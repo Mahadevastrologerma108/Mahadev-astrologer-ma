@@ -97,7 +97,31 @@
       font-size: 0.9rem;
       opacity: 0.7;
     }
-    </style>
+/* Contact Buttons */
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.contact-buttons .btn {
+  width: 85%;
+  max-width: 320px;
+  text-align: center;
+  padding: 12px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+}
+
+.btn.whatsapp { background: #25D366; }
+.btn.telegram { background: #0088cc; }
+.btn.email { background: #555; } 
+ </style>
 </head>
 
 <body>
@@ -151,6 +175,19 @@
   <p style="text-align:center;font-size:13px;opacity:0.7;margin-top:15px;">
     🙏 Guided by ethics, confidentiality & blessings of Lord Mahadev 🔱
   </p>
+<div class="contact-buttons">
+  <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="btn whatsapp">
+    WhatsApp
+  </a>
+
+  <a href="https://t.me/YourTelegramUsername" target="_blank" class="btn telegram">
+    Telegram (No Phone Number)
+  </a>
+
+  <a href="mailto:your@email.com" class="btn email">
+    Email
+  </a>
+</div>
 </section>
 <section>
   <h2>Get Your Kundli</h2>
