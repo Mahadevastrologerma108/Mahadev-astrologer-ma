@@ -116,6 +116,50 @@
   </div>
 </section>
 
+<section>
+  <h2>Get Your Kundli</h2>
+
+  <form
+    onsubmit="sendToWhatsApp(); return false;"
+    style="max-width:500px;margin:auto;"
+  >
+    <input type="text" id="name" placeholder="Name" required style="width:100%;padding:10px;margin-bottom:10px;">
+    
+    <input type="date" id="dob" required style="width:100%;padding:10px;margin-bottom:10px;">
+    
+    <input type="time" id="time" required style="width:100%;padding:10px;margin-bottom:10px;">
+    
+    <input type="text" id="place" placeholder="Birth Place" required style="width:100%;padding:10px;margin-bottom:10px;">
+    
+    <textarea id="problem" placeholder="Your Question / Problem (optional)" style="width:100%;padding:10px;margin-bottom:10px;"></textarea>
+
+    <button type="submit" style="width:100%;padding:12px;background:#f5c77a;border:none;font-weight:bold;">
+      Send Details on WhatsApp
+    </button>
+  </form>
+</section>
+
+<script>
+  function sendToWhatsApp() {
+    var name = document.getElementById("name").value;
+    var dob = document.getElementById("dob").value;
+    var time = document.getElementById("time").value;
+    var place = document.getElementById("place").value;
+    var problem = document.getElementById("problem").value;
+
+    var message =
+      "🔱 *Kundli Details* 🔱%0A%0A" +
+      "*Name:* " + name + "%0A" +
+      "*DOB:* " + dob + "%0A" +
+      "*Birth Time:* " + time + "%0A" +
+      "*Birth Place:* " + place + "%0A" +
+      "*Problem:* " + problem;
+
+    var phone = "91XXXXXXXXXX"; // <-- apna WhatsApp number yahan daalo
+
+    window.open("https://wa.me/" + phone + "?text=" + message, "_blank");
+  }
+</script>
 <section class="cta">
   <h2>Consult Now</h2>
   <p>Personal aur confidential consultation ke liye WhatsApp par sampark karein.</p>
