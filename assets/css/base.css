@@ -442,3 +442,10 @@ footer,
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+
+/* Mobile fix */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+}
