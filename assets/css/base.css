@@ -507,4 +507,12 @@ html, body {
   }
 }
 
+.menu-toggle {
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle:active {
+  transform: scale(0.9);
+}
 </style>
