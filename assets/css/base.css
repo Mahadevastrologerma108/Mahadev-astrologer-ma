@@ -437,7 +437,7 @@ footer,
 }
 
 /* active class se open hoga */
-.dropdown.active .dropdown-menu {
+.dropdown.open .dropdown-menu {
   display: block;
 }
 
