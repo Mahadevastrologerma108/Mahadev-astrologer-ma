@@ -247,7 +247,16 @@
 
 <script>
   function toggleMenu() {
-    document.querySelector('.nav-menu').classList.toggle('show');
+    const menu = document.querySelector('.nav-menu');
+    const toggle = document.querySelector('.menu-toggle');
+
+    menu.classList.toggle('show');
+
+    if (menu.classList.contains('show')) {
+      toggle.innerHTML = '✖';
+    } else {
+      toggle.innerHTML = '☰';
+    }
   }
 </script>
 
