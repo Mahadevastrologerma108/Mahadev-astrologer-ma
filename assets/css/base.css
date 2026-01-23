@@ -378,3 +378,67 @@ footer,
 }
 
 </style>
+
+
+.site-header {
+  background: rgba(5, 10, 25, 0.95);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f5c77a;
+}
+
+.logo span {
+  color: #fff;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #0b1433;
+  padding: 10px 0;
+  min-width: 180px;
+}
+
+.dropdown-menu li {
+  padding: 8px 15px;
+}
+
+.dropdown-menu a {
+  color: #fff;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
