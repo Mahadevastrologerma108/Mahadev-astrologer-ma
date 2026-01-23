@@ -453,5 +453,24 @@ footer,
     position: static;
   }
 }
+/* ===== MOBILE MENU TOGGLE ===== */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #f5c77a;
+  z-index: 1100;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    z-index: 1000;
+  }
+}
 
 </style>
