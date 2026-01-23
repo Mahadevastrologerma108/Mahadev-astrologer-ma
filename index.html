@@ -309,6 +309,71 @@ body {
   }
 }
 
+.pricing {
+  padding: 90px 20px;
+  background: linear-gradient(180deg, #050b18, #020714);
+  display: flex;
+  justify-content: center;
+}
+
+.pricing-box {
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+.pricing h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: #d4af37;
+  margin-bottom: 50px;
+}
+
+.price-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: 18px;
+  padding: 30px;
+  margin-bottom: 25px;
+}
+
+.price-card h3 {
+  color: #d4af37;
+  margin-bottom: 8px;
+}
+
+.price-card p {
+  color: #dcdcdc;
+  margin-bottom: 12px;
+}
+
+.price {
+  font-weight: 500;
+  color: #cbb26a;
+  font-size: 16px;
+}
+
+.price-card.highlight {
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+.pricing-note {
+  margin-top: 35px;
+  font-size: 14px;
+  color: #bfae6a;
+}
+
+@media (max-width: 768px) {
+  .pricing h2 {
+    font-size: 28px;
+  }
+
+  .price-card {
+    padding: 22px;
+  }
+}
+
 </style>
 </head>
 
@@ -356,6 +421,34 @@ body {
       <span>🧿 Personalized Guidance</span>
       <span>🤍 100% Privacy</span>
     </div>
+  </div>
+</section>
+
+<section class="pricing">
+  <div class="pricing-box">
+    <h2>Consultation Pricing</h2>
+
+    <div class="price-card">
+      <h3>🔱 Birth Chart Analysis</h3>
+      <p>Personal Kundli • Remedies • Guidance</p>
+      <span class="price">Starting from ₹1100</span>
+    </div>
+
+    <div class="price-card">
+      <h3>✋ Palmistry Consultation</h3>
+      <p>Life • Career • Marriage • Health</p>
+      <span class="price">Starting from ₹700</span>
+    </div>
+
+    <div class="price-card highlight">
+      <h3>📞 Call / WhatsApp Consultation</h3>
+      <p>30–45 Minutes • Personal Discussion</p>
+      <span class="price">Charges discussed after review</span>
+    </div>
+
+    <p class="pricing-note">
+      🧿 Final charges depend on consultation depth and are always discussed transparently.
+    </p>
   </div>
 </section>
 
