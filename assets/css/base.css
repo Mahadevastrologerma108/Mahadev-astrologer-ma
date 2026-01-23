@@ -530,4 +530,33 @@ html, body {
   z-index: 2000;
 }
 
+/* MENU TOGGLE ICON */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: #f5c77a;
+  cursor: pointer;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* ☰ YAHAN SE AATA HAI */
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    background: #020714;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+}
+
 </style>
