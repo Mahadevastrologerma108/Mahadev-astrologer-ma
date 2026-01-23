@@ -19,20 +19,14 @@
 
 .hero {
   position: relative;
-  padding: 80px 20px;
+  min-height: 100vh;
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  background: radial-gradient(circle at top,
-    #1b1f3b,
-    #0b0f2a 60%,
-    #050714
-  );
+  background: linear-gradient(to bottom, #020617, #000814);
   overflow: hidden;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
 }
 
 .hero-title {
@@ -44,15 +38,6 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
-.hero {
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #020617, #000814);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  text-align: center;
-}
 
 .hero-content {
   max-width: 800px;
@@ -436,15 +421,18 @@ footer,
   color: #fff;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #0b1433;
+  min-width: 180px;
 }
 
-/* Mobile fix */
-@media (max-width: 768px) {
-  .nav-menu {
-    display: none;
-  }
+/* active class se open hoga */
+.dropdown.active .dropdown-menu {
+  display: block;
 }
 
 html, body {
@@ -463,5 +451,26 @@ html, body {
   }
 }
 
-</style>
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
 
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    background: #020714;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+}
+
+</style>
