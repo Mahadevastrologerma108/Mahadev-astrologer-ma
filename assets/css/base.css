@@ -454,3 +454,14 @@ html, body {
   max-width: 100%;
   overflow-x: hidden;
 }
+
+@media (max-width: 768px) {
+  .nav-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
