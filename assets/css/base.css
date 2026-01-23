@@ -515,4 +515,19 @@ html, body {
 .menu-toggle:active {
   transform: scale(0.9);
 }
+
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: #f5c77a;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+}
+
 </style>
