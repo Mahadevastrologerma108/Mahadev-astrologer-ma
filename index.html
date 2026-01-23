@@ -14,6 +14,35 @@
 
   <style>
 
+.mahadev-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 160px;
+  color: rgba(255, 255, 255, 0.05);
+  font-family: 'Playfair Display', serif;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero {
+  position: relative;
+  padding: 80px 20px;
+  text-align: center;
+  background: radial-gradient(circle at top,
+    #1b1f3b,
+    #0b0f2a 60%,
+    #050714
+  );
+  overflow: hidden;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
@@ -35,7 +64,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px 20px;
+  padding: 40px 20px;
   text-align: center;
 }
 
@@ -175,13 +204,41 @@ body {
 .btn.whatsapp { background: #25D366; }
 .btn.telegram { background: #0088cc; }
 .btn.email { background: #555; } 
- </style>
+ 
+@media (max-width: 768px) {
+  .hero {
+    padding: 70px 16px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .hero-tagline {
+    font-size: 14px;
+    opacity: 0.85;
+  }
+
+  .mahadev-watermark {
+    font-size: 110px;
+  }
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
   <section class="hero">
+  <div class="mahadev-watermark">ॐ</div>
   <div class="hero-content">
     <h1 class="hero-title">Mahadev Astrologer MA</h1>
 
