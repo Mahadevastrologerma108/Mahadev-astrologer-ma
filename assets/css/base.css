@@ -362,6 +362,12 @@ footer,
   padding: 18px 10px;
 }
 
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+}
+
 .site-header {
   background: rgba(5, 10, 25, 0.95);
   position: sticky;
@@ -522,12 +528,6 @@ html, body {
   color: #f5c77a;
   cursor: pointer;
   z-index: 2000;
-}
-
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
 }
 
 </style>
