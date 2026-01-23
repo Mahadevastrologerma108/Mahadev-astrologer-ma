@@ -408,7 +408,7 @@ footer,
   font-weight: 500;
 }
 
-/* Dropdown */
+/* ===== DROPDOWN ===== */
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -417,6 +417,7 @@ footer,
   background: #0b1433;
   padding: 10px 0;
   min-width: 180px;
+  z-index: 999;
 }
 
 .dropdown-menu li {
@@ -427,135 +428,29 @@ footer,
   color: #fff;
 }
 
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #0b1433;
-  min-width: 180px;
-}
-
-/* active class se open hoga */
-.dropdown.open .dropdown-menu {
+/* 🔥 JS se open hoga */
+.dropdown.active .dropdown-menu {
   display: block;
 }
 
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
+/* ===== MOBILE MENU ===== */
 @media (max-width: 768px) {
   .nav-menu {
     position: absolute;
     top: 60px;
     right: 0;
     width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-}
-
-.nav-menu {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-@media (max-width: 768px) {
-  .nav-menu {
-    display: none;
+    background: #050a19;
     flex-direction: column;
-    background: #020714;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 100%;
+    display: none;
   }
 
   .nav-menu.active {
     display: flex;
   }
-}
 
-.menu-toggle {
-  display: none;
-  font-size: 26px;
-  color: #f5c77a;
-  cursor: pointer;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-menu {
-    display: none;
-    flex-direction: column;
-    background: #020714;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    padding: 20px 0;
-  }
-
-  .nav-menu.show {
-    display: flex;
-  }
-
-  .nav-menu li {
-    text-align: center;
-    padding: 12px 0;
-  }
-}
-
-.menu-toggle {
-  user-select: none;
-  transition: transform 0.3s ease;
-}
-
-.menu-toggle:active {
-  transform: scale(0.9);
-}
-
-.menu-toggle {
-  display: none;
-  font-size: 28px;
-  color: #f5c77a;
-  cursor: pointer;
-  z-index: 2000;
-}
-
-/* MENU TOGGLE ICON */
-.menu-toggle {
-  display: none;
-  font-size: 28px;
-  color: #f5c77a;
-  cursor: pointer;
-}
-
-/* MOBILE VIEW */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block; /* ☰ YAHAN SE AATA HAI */
-  }
-
-  .nav-menu {
-    display: none;
-    flex-direction: column;
-    background: #020714;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-  }
-
-  .nav-menu.active {
-    display: flex;
+  .dropdown-menu {
+    position: static;
   }
 }
 
