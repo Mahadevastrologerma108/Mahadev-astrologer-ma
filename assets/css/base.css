@@ -127,26 +127,30 @@ header {
   text-align: center;
 }
 
-/* 🔱 MAIN HEADING */
+/* 🔱 ROYAL MAIN HEADING – PREMIUM GOLD */
 .hero h1 {
   font-family: 'Cinzel', serif;
-  font-size: 2.8rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  margin-bottom: 12px;
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  margin-bottom: 14px;
   text-transform: uppercase;
 
-  background: linear-gradient(90deg, #ff7a18, #ffd700, #ff7a18);
+  background: linear-gradient(
+    180deg,
+    #f6e7b2,
+    #d4af37,
+    #b8962e
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
   text-shadow:
-    0 0 10px rgba(255, 215, 0, 0.45),
-    0 0 22px rgba(255, 122, 24, 0.35);
+    0 2px 6px rgba(212, 175, 55, 0.35);
 }
 
 .hero p {
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 /* =========================
