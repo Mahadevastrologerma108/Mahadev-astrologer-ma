@@ -390,3 +390,68 @@ button{
   opacity:.6;
   border-top:1px solid rgba(255,255,255,.05);
 }
+/* =========================
+   INNER PAGES (ABOUT / TERMS / PRIVACY etc.)
+========================= */
+
+.page-wrap{
+  max-width:900px;
+  margin:140px auto 80px;
+  padding:30px;
+}
+
+.page-card{
+  background:linear-gradient(180deg,#121212,#0c0c0c);
+  border-radius:22px;
+  padding:36px;
+  box-shadow:0 0 30px rgba(230,195,106,.08);
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.page-card h1{
+  text-align:center;
+  font-family:Cinzel,serif;
+  font-size:2.4rem;
+  margin-bottom:10px;
+  background:linear-gradient(90deg,#c9a24d,#f5dc9c,#c9a24d);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.page-sub{
+  text-align:center;
+  font-size:14px;
+  opacity:.8;
+  margin-bottom:30px;
+}
+
+.page-card h2{
+  margin-top:28px;
+  margin-bottom:10px;
+  font-size:20px;
+  color:#e6c36a;
+}
+
+.page-card p{
+  opacity:.9;
+  margin-bottom:14px;
+}
+
+.page-card ul{
+  margin-left:18px;
+  margin-bottom:16px;
+}
+
+.page-card li{
+  margin-bottom:6px;
+}
+
+.trust-box{
+  margin-top:30px;
+  background:rgba(255,255,255,.04);
+  padding:16px;
+  border-radius:14px;
+  text-align:center;
+  font-size:14px;
+  border:1px solid rgba(255,255,255,.06);
+}
