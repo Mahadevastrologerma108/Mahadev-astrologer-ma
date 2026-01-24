@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&family=Noto+Serif+Devanagari:wght@400;500&display=swap" rel="stylesheet">
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mahadev Astrologer MA</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="assets/css/base.css" />
+  <!-- BASE CSS -->
+  <link rel="stylesheet" href="assets/css/base.css">
 </head>
+
 <body>
 
-<!-- ===== HEADER / NAVBAR ===== -->
-<header class="header">
-  <div class="logo">Mahadev Astro</div>
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="logo">Mahadev <span>Astro</span></div>
 
   <div class="menu-toggle" id="menuToggle">☰</div>
 
-  <nav class="nav-menu" id="navMenu">
-    <ul>
+  <nav>
+    <ul id="navMenu" class="nav-menu">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
 
       <li class="dropdown" id="servicesDropdown">
-        <span>Services ▾</span>
+        <a href="javascript:void(0)">Services ▾</a>
         <ul class="dropdown-menu">
           <li><a href="#services">Birth Chart Analysis</a></li>
           <li><a href="#services">Palmistry</a></li>
@@ -33,75 +32,118 @@
       </li>
 
       <li><a href="#pricing">Pricing</a></li>
-      <li><a href="pages/contact.html">Contact</a></li>
+      <li><a href="#contact">Get Your Kundli</a></li>
     </ul>
   </nav>
 </header>
 
-<!-- ===== HERO ===== -->
-<section class="hero" id="home">
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
   <h1>Mahadev Astrologer MA</h1>
-  <p>Vedic Astrology • Palmistry • Personalized Guidance</p>
-  <p class="tagline">Guided by the Blessings of Lord Mahadev</p>
+  <p class="tagline">Vedic Astrology • Palmistry • Personalized Guidance</p>
+  <p class="sub-tagline">Guided by the Blessings of Lord Mahadev 🔱</p>
 </section>
 
-<!-- ===== ABOUT ===== -->
-<section class="about" id="about">
+<!-- ================= ABOUT ================= -->
+<section id="about">
   <h2>About Us | हमारे बारे में</h2>
 
   <p>
-    Mahadev Astrologer MA is dedicated to guiding people through authentic
-    Vedic Astrology and Palmistry with honesty and spiritual wisdom.
+    <strong>English:</strong><br>
+    Mahadev Astrologer MA is devoted to guiding people through authentic
+    Vedic Astrology and Palmistry. Our purpose is not to create fear,
+    but to provide clarity, balance, and direction through spiritual wisdom.
   </p>
 
   <p>
-    प्रत्येक परामर्श पूर्ण गोपनीयता के साथ किया जाता है और
-    समाधान पर केंद्रित होता है, डर पर नहीं।
+    <strong>हिंदी:</strong><br>
+    महादेव एस्ट्रोलॉजर MA प्रामाणिक वैदिक ज्योतिष और हस्तरेखा के माध्यम से
+    लोगों के जीवन में स्पष्टता, संतुलन और सही दिशा प्रदान करने के लिए समर्पित है।
+    हमारा उद्देश्य डर पैदा करना नहीं, बल्कि समाधान देना है।
+  </p>
+
+  <p>
+    Guided by Lord Mahadev’s blessings, every consultation is honest,
+    confidential, and focused on peace of mind — never pressure or fear.
   </p>
 </section>
 
-<!-- ===== SERVICES ===== -->
-<section class="services" id="services">
+<!-- ================= SERVICES ================= -->
+<section id="services">
   <h2>Services</h2>
+
   <div class="cards">
     <div class="card">Kundli Analysis</div>
-    <div class="card">Palmistry</div>
+    <div class="card">Palmistry (Hast Rekha)</div>
     <div class="card">Horoscope Reading</div>
-    <div class="card">Marriage Guidance</div>
-    <div class="card">Career Consultation</div>
+    <div class="card">Marriage & Relationship Guidance</div>
+    <div class="card">Career & Business Consultation</div>
     <div class="card">Muhurat & Remedies</div>
   </div>
 </section>
 
-<!-- ===== PRICING ===== -->
-<section class="pricing" id="pricing">
+<!-- ================= PRICING ================= -->
+<section id="pricing">
   <h2>Consultation Pricing</h2>
-  <p>Birth Chart Analysis — <strong>₹1100</strong></p>
-  <p>Palmistry Consultation — <strong>₹700</strong></p>
+  <p>🔱 Birth Chart Analysis — Starting from ₹1100</p>
+  <p>✋ Palmistry Consultation — Starting from ₹700</p>
+  <p>📞 Call / WhatsApp — Charges discussed after review</p>
 </section>
 
-<!-- ===== KUNDLI FORM ===== -->
-<section class="kundli">
+<!-- ================= KUNDLI FORM ================= -->
+<section id="contact">
   <h2>Get Your Kundli</h2>
-  <form>
-    <input type="text" placeholder="Full Name" required />
-    <input type="text" placeholder="Place of Birth" required />
+
+  <form class="kundli-form">
+    <input type="text" placeholder="Full Name" required>
+    <input type="date" required>
+    <input type="time" required>
+    <input type="text" placeholder="Place of Birth" required>
+
+    <select required>
+      <option value="">Receive Kundli Via</option>
+      <option>Telegram</option>
+      <option>WhatsApp</option>
+      <option>Email</option>
+    </select>
+
     <button type="submit">Submit Kundli Request</button>
   </form>
+
+  <p class="contact-note">
+    🧿 100% Privacy Guaranteed • No data misuse • Honest guidance only
+  </p>
+
+  <p>
+    📩 Telegram:
+    <a href="https://t.me/yourusername" target="_blank">@yourusername</a><br>
+    📧 Email:
+    <a href="mailto:youremail@gmail.com">youremail@gmail.com</a>
+  </p>
 </section>
 
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-  <p>© 2026 Mahadev Astrologer MA</p>
-  <p>
-    <a href="pages/privacy.html">Privacy Policy</a> |
-    <a href="pages/terms.html">Terms</a> |
-    <a href="pages/disclaimer.html">Disclaimer</a> |
-    <a href="pages/contact.html">Contact</a>
-  </p>
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-inner">
+    <h3>Mahadev Astrologer MA</h3>
+    <p class="footer-tagline">Guided by the blessings of Lord Mahadev 🔱</p>
+
+    <div class="footer-links">
+      <a href="pages/about.html">About Us</a>
+      <a href="pages/privacy.html">Privacy Policy</a>
+      <a href="pages/terms.html">Terms & Conditions</a>
+      <a href="pages/disclaimer.html">Disclaimer</a>
+      <a href="pages/contact.html">Contact Us</a>
+    </div>
+
+    <p class="footer-copy">
+      © 2026 Mahadev Astrologer MA • All Rights Reserved
+    </p>
+  </div>
 </footer>
 
 <!-- JS -->
-<script src="assets/js/script.js"></script>
+<script src="assets/js/script.js" defer></script>
+
 </body>
 </html>
