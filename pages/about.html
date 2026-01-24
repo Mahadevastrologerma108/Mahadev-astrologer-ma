@@ -1,98 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us | Mahadev Astrologer MA</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="../assets/css/base.css" />
+<meta charset="UTF-8">
+<title>About Us | Mahadev Astrologer MA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">Mahadev Astro</div>
-    <div class="menu-toggle" id="menuToggle">&#9776;</div>
+<header class="site-header">
+  <div class="navbar">
+    <div class="logo">
+      <img src="../assets/images/logo.png" alt="Mahadev Astrologer MA">
+    </div>
+    <div class="menu-toggle" id="menuToggle">☰</div>
 
     <nav>
-      <ul id="navMenu">
+      <ul id="navMenu" class="nav-menu">
         <li><a href="../index.html">Home</a></li>
-        <li><a href="../index.html#services">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="dropdown" id="servicesDropdown">
+          <a href="javascript:void(0)">Services ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="../index.html#services">Kundli Analysis</a></li>
+            <li><a href="../index.html#services">Palmistry</a></li>
+            <li><a href="../index.html#services">Vastu</a></li>
+          </ul>
+        </li>
         <li><a href="../index.html#pricing">Pricing</a></li>
-        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <!-- ABOUT SECTION -->
-  <section class="section about-page">
-    <h1>About Us | हमारे बारे में</h1>
+<section class="hero">
+  <h1>About Us</h1>
+  <p class="tagline">Authentic Guidance • Spiritual Ethics • Complete Privacy</p>
+</section>
 
-    <p>
-      <strong>Mahadev Astrologer MA</strong> is a spiritual initiative dedicated to guiding people
-      through authentic <strong>Vedic Astrology, Palmistry, and personalized consultations</strong>.
-      Our guidance is rooted in ancient wisdom, ethical practice, and the divine blessings of
-      Lord Mahadev.
-    </p>
+<section>
+  <h2>Who We Are</h2>
+  <p>
+    Mahadev Astrologer MA provides authentic Vedic Astrology and Palmistry
+    guidance focused on clarity, balance, and conscious life decisions.
+  </p>
+  <p>
+    Our approach is ethical, transparent and deeply rooted in spiritual wisdom.
+  </p>
 
-    <p>
-      <strong>महादेव एस्ट्रोलॉजर MA</strong> का उद्देश्य प्राचीन वैदिक ज्योतिष, हस्तरेखा शास्त्र
-      और व्यक्तिगत परामर्श के माध्यम से लोगों को सही दिशा दिखाना है।
-      हमारा मार्गदर्शन ईमानदारी, आध्यात्मिकता और भगवान महादेव के आशीर्वाद से प्रेरित है।
-    </p>
+  <div class="privacy-note">
+    🔐 Your data, birth details & conversations are kept 100% confidential.
+  </div>
+</section>
 
-    <h2>Our Philosophy | हमारा दृष्टिकोण</h2>
-
-    <p>
-      We believe astrology is not about fear or superstition, but about clarity, awareness,
-      and conscious decision-making. Every consultation is handled with complete honesty,
-      responsibility, and respect for the client.
-    </p>
-
-    <p>
-      हम मानते हैं कि ज्योतिष डर या अंधविश्वास नहीं, बल्कि आत्म-जागरूकता और सही निर्णय लेने का
-      एक माध्यम है। प्रत्येक परामर्श पूरी गोपनीयता, ईमानदारी और जिम्मेदारी के साथ किया जाता है।
-    </p>
-
-    <h2>Client Privacy | ग्राहक गोपनीयता</h2>
-
-    <p>
-      Your privacy is our highest priority. All personal details, birth data, and consultation
-      discussions are kept strictly confidential and are never shared with any third party.
-    </p>
-
-    <p>
-      आपकी व्यक्तिगत जानकारी, जन्म विवरण और परामर्श से जुड़ी हर बात पूरी तरह गोपनीय रखी जाती है।
-      हम किसी भी प्रकार की जानकारी किसी तीसरे पक्ष के साथ साझा नहीं करते।
-    </p>
-
-    <h2>Guided by Mahadev | महादेव के आशीर्वाद से</h2>
-
-    <p>
-      Every remedy, suggestion, and guidance is offered with humility and devotion,
-      seeking the blessings of Lord Mahadev for the well-being and growth of our clients.
-    </p>
-
-    <p>
-      प्रत्येक उपाय और मार्गदर्शन पूरी श्रद्धा और विनम्रता के साथ भगवान महादेव के आशीर्वाद से
-      दिया जाता है, ताकि साधक के जीवन में सकारात्मक परिवर्तन आ सके।
-    </p>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 Mahadev Astrologer MA</p>
-    <div class="footer-links">
-      <a href="privacy.html">Privacy Policy</a> |
-      <a href="terms.html">Terms</a> |
-      <a href="disclaimer.html">Disclaimer</a> |
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h3>Mahadev Astrologer MA</h3>
+      <p>Authentic Vedic Astrology & Palmistry</p>
+    </div>
+    <div>
+      <h4>Pages</h4>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="disclaimer.html">Disclaimer</a>
       <a href="contact.html">Contact</a>
     </div>
-  </footer>
+  </div>
+  <div class="footer-bottom">© 2026 Mahadev Astrologer MA</div>
+</footer>
 
-  <!-- JS -->
-  <script src="../assets/js/script.js"></script>
+<script src="../assets/js/script.js"></script>
 </body>
 </html>
