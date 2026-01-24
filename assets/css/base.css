@@ -1,108 +1,81 @@
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Georgia, serif;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  background: radial-gradient(circle at top, #0b1d33, #000);
-  color: #eaeaea;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0e0e0e;
+  color: #f5f5f5;
 }
 
 /* ===== HEADER ===== */
-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  background: linear-gradient(180deg, #020714, #050a19);
+  background: #111;
 }
 
 .logo {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  color: #f5c77a;
 }
 
 .menu-toggle {
+  display: none;
   font-size: 26px;
   cursor: pointer;
-  display: none;
-  color: #f5c77a;
 }
 
-nav ul {
+/* ===== NAV ===== */
+.nav-menu ul {
   list-style: none;
   display: flex;
   gap: 20px;
 }
 
-nav a {
-  color: #fff;
+.nav-menu a {
+  color: #f5c77a;
   text-decoration: none;
-}
-
-/* ===== DROPDOWN ===== */
-.dropdown {
-  position: relative;
 }
 
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 100%;
-  left: 0;
-  background: #050b18;
-  border-radius: 10px;
+  background: #222;
+  padding: 10px;
 }
 
 .dropdown.active .dropdown-menu {
   display: block;
 }
 
-.dropdown-menu li a {
-  display: block;
-  padding: 10px 15px;
-}
-
 /* ===== SECTIONS ===== */
 section {
-  padding: 50px 20px;
+  padding: 40px 20px;
+  text-align: center;
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 15px;
 }
 
 .card {
+  background: #1c1c1c;
   padding: 15px;
-  background: #020714;
-  border-radius: 12px;
-}
-
-/* ===== FORM ===== */
-form input,
-form select,
-form button {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 12px;
   border-radius: 8px;
-  border: none;
 }
 
-form button {
-  background: #f5c77a;
-  font-weight: bold;
-  cursor: pointer;
+/* ===== FOOTER ===== */
+.footer {
+  background: #111;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer a {
+  color: #f5c77a;
+  margin: 0 5px;
 }
 
 /* ===== MOBILE ===== */
@@ -111,17 +84,15 @@ form button {
     display: block;
   }
 
-  nav ul {
+  .nav-menu {
     display: none;
+  }
+
+  .nav-menu.show {
+    display: block;
+  }
+
+  .nav-menu ul {
     flex-direction: column;
-    margin-top: 15px;
-  }
-
-  nav ul.show {
-    display: flex;
-  }
-
-  .dropdown-menu {
-    position: static;
   }
 }
