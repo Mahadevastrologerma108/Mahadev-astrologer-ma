@@ -82,6 +82,7 @@ header {
   position: absolute;
   top: 36px;
   right: 0;
+  left: auto;
   background: #111;
   border-radius: 8px;
   padding: 10px 0;
