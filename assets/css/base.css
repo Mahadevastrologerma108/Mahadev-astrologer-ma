@@ -27,7 +27,6 @@ body {
   align-items: center;
 }
 
-/* LOGO */
 .logo {
   margin-right: auto;
 }
@@ -57,7 +56,7 @@ body {
   text-decoration: none;
 }
 
-/* DROPDOWN — RIGHT ALIGNED */
+/* DROPDOWN RIGHT */
 .dropdown-menu {
   position: absolute;
   top: 40px;
@@ -68,7 +67,7 @@ body {
   display: none;
 }
 
-.dropdown-menu li a {
+.dropdown-menu a {
   display: block;
   padding: 10px 14px;
 }
@@ -79,8 +78,14 @@ body {
 
 /* HERO */
 .hero {
-  padding-top: 120px;
+  padding-top: 120px; /* 🔥 CONTENT SAVER */
   text-align: center;
+}
+
+.section {
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: auto;
 }
 
 /* MOBILE */
