@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   const menuToggle = document.getElementById("menuToggle");
   const navMenu = document.getElementById("navMenu");
   const dropdown = document.getElementById("servicesDropdown");
@@ -11,10 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (dropdown) {
-    dropdown.addEventListener("click", (e) => {
-      e.preventDefault();
+    dropdown.addEventListener("click", () => {
       dropdown.classList.toggle("active");
     });
   }
-
 });
