@@ -3,11 +3,15 @@ const navMenu = document.getElementById("navMenu");
 const dropdown = document.getElementById("servicesDropdown");
 
 /* Mobile menu toggle */
-menuToggle.addEventListener("click", () => {
-  navMenu.classList.toggle("show");
-});
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
+  });
+}
 
 /* Services dropdown */
-dropdown.addEventListener("click", () => {
-  dropdown.classList.toggle("active");
-});
+if (dropdown) {
+  dropdown.addEventListener("click", () => {
+    dropdown.classList.toggle("active");
+  });
+}
