@@ -62,21 +62,80 @@ a:hover{text-decoration:underline}
 
 /* HERO */
 .hero{
-  padding:140px 20px 80px;
+  padding:140px 20px 90px;
   text-align:center;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(201,162,77,.12), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(245,220,156,.10), transparent 40%),
+    #0b0b0b;
 }
 
+/* DIVINE MOVING GLOW */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background:conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(201,162,77,.15),
+    transparent,
+    rgba(245,220,156,.12),
+    transparent
+  );
+  animation:rotateGlow 22s linear infinite;
+}
+
+@keyframes rotateGlow{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* MAIN HEADING */
 .hero h1{
+  position:relative;
   font-family:Cinzel,serif;
-  font-size:3rem;
-  letter-spacing:2px;
-  background:linear-gradient(90deg,#c9a24d,#f5dc9c,#c9a24d);
+  font-size:3.2rem;
+  font-weight:900;
+  letter-spacing:2.5px;
+  margin-bottom:14px;
+  text-transform:uppercase;
+
+  background:linear-gradient(
+    90deg,
+    #b8963d,
+    #f7e4a3,
+    #b8963d
+  );
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  text-shadow:0 0 18px rgba(201,162,77,.35);
+
+  text-shadow:
+    0 0 12px rgba(184,150,61,.35),
+    0 0 28px rgba(247,228,163,.25);
+
+  animation:shineText 4s ease-in-out infinite;
 }
 
-.tagline{opacity:.85}
+@keyframes shineText{
+  0%{filter:brightness(1)}
+  50%{filter:brightness(1.15)}
+  100%{filter:brightness(1)}
+}
+
+/* TAGLINE */
+.tagline{
+  opacity:0;
+  animation:fadeUp .9s ease forwards;
+  animation-delay:.6s;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
 /* SECTIONS */
 section{
