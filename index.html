@@ -149,6 +149,74 @@ footer a {
   color: #3b1c5a;
   text-decoration: none;
 }
+
+.site-header {
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.nav-menu a {
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-menu a:hover {
+  background: rgba(245,199,122,0.15);
+  color: #f5c77a;
+}
+.dropdown-menu {
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 18px;
+}
+
+.dropdown-menu li a:hover {
+  background: rgba(212,175,55,0.15);
+}
+section {
+  background: linear-gradient(180deg, #020714, #050b18);
+  border-radius: 18px;
+  margin-bottom: 40px;
+}
+.card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(212,175,55,0.25);
+}
+form input,
+form textarea {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(212,175,55,0.3);
+  color: #fff;
+  border-radius: 8px;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+form button:hover {
+  background: #ffd98a;
+}
+@media (max-width: 768px) {
+  section {
+    margin-bottom: 25px;
+    padding: 45px 18px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+}
 </style>
 </head>
 
