@@ -19,7 +19,7 @@
     <div class="menu-toggle" id="menuToggle">☰</div>
 
     <nav>
-      <ul class="nav-menu" id="navMenu">
+      <ul id="navMenu" class="nav-menu">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
 
@@ -40,30 +40,71 @@
   </div>
 </header>
 
-<section class="hero" id="home">
+<!-- 🔥 HERO -->
+<section id="home" class="hero">
   <h1>Mahadev Astrologer MA</h1>
-  <p>Vedic Astrology • Palmistry • Personalized Guidance</p>
+  <p class="tagline">Vedic Astrology • Palmistry • Personalized Guidance</p>
+  <p class="sub-tagline">Guided by the Blessings of Lord Mahadev</p>
 </section>
 
-<section id="about">
+<!-- ABOUT -->
+<section id="about" class="section">
   <h2>About Us | हमारे बारे में</h2>
-  <p>Authentic Vedic Astrology & Palmistry guidance.</p>
+
+  <p>
+    <strong>English:</strong><br>
+    Mahadev Astrologer MA provides authentic Vedic Astrology and Palmistry guidance
+    focused on clarity, balance, and conscious decision-making.
+  </p>
+
+  <p>
+    <strong>हिंदी:</strong><br>
+    महादेव एस्ट्रोलॉजर MA प्रामाणिक वैदिक ज्योतिष और हस्तरेखा शास्त्र के माध्यम से
+    जीवन में स्पष्टता और सही दिशा प्रदान करता है।
+  </p>
 </section>
 
-<section id="services">
+<!-- SERVICES -->
+<section id="services" class="section">
   <h2>Services</h2>
-  <p>Kundli • Palmistry • Vastu</p>
+  <ul>
+    <li>Kundli Analysis</li>
+    <li>Palmistry</li>
+    <li>Horoscope Reading</li>
+    <li>Marriage Guidance</li>
+    <li>Career Consultation</li>
+    <li>Muhurat & Remedies</li>
+  </ul>
 </section>
 
-<section id="pricing">
-  <h2>Pricing</h2>
-  <p>Birth Chart — ₹1100</p>
-  <p>Palmistry — ₹700</p>
+<!-- PRICING -->
+<section id="pricing" class="section">
+  <h2>Consultation Pricing</h2>
+  <p>Birth Chart Analysis — ₹1100</p>
+  <p>Palmistry Consultation — ₹700</p>
 </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>WhatsApp / Telegram Available</p>
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <h2>Get Your Kundli</h2>
+
+  <form class="kundli-form">
+    <input type="text" placeholder="Full Name" required>
+    <input type="date" required>
+    <input type="time" required>
+    <input type="text" placeholder="Place of Birth" required>
+
+    <select required>
+      <option value="">Receive Via</option>
+      <option>Telegram</option>
+      <option>WhatsApp</option>
+      <option>Email</option>
+    </select>
+
+    <button type="submit">Submit Kundli Request</button>
+  </form>
+
+  <p class="privacy-note">🧿 100% Privacy Guaranteed • Honest Guidance Only</p>
 </section>
 
 <script src="assets/js/script.js"></script>
