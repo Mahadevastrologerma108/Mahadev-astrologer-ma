@@ -46,12 +46,10 @@ header {
   justify-content: space-between;
 }
 
-.logo {
-  font-family: 'Cinzel', serif;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #f5c77a;
+.logo img {
+  height: 42px;
+  width: auto;
+  display: block;
 }
 
 /* =========================
