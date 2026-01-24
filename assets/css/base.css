@@ -315,3 +315,78 @@ button{
   font-size:13px;
   font-weight:600;
 }
+
+.site-footer{
+  background:#000;
+  margin-top:80px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+
+.footer-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:50px 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+}
+
+.footer-brand h3{
+  font-size:22px;
+  margin-bottom:6px;
+}
+
+.footer-brand p{
+  opacity:.8;
+  font-size:14px;
+}
+
+.footer-trust{
+  margin-top:16px;
+  font-size:13px;
+  background:rgba(255,255,255,.04);
+  padding:12px 14px;
+  border-radius:12px;
+  line-height:1.5;
+}
+
+/* PAGES BOX */
+.footer-box{
+  background:#111;
+  padding:22px;
+  border-radius:16px;
+  box-shadow:0 0 22px rgba(230,195,106,.08);
+}
+
+.footer-box h4{
+  margin-bottom:14px;
+  font-size:18px;
+  color:#e6c36a;
+}
+
+.footer-links{
+  display:grid;
+  gap:10px;
+}
+
+.footer-links a{
+  padding:10px 14px;
+  border-radius:10px;
+  background:rgba(255,255,255,.04);
+  color:#ddd;
+  transition:.3s;
+}
+
+.footer-links a:hover{
+  background:#e6c36a;
+  color:#000;
+  transform:translateX(4px);
+}
+
+.footer-bottom{
+  text-align:center;
+  padding:18px;
+  font-size:13px;
+  opacity:.6;
+  border-top:1px solid rgba(255,255,255,.05);
+}
