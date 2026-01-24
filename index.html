@@ -6,22 +6,23 @@
   <title>Mahadev Astrologer MA</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="assets/css/base.css" />
 </head>
-
 <body>
 
-<header>
+<!-- ===== HEADER / NAVBAR ===== -->
+<header class="header">
   <div class="logo">Mahadev Astro</div>
+
   <div class="menu-toggle" id="menuToggle">☰</div>
 
-  <nav>
-    <ul id="navMenu">
+  <nav class="nav-menu" id="navMenu">
+    <ul>
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
 
       <li class="dropdown" id="servicesDropdown">
-        <a href="javascript:void(0)">Services ▾</a>
+        <span>Services ▾</span>
         <ul class="dropdown-menu">
           <li><a href="#services">Birth Chart Analysis</a></li>
           <li><a href="#services">Palmistry</a></li>
@@ -30,29 +31,35 @@
       </li>
 
       <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="pages/contact.html">Contact</a></li>
     </ul>
   </nav>
 </header>
 
-<!-- HERO -->
-<section id="home" class="hero">
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
   <h1>Mahadev Astrologer MA</h1>
   <p>Vedic Astrology • Palmistry • Personalized Guidance</p>
-  <p>Guided by the Blessings of Lord Mahadev</p>
+  <p class="tagline">Guided by the Blessings of Lord Mahadev</p>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
   <h2>About Us | हमारे बारे में</h2>
+
   <p>
     Mahadev Astrologer MA is dedicated to guiding people through authentic
     Vedic Astrology and Palmistry with honesty and spiritual wisdom.
   </p>
+
+  <p>
+    प्रत्येक परामर्श पूर्ण गोपनीयता के साथ किया जाता है और
+    समाधान पर केंद्रित होता है, डर पर नहीं।
+  </p>
 </section>
 
-<!-- SERVICES -->
-<section id="services">
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
   <h2>Services</h2>
   <div class="cards">
     <div class="card">Kundli Analysis</div>
@@ -64,39 +71,35 @@
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing">
+<!-- ===== PRICING ===== -->
+<section class="pricing" id="pricing">
   <h2>Consultation Pricing</h2>
-  <p>Birth Chart from ₹1100</p>
-  <p>Palmistry from ₹700</p>
+  <p>Birth Chart Analysis — <strong>₹1100</strong></p>
+  <p>Palmistry Consultation — <strong>₹700</strong></p>
 </section>
 
-<!-- KUNDLI / CONTACT -->
-<section id="contact">
+<!-- ===== KUNDLI FORM ===== -->
+<section class="kundli">
   <h2>Get Your Kundli</h2>
-
   <form>
-    <input type="text" placeholder="Full Name" required>
-    <input type="date" required>
-    <input type="time" required>
-    <input type="text" placeholder="Place of Birth" required>
-
-    <select required>
-      <option value="">Receive Via</option>
-      <option>Telegram</option>
-      <option>WhatsApp</option>
-      <option>Email</option>
-    </select>
-
+    <input type="text" placeholder="Full Name" required />
+    <input type="text" placeholder="Place of Birth" required />
     <button type="submit">Submit Kundli Request</button>
   </form>
 </section>
 
-<footer>
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
   <p>© 2026 Mahadev Astrologer MA</p>
+  <p>
+    <a href="pages/privacy.html">Privacy Policy</a> |
+    <a href="pages/terms.html">Terms</a> |
+    <a href="pages/disclaimer.html">Disclaimer</a> |
+    <a href="pages/contact.html">Contact</a>
+  </p>
 </footer>
 
 <!-- JS -->
-<script src="script.js"></script>
+<script src="assets/js/script.js"></script>
 </body>
 </html>
