@@ -75,13 +75,18 @@ header {
 }
 
 /* =========================
-   DROPDOWN (RIGHT ALIGNED)
+   DROPDOWN (RIGHT CORNER FIXED)
 ========================= */
+
+.nav-menu li {
+  position: relative; /* 🔥 MOST IMPORTANT */
+}
+
 .dropdown-menu {
   list-style: none;
   position: absolute;
-  top: 36px;
-  right: 0;
+  top: 40px;
+  right: 0;       /* ✅ right aligned */
   left: auto;
   background: #111;
   border-radius: 8px;
@@ -104,7 +109,6 @@ header {
 .nav-menu li.active .dropdown-menu {
   display: block;
 }
-
 /* =========================
    MOBILE MENU TOGGLE
 ========================= */
