@@ -3,15 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const navMenu = document.getElementById("navMenu");
   const dropdown = document.getElementById("servicesDropdown");
 
-  if (menuToggle && navMenu) {
-    menuToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("show");
-    });
-  }
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
+  });
 
-  if (dropdown) {
-    dropdown.addEventListener("click", () => {
-      dropdown.classList.toggle("active");
-    });
-  }
+  dropdown.addEventListener("click", () => {
+    dropdown.classList.toggle("active");
+  });
 });
