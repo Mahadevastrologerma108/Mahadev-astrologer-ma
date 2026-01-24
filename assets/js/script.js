@@ -1,15 +1,20 @@
-const menuToggle = document.getElementById("menuToggle");
-const navMenu = document.getElementById("navMenu");
-const dropdown = document.getElementById("servicesDropdown");
+document.addEventListener("DOMContentLoaded", () => {
 
-if (menuToggle && navMenu) {
-  menuToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("show");
-  });
-}
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+  const dropdown = document.getElementById("servicesDropdown");
 
-if (dropdown) {
-  dropdown.addEventListener("click", () => {
-    dropdown.classList.toggle("active");
-  });
-}
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("show");
+    });
+  }
+
+  if (dropdown) {
+    dropdown.addEventListener("click", (e) => {
+      e.preventDefault();
+      dropdown.classList.toggle("active");
+    });
+  }
+
+});
