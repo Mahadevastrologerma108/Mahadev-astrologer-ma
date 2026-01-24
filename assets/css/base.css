@@ -149,47 +149,26 @@ body {
   font-weight: 600;
 }
 
-/* =========================
-   FOOTER (FINAL – CLEAN & PROFESSIONAL)
-========================= */
-footer {
-  background: #000;
-  padding: 30px 20px;
-  text-align: center;
-}
 
-.footer-inner {
-  max-width: 1200px;
-  margin: auto;
-}
+<footer class="site-footer">
+  <div class="footer-inner">
 
-.footer-inner h3 {
-  font-family: 'Cinzel', serif;
-  letter-spacing: 1px;
-  margin-bottom: 14px;
-}
+    <div class="footer-brand">
+      <h3>Mahadev Astrologer MA</h3>
+      <p>Authentic Vedic Astrology & Palmistry</p>
+    </div>
 
-/* 🔥 FOOTER PAGES – HORIZONTAL */
-.footer-links {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 18px;
-  margin: 16px 0;
-}
+    <div class="footer-links">
+      <a href="./pages/about.html">About</a>
+      <a href="./pages/privacy.html">Privacy</a>
+      <a href="./pages/terms.html">Terms</a>
+      <a href="./pages/disclaimer.html">Disclaimer</a>
+      <a href="./pages/contact.html">Contact</a>
+    </div>
 
-.footer-links a {
-  color: #f5c77a;
-  font-size: 14px;
-  white-space: nowrap;
-}
+  </div>
 
-.footer-links a:hover {
-  text-decoration: underline;
-}
-
-footer p {
-  font-size: 13px;
-  opacity: 0.7;
-  margin-top: 10px;
-}
+  <div class="footer-bottom">
+    © 2026 Mahadev Astrologer MA
+  </div>
+</footer>
