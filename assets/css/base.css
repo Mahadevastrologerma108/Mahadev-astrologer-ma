@@ -1,4 +1,11 @@
-*{margin:0;padding:0;box-sizing:border-box}
+/* =====================
+   GLOBAL RESET
+===================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 body{
   font-family:Poppins,sans-serif;
@@ -8,10 +15,15 @@ body{
 }
 
 /* LINKS */
-a{color:#e6c36a;text-decoration:none}
+a{
+  color:#e6c36a;
+  text-decoration:none;
+}
 a:hover{text-decoration:underline}
 
-/* HEADER */
+/* =====================
+   HEADER & NAVBAR
+===================== */
 .site-header{
   position:fixed;
   top:0;
@@ -31,7 +43,6 @@ a:hover{text-decoration:underline}
 .logo{margin-right:auto}
 .logo img{height:42px}
 
-/* MENU */
 .nav-menu{
   list-style:none;
   display:flex;
@@ -55,12 +66,14 @@ a:hover{text-decoration:underline}
 
 .dropdown.active .dropdown-menu{display:block}
 
-.dropdown-menu li a{
+.dropdown-menu a{
   display:block;
   padding:10px 16px;
 }
 
-/* HERO */
+/* =====================
+   HERO SECTION
+===================== */
 .hero{
   padding:140px 20px 90px;
   text-align:center;
@@ -72,13 +85,11 @@ a:hover{text-decoration:underline}
     #0b0b0b;
 }
 
-/* DIVINE MOVING GLOW */
 .hero::before{
   content:"";
   position:absolute;
   inset:-50%;
   background:conic-gradient(
-    from 0deg,
     transparent,
     rgba(201,162,77,.15),
     transparent,
@@ -89,11 +100,9 @@ a:hover{text-decoration:underline}
 }
 
 @keyframes rotateGlow{
-  from{transform:rotate(0deg)}
   to{transform:rotate(360deg)}
 }
 
-/* MAIN HEADING */
 .hero h1{
   position:relative;
   font-family:Cinzel,serif;
@@ -102,13 +111,11 @@ a:hover{text-decoration:underline}
   letter-spacing:2.5px;
   margin-bottom:14px;
   text-transform:uppercase;
+  max-width:100%;
+  padding:0 12px;
+  line-height:1.25;
 
-  background:linear-gradient(
-    90deg,
-    #b8963d,
-    #f7e4a3,
-    #b8963d
-  );
+  background:linear-gradient(90deg,#b8963d,#f7e4a3,#b8963d);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 
@@ -120,16 +127,12 @@ a:hover{text-decoration:underline}
 }
 
 @keyframes shineText{
-  0%{filter:brightness(1)}
   50%{filter:brightness(1.15)}
-  100%{filter:brightness(1)}
 }
 
-/* TAGLINE */
 .tagline{
   opacity:0;
-  animation:fadeUp .9s ease forwards;
-  animation-delay:.6s;
+  animation:fadeUp .9s ease forwards .6s;
 }
 
 @keyframes fadeUp{
@@ -137,7 +140,9 @@ a:hover{text-decoration:underline}
   to{opacity:1;transform:translateY(0)}
 }
 
-/* SECTIONS */
+/* =====================
+   SECTIONS
+===================== */
 section{
   max-width:1100px;
   margin:auto;
@@ -164,7 +169,9 @@ section h2{
   text-align:center;
 }
 
-/* KUNDLI */
+/* =====================
+   FORMS
+===================== */
 .kundli-form{
   max-width:480px;
   margin:auto;
@@ -184,7 +191,7 @@ button{
   cursor:pointer;
 }
 
-/* PRIVACY */
+/* PRIVACY NOTE */
 .privacy-note{
   margin-top:20px;
   text-align:center;
@@ -195,46 +202,9 @@ button{
   border-radius:14px;
 }
 
-/* FOOTER */
-.site-footer{
-  background:#000;
-  margin-top:60px;
-}
-
-.footer-inner{
-  max-width:1200px;
-  margin:auto;
-  padding:40px 20px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-
-.footer-inner a{display:block;color:#ccc;margin-top:6px}
-
-.footer-bottom{
-  text-align:center;
-  padding:16px;
-  font-size:13px;
-  opacity:.6;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  .menu-toggle{display:block;font-size:26px;margin-left:auto}
-  .nav-menu{
-    position:absolute;
-    top:60px;
-    right:0;
-    background:#000;
-    width:100%;
-    flex-direction:column;
-    display:none;
-  }
-  .nav-menu.show{display:flex}
-}
-
-/* PRICING */
+/* =====================
+   PRICING
+===================== */
 .pricing-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -247,9 +217,8 @@ button{
   border-radius:20px;
   padding:28px 22px;
   text-align:center;
-  position:relative;
   box-shadow:0 0 25px rgba(0,0,0,.4);
-  transition:.3s ease;
+  transition:.3s;
 }
 
 .price-card:hover{
@@ -260,26 +229,23 @@ button{
 .price-card h3{
   font-family:Cinzel,serif;
   font-size:22px;
-  margin-bottom:10px;
 }
 
 .price{
   font-size:34px;
   font-weight:700;
   color:#e6c36a;
-  margin:12px 0 18px;
+  margin:14px 0 18px;
 }
 
 .price-card ul{
   list-style:none;
-  padding:0;
   margin-bottom:22px;
 }
 
-.price-card ul li{
+.price-card li{
   margin:10px 0;
   font-size:15px;
-  opacity:.9;
 }
 
 .price-btn{
@@ -289,33 +255,15 @@ button{
   background:#e6c36a;
   color:#000;
   font-weight:600;
-  transition:.3s;
 }
 
-.price-btn:hover{
-  background:#f5dc9c;
-  text-decoration:none;
-}
-
-/* FEATURED CARD */
 .price-card.featured{
-  background:linear-gradient(180deg,#1a1a1a,#0f0f0f);
   border:1px solid rgba(230,195,106,.4);
 }
 
-.badge{
-  position:absolute;
-  top:-12px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#e6c36a;
-  color:#000;
-  padding:6px 16px;
-  border-radius:20px;
-  font-size:13px;
-  font-weight:600;
-}
-
+/* =====================
+   FOOTER
+===================== */
 .site-footer{
   background:#000;
   margin-top:80px;
@@ -331,37 +279,10 @@ button{
   gap:30px;
 }
 
-.footer-brand h3{
-  font-size:22px;
-  margin-bottom:6px;
-}
-
-.footer-brand p{
-  opacity:.8;
-  font-size:14px;
-}
-
-.footer-trust{
-  margin-top:16px;
-  font-size:13px;
-  background:rgba(255,255,255,.04);
-  padding:12px 14px;
-  border-radius:12px;
-  line-height:1.5;
-}
-
-/* PAGES BOX */
 .footer-box{
   background:#111;
   padding:22px;
   border-radius:16px;
-  box-shadow:0 0 22px rgba(230,195,106,.08);
-}
-
-.footer-box h4{
-  margin-bottom:14px;
-  font-size:18px;
-  color:#e6c36a;
 }
 
 .footer-links{
@@ -373,14 +294,6 @@ button{
   padding:10px 14px;
   border-radius:10px;
   background:rgba(255,255,255,.04);
-  color:#ddd;
-  transition:.3s;
-}
-
-.footer-links a:hover{
-  background:#e6c36a;
-  color:#000;
-  transform:translateX(4px);
 }
 
 .footer-bottom{
@@ -390,10 +303,10 @@ button{
   opacity:.6;
   border-top:1px solid rgba(255,255,255,.05);
 }
-/* =========================
-   INNER PAGES (ABOUT / TERMS / PRIVACY etc.)
-========================= */
 
+/* =====================
+   INNER PAGES
+===================== */
 .page-wrap{
   max-width:900px;
   margin:140px auto 80px;
@@ -404,7 +317,6 @@ button{
   background:linear-gradient(180deg,#121212,#0c0c0c);
   border-radius:22px;
   padding:36px;
-  box-shadow:0 0 30px rgba(230,195,106,.08);
   border:1px solid rgba(255,255,255,.06);
 }
 
@@ -412,46 +324,45 @@ button{
   text-align:center;
   font-family:Cinzel,serif;
   font-size:2.4rem;
-  margin-bottom:10px;
   background:linear-gradient(90deg,#c9a24d,#f5dc9c,#c9a24d);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-.page-sub{
-  text-align:center;
-  font-size:14px;
-  opacity:.8;
-  margin-bottom:30px;
-}
-
 .page-card h2{
-  margin-top:28px;
-  margin-bottom:10px;
-  font-size:20px;
+  margin-top:26px;
   color:#e6c36a;
 }
 
-.page-card p{
-  opacity:.9;
-  margin-bottom:14px;
-}
+/* =====================
+   MOBILE
+===================== */
+@media(max-width:768px){
 
-.page-card ul{
-  margin-left:18px;
-  margin-bottom:16px;
-}
+  .menu-toggle{
+    display:block;
+    font-size:26px;
+    margin-left:auto;
+  }
 
-.page-card li{
-  margin-bottom:6px;
-}
+  .nav-menu{
+    position:absolute;
+    top:60px;
+    right:0;
+    width:100%;
+    background:#000;
+    flex-direction:column;
+    display:none;
+  }
 
-.trust-box{
-  margin-top:30px;
-  background:rgba(255,255,255,.04);
-  padding:16px;
-  border-radius:14px;
-  text-align:center;
-  font-size:14px;
-  border:1px solid rgba(255,255,255,.06);
+  .nav-menu.show{display:flex}
+
+  .hero h1{
+    font-size:2.2rem;
+    letter-spacing:1.2px;
+  }
+
+  .tagline{
+    font-size:14px;
+  }
 }
