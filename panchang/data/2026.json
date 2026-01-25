@@ -1,1 +1,125 @@
-2026.json
+{
+  "year": 2026,
+  "months": [
+    {
+      "name": "January 2026",
+      "days": [
+        {
+          "date": "14 Jan",
+          "title": "Makar Sankranti",
+          "type": "festival"
+        },
+        {
+          "date": "17 Jan",
+          "title": "Ekadashi",
+          "type": "ekadashi"
+        },
+        {
+          "date": "24 Jan",
+          "title": "Purnima",
+          "type": "purnima"
+        },
+        {
+          "date": "30 Jan",
+          "title": "Amavasya",
+          "type": "amavasya"
+        }
+      ]
+    },
+    {
+      "name": "February 2026",
+      "days": [
+        {
+          "date": "1 Feb",
+          "title": "Vasant Panchami",
+          "type": "festival"
+        },
+        {
+          "date": "15 Feb",
+          "title": "Ekadashi",
+          "type": "ekadashi"
+        },
+        {
+          "date": "22 Feb",
+          "title": "Purnima",
+          "type": "purnima"
+        },
+        {
+          "date": "28 Feb",
+          "title": "Amavasya",
+          "type": "amavasya"
+        }
+      ]
+    },
+    {
+      "name": "March 2026",
+      "days": [
+        {
+          "date": "3 Mar",
+          "title": "Maha Shivratri",
+          "type": "festival"
+        },
+        {
+          "date": "16 Mar",
+          "title": "Ekadashi",
+          "type": "ekadashi"
+        },
+        {
+          "date": "25 Mar",
+          "title": "Purnima",
+          "type": "purnima"
+        },
+        {
+          "date": "31 Mar",
+          "title": "Amavasya",
+          "type": "amavasya"
+        }
+      ]
+    },
+    {
+      "name": "April 2026",
+      "days": [
+        {
+          "date": "2 Apr",
+          "title": "Ram Navami",
+          "type": "festival"
+        },
+        {
+          "date": "15 Apr",
+          "title": "Ekadashi",
+          "type": "ekadashi"
+        },
+        {
+          "date": "23 Apr",
+          "title": "Hanuman Jayanti (Purnima)",
+          "type": "purnima"
+        },
+        {
+          "date": "30 Apr",
+          "title": "Amavasya",
+          "type": "amavasya"
+        }
+      ]
+    },
+    {
+      "name": "May 2026",
+      "days": [
+        {
+          "date": "15 May",
+          "title": "Ekadashi",
+          "type": "ekadashi"
+        },
+        {
+          "date": "22 May",
+          "title": "Buddha Purnima",
+          "type": "purnima"
+        },
+        {
+          "date": "29 May",
+          "title": "Amavasya",
+          "type": "amavasya"
+        }
+      ]
+    }
+  ]
+}
