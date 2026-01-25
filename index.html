@@ -9,109 +9,169 @@
 
 <body>
 
+<!-- HEADER -->
 <header class="site-header">
   <div class="navbar">
+
     <div class="logo">
       <img src="assets/images/logo.png" alt="Mahadev Astrologer MA">
     </div>
 
     <div class="menu-toggle" id="menuToggle">☰</div>
 
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#panchang">Panchang</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <nav>
+      <ul id="navMenu" class="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+
+        <li class="dropdown" id="servicesDropdown">
+          <a href="javascript:void(0)">Services ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="#services">Kundli Analysis</a></li>
+            <li><a href="#services">Palmistry</a></li>
+            <li><a href="#services">Vastu Guidance</a></li>
+          </ul>
+        </li>
+
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
   </div>
 </header>
 
+<!-- HERO -->
 <section id="home" class="hero">
   <h1>Mahadev Astrologer MA</h1>
-  <p class="tagline">Vedic Astrology • Palmistry • Hindu Panchang</p>
+  <p class="tagline">Vedic Astrology • Palmistry • Conscious Guidance</p>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
-  <h2>About Us</h2>
+  <h2>About Us | हमारे बारे में</h2>
+
   <p>
-    Authentic Vedic Astrology, Palmistry & Hindu Panchang guidance
-    with privacy and ethical consultation.
+    Mahadev Astrologer MA offers authentic Vedic Astrology & Palmistry
+    with a focus on clarity, balance and ethical guidance.
+  </p>
+
+  <p class="hindi">
+    महादेव एस्ट्रोलॉजर MA प्रामाणिक वैदिक ज्योतिष और हस्तरेखा शास्त्र के माध्यम से
+    जीवन में सही दिशा और संतुलन प्रदान करता है।
   </p>
 </section>
 
-<!-- =====================
-     PANCHANG SECTION
-===================== -->
-<section id="panchang">
-  <h2>Yearly Hindu Panchang</h2>
+<!-- SERVICES -->
+<section id="services">
+  <h2>Our Services</h2>
 
-  <div class="panchang-wrap">
-
-    <div class="panchang-header">
-      <h3>Panchang – 2026</h3>
-
-      <div class="year-selector">
-        <button>2025</button>
-        <button>2026</button>
-        <button>2027</button>
-      </div>
-    </div>
-
-    <div class="month-grid">
-
-      <div class="month-card">
-        <h3>January</h3>
-        <div class="event festival">Makarsankranti</div>
-        <div class="event ekadashi">Ekadashi</div>
-        <div class="event purnima">Purnima</div>
-      </div>
-
-      <div class="month-card">
-        <h3>February</h3>
-        <div class="event amavasya">Amavasya</div>
-        <div class="event festival">Vasant Panchami</div>
-      </div>
-
-      <!-- Remaining months future me same structure se add honge -->
-
-    </div>
-
+  <div class="services-grid">
+    <div class="service-card">Kundli Analysis</div>
+    <div class="service-card">Palmistry</div>
+    <div class="service-card">Marriage Guidance</div>
+    <div class="service-card">Career Consultation</div>
+    <div class="service-card">Vastu Guidance</div>
+    <div class="service-card">Remedies & Muhurat</div>
   </div>
 </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>WhatsApp / Telegram consultation available.</p>
+<!-- PRICING -->
+<section id="pricing">
+  <h2>Consultation Pricing</h2>
+
+  <div class="pricing-grid">
+
+    <div class="price-card">
+      <h3>Kundali Analysis(कुण्डली)</h3>
+      <div class="price">₹501</div>
+      <ul>
+        <li>✔ Kundli Overview</li>
+        <li>✔ Career / Relationship Insight</li>
+        <li>✔ PDF Summary</li>
+        <li>✔ WhatsApp Support</li>
+      </ul>
+      <a href="#contact" class="price-btn">Book Now</a>
+    </div>
+
+    <div class="price-card featured">
+      <h3>Palmistry(हस्तरेखा)</h3>
+      <div class="price">₹501</div>
+      <ul>
+        <li>✔ Palm Reading</li>
+        <li>✔ Remedies Guidance</li>
+        <li>✔ PDF Report</li>
+        <li>✔ WhatsApp / Telegram Support</li>
+      </ul>
+      <a href="#contact" class="price-btn">Book Now</a>
+    </div>
+
+    <div class="price-card">
+      <h3>Numerology(अंक ज्योतिष)</h3>
+      <div class="price">₹201</div>
+      <ul>
+        <li>✔ Name Compatibility</li>
+        <li>✔ Life + Career Planning</li>
+        <li>✔ Personalized Remedies</li>
+        <li>✔ Partner Compatible</li>
+      </ul>
+      <a href="#contact" class="price-btn">Book Now</a>
+    </div>
+
+  </div>
+
+  <div class="privacy-note">
+    🔐 Your personal details & consultation remain strictly confidential.
+  </div>
 </section>
 
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Get Your Kundli</h2>
+
+  <form class="kundli-form">
+    <input type="text" placeholder="Full Name" required>
+    <input type="date" required>
+    <input type="time" required>
+    <input type="text" placeholder="Place of Birth" required>
+
+    <select required>
+      <option value="">Receive Via</option>
+      <option>WhatsApp</option>
+      <option>Telegram</option>
+      <option>Email</option>
+    </select>
+
+    <button type="submit">Submit Request</button>
+  </form>
+
+  <p class="privacy-note">
+    🔒 <strong>100% Privacy Guaranteed</strong><br>
+    Your birth details are used only for consultation.
+  </p>
+</section>
+
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-box">
-      <h4>Mahadev Astrologer MA</h4>
-      <p>Trusted Vedic Guidance</p>
-    </div>
 
     <div class="footer-box">
       <h4>Pages</h4>
       <div class="footer-links">
-        <a href="#">About</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms</a>
-        <a href="#">Disclaimer</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/privacy.html">Privacy Policy</a>
+        <a href="pages/terms.html">Terms</a>
+        <a href="pages/disclaimer.html">Disclaimer</a>
       </div>
     </div>
+
   </div>
 
   <div class="footer-bottom">
-    © 2026 Mahadev Astrologer MA • 100% Privacy Guaranteed
+    © 2026 Mahadev Astrologer MA
   </div>
 </footer>
 
-<script>
-const toggle=document.getElementById("menuToggle");
-const menu=document.getElementById("navMenu");
-toggle.onclick=()=>menu.classList.toggle("show");
-</script>
-
+<script src="assets/js/script.js"></script>
 </body>
 </html>
