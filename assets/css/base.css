@@ -1,4 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Cinzel:wght@700&display=swap');
+
+/* ================= ROOT ================= */
+
+:root {
+  --bg-main: #0b0b14;
+  --bg-dark: #05050a;
+  --bg-card: #12121c;
+  --border-dark: #1f1f2e;
+  --gold: #f5c542;
+  --text-light: #f5f5f5;
+  --text-muted: #aaa;
+}
+
+/* ================= RESET ================= */
 
 * {
   margin: 0;
@@ -8,15 +22,15 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #0b0b14;
-  color: #f5f5f5;
+  background: var(--bg-main);
+  color: var(--text-light);
   line-height: 1.6;
 }
 
 /* ================= HEADER ================= */
 
 .site-header {
-  background: #05050a;
+  background: var(--bg-dark);
   border-bottom: 1px solid #222;
   position: sticky;
   top: 0;
@@ -32,11 +46,14 @@ body {
   justify-content: space-between;
 }
 
+/* LOGO FIX (NO OVERSIZE) */
 .logo img {
   height: 42px;
   width: auto;
+  max-width: 160px;
 }
 
+/* MENU */
 .menu-toggle {
   display: none;
   font-size: 26px;
@@ -58,7 +75,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #f5c542;
+  color: var(--gold);
 }
 
 /* Dropdown */
@@ -77,10 +94,6 @@ nav ul li a:hover {
   border-radius: 6px;
 }
 
-.dropdown-menu li {
-  padding: 6px 0;
-}
-
 .dropdown:hover .dropdown-menu {
   display: block;
 }
@@ -89,17 +102,20 @@ nav ul li a:hover {
 
 .hero {
   text-align: center;
-  padding: 80px 20px;
-  background: radial-gradient(circle at top, #141422, #0b0b14);
+  padding: 90px 20px;
+  background: radial-gradient(circle at top, #141422, var(--bg-main));
 }
 
 .hero h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--gold);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
 }
 
-.tagline {
-  color: #aaa;
+.hero p {
+  color: var(--text-muted);
   font-size: 15px;
 }
 
@@ -114,6 +130,8 @@ section {
 section h2 {
   text-align: center;
   margin-bottom: 30px;
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
   font-size: 26px;
 }
 
@@ -126,11 +144,11 @@ section h2 {
 }
 
 .service-card {
-  background: #12121c;
+  background: var(--bg-card);
   padding: 20px;
   border-radius: 8px;
   text-align: center;
-  border: 1px solid #1f1f2e;
+  border: 1px solid var(--border-dark);
 }
 
 /* ================= PRICING ================= */
@@ -142,20 +160,21 @@ section h2 {
 }
 
 .price-card {
-  background: #12121c;
+  background: var(--bg-card);
   padding: 24px;
   border-radius: 10px;
-  border: 1px solid #1f1f2e;
+  border: 1px solid var(--border-dark);
 }
 
-.price-card.featured {
-  border-color: #f5c542;
+.price-card h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
 }
 
 .price {
   font-size: 28px;
   margin: 12px 0;
-  color: #f5c542;
+  color: var(--gold);
 }
 
 .price-card ul {
@@ -172,42 +191,17 @@ section h2 {
   display: inline-block;
   margin-top: 12px;
   padding: 10px 18px;
-  background: #f5c542;
+  background: var(--gold);
   color: #000;
   text-decoration: none;
   border-radius: 6px;
   font-weight: 500;
 }
 
-/* ================= FORM ================= */
-
-.kundli-form {
-  max-width: 420px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.kundli-form input,
-.kundli-form select,
-.kundli-form button {
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  font-family: inherit;
-}
-
-.kundli-form button {
-  background: #f5c542;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 /* ================= FOOTER ================= */
 
 .site-footer {
-  background: #05050a;
+  background: var(--bg-dark);
   margin-top: 60px;
 }
 
@@ -218,6 +212,8 @@ section h2 {
 }
 
 .footer-box h4 {
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
   margin-bottom: 10px;
 }
 
@@ -230,7 +226,7 @@ section h2 {
 }
 
 .footer-links a:hover {
-  color: #f5c542;
+  color: var(--gold);
 }
 
 .footer-bottom {
@@ -251,7 +247,7 @@ section h2 {
   nav ul {
     display: none;
     flex-direction: column;
-    background: #05050a;
+    background: var(--bg-dark);
     position: absolute;
     top: 60px;
     right: 0;
@@ -264,80 +260,7 @@ section h2 {
   }
 
   .logo img {
-    height: 36px;
+    height: 34px;
+    max-width: 140px;
   }
-
-}
-
-/* ===============================
-   HERO / HEADING FIX (OLD LOOK)
-================================ */
-
-.hero,
-.hero-section,
-.heading-section {
-  background: linear-gradient(180deg, #0f021f 0%, #05000a 100%);
-  padding: 120px 6% 90px;
-  text-align: center;
-}
-
-/* Main Heading */
-.hero h1,
-.heading-section h1,
-section h1 {
-  font-family: 'Cinzel', serif;
-  color: var(--gold);
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  margin-bottom: 15px;
-  letter-spacing: 1px;
-}
-
-/* Sub Heading / Tagline */
-.hero p,
-.heading-section p,
-section > p {
-  color: var(--shiva-blue);
-  font-size: 1.05rem;
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-/* Mobile safety */
-@media (max-width: 768px) {
-  .hero,
-  .heading-section {
-    padding: 90px 6% 70px;
-  }
-}
-/* ===============================
-   ROYAL FONT RESTORE (OLD LOOK)
-================================ */
-
-/* Logo / Brand */
-.nav-logo,
-.logo {
-  font-family: 'Cinzel', serif !important;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--gold);
-}
-
-/* All Main Headings */
-h1, h2, h3 {
-  font-family: 'Cinzel', serif !important;
-  color: var(--gold);
-  letter-spacing: 0.8px;
-}
-
-/* Section Titles / Cards */
-.price-card h3,
-.section-title,
-.footer-box h4 {
-  font-family: 'Cinzel', serif !important;
-  color: var(--gold);
-}
-
-/* Paragraphs remain clean (OLD STYLE) */
-p, li, a, span {
-  font-family: 'Poppins', sans-serif;
 }
