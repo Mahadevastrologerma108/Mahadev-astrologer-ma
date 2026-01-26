@@ -1,76 +1,79 @@
-/* =====================================
-   Panchang JS
-   Future Ready (API / JSON Upgrade Safe)
-   ===================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
-  const yearSelect = document.getElementById("yearSelect");
-  const calendarGrid = document.getElementById("calendarGrid");
-
-  // Default year
-  const DEFAULT_YEAR = new Date().getFullYear();
-
-  // Load on page load
-  loadYear(DEFAULT_YEAR);
-
-  // Change year event
-  yearSelect.addEventListener("change", (e) => {
-    loadYear(e.target.value);
-  });
-
-  /* ===========================
-     Core Functions
-     =========================== */
-
-  function loadYear(year) {
-    calendarGrid.innerHTML = "<p>Loading Panchang...</p>";
-
-    fetch(`data/${year}.json`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Data not found");
-        return res.json();
-      })
-      .then((data) => {
-        renderCalendar(data);
-      })
-      .catch(() => {
-        calendarGrid.innerHTML = `
-          <p style="opacity:.7">
-            Panchang data for <strong>${year}</strong> not available yet.
-            <br>We will update it soon 🙏
-          </p>
-        `;
-      });
-  }
-
-  function renderCalendar(data) {
-    calendarGrid.innerHTML = "";
-
-    data.months.forEach((month) => {
-      const monthCard = document.createElement("div");
-      monthCard.className = "month-card";
-
-      monthCard.innerHTML = `
-        <div class="month-title">${month.name}</div>
-        ${month.days.map(renderDay).join("")}
-      `;
-
-      calendarGrid.appendChild(monthCard);
-    });
-  }
-
-  function renderDay(day) {
-    let tithiClass = "";
-
-    if (day.type === "amavasya") tithiClass = "amavasya";
-    if (day.type === "purnima") tithiClass = "purnima";
-    if (day.type === "ekadashi") tithiClass = "ekadashi";
-
-    return `
-      <div class="date-row ${tithiClass}">
-        <span>${day.date}</span>
-        <span>${day.title}</span>
-      </div>
-    `;
-  }
+    equalizeCalendarBlocks();
 });
+
+/**
+ * Sab calendar day blocks ko equal height deta hai
+ * taaki chhote-bade blocks ka problem khatam ho
+ */
+function equalizeCalendarBlocks() {
+    const days = document.querySelectorAll(".calendar-grid .day");
+
+    if (!days.length) return;
+
+    let maxHeight = 0;
+
+    // pehle reset
+    days.forEach(day => {
+        day.style.minHeight = "auto";
+    });
+
+    // max height find karo
+    days.forEach(day => {
+        const height = day.offsetHeight;
+        if (height > maxHeight) {
+            maxHeight = height;
+        }
+    });
+
+    // sabko same height do
+    days.forEach(day => {
+        day.style.minHeight = maxHeight + "px";
+        day.style.display = "flex";
+        day.style.flexDirection = "column";
+        day.style.justifyContent = "center";
+    });
+}
+
+/**
+ * FUTURE READY SECTION
+ * Jab JSON / API se festival load karoge
+ * bas is function me data feed karna
+ */
+function applyFestivalEvents(eventData = []) {
+    /*
+      eventData format (future):
+      [
+        { date: "2026-01-15", name: "Makar Sankranti", type: "festival" },
+        { date: "2026-01-26", name: "Amavasya", type: "vrat" }
+      ]
+    */
+
+    const days = document.querySelectorAll(".calendar-grid .day");
+
+    days.forEach(day => {
+        const dayNumber = day.dataset.day;
+        if (!dayNumber) return;
+
+        eventData.forEach(event => {
+            const eventDay = new Date(event.date).getDate();
+            if (parseInt(dayNumber) === eventDay) {
+                day.classList.add("event");
+
+                const dot = document.createElement("div");
+                dot.className = "event-dot";
+
+                const label = document.createElement("small");
+                label.innerText = event.name;
+
+                day.appendChild(dot);
+                day.appendChild(label);
+            }
+        });
+    });
+
+    // events add hone ke baad fir se equal height
+    equalizeCalendarBlocks();
+}
+
+console.log("🕉️ Panchang JS loaded successfully – Mahadev Astrologer MA");
