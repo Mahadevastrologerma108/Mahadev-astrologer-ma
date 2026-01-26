@@ -264,3 +264,22 @@ section h2 {
     max-width: 140px;
   }
 }
+
+/* ===== FORCE GOLD HEADING (OLD LOOK RESTORE) ===== */
+
+.hero h1,
+.heading-section h1,
+section h1,
+section h2,
+.price-card h3,
+.footer-box h4 {
+  color: #f5c542 !important;   /* GOLD */
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 1px;
+}
+
+/* Tagline / sub text */
+.hero p,
+.heading-section p {
+  color: #aaa !important;
+}
