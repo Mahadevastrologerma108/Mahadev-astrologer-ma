@@ -1,17 +1,49 @@
-function toggleSidebar() {
-  const sidebar = document.getElementById("mobileSidebar");
-  sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+/* ===============================
+   MOBILE MENU TOGGLE
+================================ */
+
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.querySelector('nav ul');
+
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+  });
 }
 
-window.addEventListener("scroll", () => {
-  const nav = document.querySelector(".royal-nav");
-  if (!nav) return;
+/* ===============================
+   DROPDOWN (MOBILE SAFE)
+================================ */
 
-  if (window.scrollY > 40) {
-    nav.style.background = "#05000a";
-    nav.style.boxShadow = "0 5px 20px rgba(0,0,0,0.5)";
-  } else {
-    nav.style.background = "#090116";
-    nav.style.boxShadow = "none";
-  }
+document.querySelectorAll('.dropdown > a').forEach(link => {
+  link.addEventListener('click', function (e) {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu) {
+        dropdownMenu.style.display =
+          dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  });
 });
+
+/* ===============================
+   SMOOTH SCROLL (OPTIONAL)
+================================ */
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+/* ===============================
+   DEBUG CONFIRMATION
+================================ */
+
+console.log("Mahadev Astrologer MA – Stable JS loaded");
