@@ -309,3 +309,35 @@ section > p {
     padding: 90px 6% 70px;
   }
 }
+/* ===============================
+   ROYAL FONT RESTORE (OLD LOOK)
+================================ */
+
+/* Logo / Brand */
+.nav-logo,
+.logo {
+  font-family: 'Cinzel', serif !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+
+/* All Main Headings */
+h1, h2, h3 {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gold);
+  letter-spacing: 0.8px;
+}
+
+/* Section Titles / Cards */
+.price-card h3,
+.section-title,
+.footer-box h4 {
+  font-family: 'Cinzel', serif !important;
+  color: var(--gold);
+}
+
+/* Paragraphs remain clean (OLD STYLE) */
+p, li, a, span {
+  font-family: 'Poppins', sans-serif;
+}
