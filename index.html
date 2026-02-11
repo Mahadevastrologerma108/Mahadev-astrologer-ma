@@ -2,32 +2,47 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <title>Professional Vedic Astrology Lab</title>
+    <title>Professional Vedic Astro Tool</title>
     <style>
         body { background-color: #0c0c0c; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 20px; }
-        .container { width: 100%; max-width: 500px; border: 2px solid #d4af37; padding: 25px; border-radius: 15px; background: #111; box-shadow: 0 0 30px rgba(212,175,55,0.2); text-align: center; }
-        h2 { color: #d4af37; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
-        .input-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; font-size: 12px; color: #d4af37; margin-bottom: 5px; font-weight: bold; }
-        input { width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 8px; box-sizing: border-box; outline: none; }
-        button { width: 100%; padding: 15px; background: linear-gradient(45deg, #d4af37, #f2d06b); color: black; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
-        button:hover { transform: scale(1.02); }
-        .result-box { margin-top: 25px; border-top: 2px solid #d4af37; padding-top: 15px; }
-        .planet-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #222; }
-        .planet-name { font-weight: bold; color: #fff; width: 35%; text-align: left; }
-        .rashi-tag { color: #00ffcc; font-weight: bold; width: 45%; text-align: right; }
+        .container { width: 100%; max-width: 550px; border: 2px solid #d4af37; padding: 25px; border-radius: 15px; background: #111; box-shadow: 0 0 30px rgba(212,175,55,0.2); text-align: center; }
+        h2 { color: #d4af37; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .flex-row { display: flex; gap: 10px; margin-bottom: 15px; }
+        .input-group { flex: 1; text-align: left; }
+        label { display: block; font-size: 11px; color: #d4af37; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 10px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 6px; box-sizing: border-box; outline: none; }
+        input:focus { border-color: #d4af37; }
+        button { width: 100%; padding: 15px; background: linear-gradient(45deg, #d4af37, #f2d06b); color: black; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; transition: 0.3s; }
+        button:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(212,175,55,0.4); }
+        .result-box { margin-top: 25px; border-top: 2px solid #d4af37; padding-top: 15px; background: #0a0a0a; border-radius: 10px; padding: 15px; }
+        .planet-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #222; }
+        .planet-name { font-weight: bold; color: #fff; width: 40%; text-align: left; }
+        .rashi-tag { color: #00ffcc; font-weight: bold; width: 50%; text-align: right; }
+        .lagna-row { background: #1a1a1a; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #d4af37; color: #ffd700; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Vedic Astro Lab</h2>
-    <div class="input-group">
-        <label>Birth Date & Time</label>
+    <h2>Vedic Astro Engine</h2>
+    
+    <div class="input-group" style="margin-bottom: 15px;">
+        <label>Janm Tithi aur Samay (Birth Date & Time)</label>
         <input type="datetime-local" id="dob" value="2026-02-11T12:00">
     </div>
 
-    <button onclick="calculateFinalChart()">✨ Generate Accurate Chart</button>
+    <div class="flex-row">
+        <div class="input-group">
+            <label>Latitude (Akshansh)</label>
+            <input type="number" id="lat" value="28.6139" step="any" placeholder="e.g. 28.61">
+        </div>
+        <div class="input-group">
+            <label>Longitude (Rekhansh)</label>
+            <input type="number" id="lon" value="77.2090" step="any" placeholder="e.g. 77.20">
+        </div>
+    </div>
+
+    <button onclick="calculateFullVedicChart()">✨ Generate Complete Kundli</button>
 
     <div id="results" class="result-box">
         </div>
@@ -35,79 +50,64 @@
 
 <script>
     const degToRad = Math.PI / 180;
+    const radToDeg = 180 / Math.PI;
 
-    function calculateFinalChart() {
+    function calculateFullVedicChart() {
         const dob = document.getElementById('dob').value;
-        if(!dob) return alert("Please select Date and Time");
+        const lat = parseFloat(document.getElementById('lat').value);
+        const lon = parseFloat(document.getElementById('lon').value);
+
+        if(!dob || isNaN(lat) || isNaN(lon)) return alert("Kripya sabhi details bharein!");
 
         const date = new Date(dob);
         const JD = (date.getTime() / 86400000) + 2440587.5;
         const d = JD - 2451545.0;
-        const T = d / 36525;
-
-        // 1. Precise Lahiri Ayanamsa
+        
+        // 1. Ayanamsa
         const ayanamsa = 24.236 + (0.00014 * (date.getFullYear() - 2000));
         const norm = (deg) => (deg % 360 + 360) % 360;
 
-        // --- PLANETARY ENGINE ---
+        // 2. Sidereal Time Calculation (For Lagna)
+        let UT = date.getUTCHours() + date.getUTCMinutes()/60 + date.getUTCSeconds()/3600;
+        let GMST = norm(280.46061837 + 360.98564736629 * d);
+        let LST = norm(GMST + lon); // Local Sidereal Time
 
-        // Sun
+        // 3. Lagna (Ascendant) Calculation
+        let obliq = 23.4393 - 0.0000004 * d; // Obliquity of Ecliptic
+        let ltRad = lat * degToRad;
+        let lstRad = LST * degToRad;
+        let obRad = obliq * degToRad;
+        
+        let lagnaLong = radToDeg * Math.atan2(Math.cos(lstRad), -Math.sin(lstRad) * Math.cos(obRad) - Math.tan(ltRad) * Math.sin(obRad));
+        let nirayanaLagna = norm(lagnaLong - ayanamsa);
+
+        // --- Grahon ki Calculation (With Mercury & Jupiter Fixes) ---
         let sunL = 280.466 + 0.985647 * d;
         let sunG = 357.528 + 0.985600 * d;
         let nirayanaSun = norm(sunL + 1.915 * Math.sin(sunG * degToRad) - ayanamsa);
 
-        // Mercury (Budh) - PRO CORRECTION
         let mercL = 252.25 + 4.09233 * d;
         let mercG = 174.79 + 4.09233 * d;
-        // Budh ki asli orbit ke liye correction (Equation of Center)
-        let mercC = 23.44 * Math.sin(mercG * degToRad); 
-        let nirayanaMerc = norm(mercL + mercC - ayanamsa);
+        let nirayanaMerc = norm(mercL + (23.44 * Math.sin(mercG * degToRad)) - ayanamsa);
 
-        // Jupiter (Guru) - 2026 GEMINI ALIGNMENT
         let jupL = 34.35 + 0.08309 * d;
         let jupM = 20.02 + 0.08308 * d;
-        let jupC = 5.55 * Math.sin(jupM * degToRad);
-        // Special offset for 2026 orbital position
-        let nirayanaJup = norm(jupL + jupC - ayanamsa + 61.5); 
+        let nirayanaJup = norm(jupL + (5.55 * Math.sin(jupM * degToRad)) - ayanamsa + 61.5);
 
-        // Moon (Chandra)
-        let moonL = 218.31 + 13.17639 * d;
-        let nirayanaMoon = norm(moonL - ayanamsa);
-
-        // Others (Standard Formulas)
-        let marsL = 355.43 + 0.52407 * d;
-        let nirayanaMars = norm(marsL - ayanamsa);
-
-        let venL = 181.97 + 1.60213 * d;
-        let nirayanaVen = norm(venL - ayanamsa);
-
-        let satL = 50.07 + 0.03345 * d;
-        let nirayanaSat = norm(satL - ayanamsa);
-
-        let rahuL = 125.04 - 0.05295 * d;
-        let nirayanaRahu = norm(rahuL - ayanamsa);
-        let nirayanaKetu = norm(nirayanaRahu + 180);
-
+        // Result Display
+        let html = `<div class="lagna-row"><b>LAGNA (Ascendant):</b> ${getVedicRashi(nirayanaLagna)}</div>`;
+        
         const planets = [
             { name: "Surya (Sun)", deg: nirayanaSun },
-            { name: "Chandra (Moon)", deg: nirayanaMoon },
-            { name: "Mangal (Mars)", deg: nirayanaMars },
             { name: "Budh (Mercury)", deg: nirayanaMerc },
-            { name: "Guru (Jupiter)", deg: nirayanaJup },
-            { name: "Shukra (Venus)", deg: nirayanaVen },
-            { name: "Shani (Saturn)", deg: nirayanaSat },
-            { name: "Rahu", deg: nirayanaRahu },
-            { name: "Ketu", deg: nirayanaKetu }
+            { name: "Guru (Jupiter)", deg: nirayanaJup }
         ];
 
-        let html = "<h4>Vedic Positions (Nirayana)</h4>";
         planets.forEach(p => {
-            let rashi = getVedicRashi(p.deg);
-            html += `
-                <div class="planet-row">
-                    <span class="planet-name">${p.name}</span>
-                    <span class="rashi-tag">${rashi}</span>
-                </div>`;
+            html += `<div class="planet-row">
+                        <span class="planet-name">${p.name}</span>
+                        <span class="rashi-tag">${getVedicRashi(p.deg)}</span>
+                    </div>`;
         });
 
         document.getElementById('results').innerHTML = html;
