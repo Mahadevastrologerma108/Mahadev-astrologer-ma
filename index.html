@@ -2,66 +2,106 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Professional Astrology Tool</title>
+    <title>Professional Astrology Tool - Testing</title>
     <script src="https://cdn.jsdelivr.net/npm/astrology-js@1.0.1/dist/index.browser.min.js"></script>
     <style>
-        body { background-color: #0c0c0c; color: white; font-family: sans-serif; padding: 20px; }
-        .container { max-width: 600px; margin: auto; border: 1px solid #d4af37; padding: 20px; border-radius: 10px; }
-        input, button { padding: 10px; margin: 5px; width: 90%; }
-        .result-box { margin-top: 20px; background: #1a1a1a; padding: 15px; border-radius: 8px; }
-        .planet { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding: 5px 0; }
+        body { background-color: #0c0c0c; color: white; font-family: 'Segoe UI', sans-serif; padding: 20px; text-align: center; }
+        .container { max-width: 500px; margin: auto; border: 2px solid #d4af37; padding: 30px; border-radius: 20px; box-shadow: 0 0 20px rgba(212,175,55,0.3); }
+        input { padding: 12px; margin: 10px 0; width: 100%; border-radius: 8px; border: 1px solid #444; background: #222; color: white; box-sizing: border-box; }
+        button { padding: 15px; width: 100%; background: #d4af37; color: black; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        button:hover { background: #ffd700; transform: scale(1.02); }
+        .result-box { margin-top: 25px; text-align: left; background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px inset #333; min-height: 50px; }
+        .planet-row { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding: 10px 0; }
+        .rashi-name { color: #00ffcc; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Personal Unlimited Chart Maker</h2>
-        <input type="datetime-local" id="birthTime" value="2026-02-11T12:00">
-        <input type="text" id="lat" placeholder="Latitude (e.g. 28.61)">
-        <input type="text" id="lon" placeholder="Longitude (e.g. 77.20)">
-        <button onclick="generateChart()">Generate Unlimited Chart</button>
 
-        <div id="results" class="result-box">
-            Results will appear here...
-        </div>
+<div class="container">
+    <h2 style="color:#d4af37;">Personal Astrology Lab</h2>
+    <p style="font-size: 12px; color: #888;">Unlimited Charts Testing Repo</p>
+    
+    <label>Birth Date & Time</label>
+    <input type="datetime-local" id="birthTime" value="2026-02-11T12:00">
+    
+    <label>Latitude (Delhi: 28.61)</label>
+    <input type="number" id="lat" value="28.6139" step="any">
+    
+    <label>Longitude (Delhi: 77.20)</label>
+    <input type="number" id="lon" value="77.2090" step="any">
+    
+    <button onclick="generateChart()">✨ Generate Chart Now</button>
+
+    <div id="results" class="result-box">
+        Fill details and click generate...
     </div>
+</div>
 
-    <script>
-        function generateChart() {
-            const time = new Date(document.getElementById('birthTime').value);
-            const lat = parseFloat(document.getElementById('lat').value) || 28.61;
-            const lon = parseFloat(document.getElementById('lon').value) || 77.20;
+<script>
+    function generateChart() {
+        console.log("Generating Chart...");
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = "Calculating...";
 
-            // Professional Engine Configuration
-            const engine = new astrology.Engine({
-                date: time,
-                latitude: lat,
-                longitude: lon,
-                houseSystem: 'P',
-                ayanamsa: 'Lahiri' // Sabse sateek Vedic correction
-            });
+        try {
+            const timeVal = document.getElementById('birthTime').value;
+            const lat = parseFloat(document.getElementById('lat').value);
+            const lon = parseFloat(document.getElementById('lon').value);
 
-            const chart = engine.getChart();
-            const planets = chart.planets;
+            if(!timeVal) { alert("Please select date and time"); return; }
 
-            let html = "<h3>Vedic Planetary Positions</h3>";
-            for (let name in planets) {
-                // Ayanamsa manual adjustment for precision
-                let vDegree = (planets[name].longitude - 24.23 + 360) % 360;
-                let rashi = getRashi(vDegree);
-                
-                html += `<div class="planet">
-                            <span><b>${name.toUpperCase()}</b></span>
-                            <span>${vDegree.toFixed(2)}°</span>
-                            <span style="color:#ffd700;">${rashi}</span>
-                         </div>`;
+            const date = new Date(timeVal);
+            
+            // Vedic Ayanamsa Correction (Approx 24.23 for 2026)
+            const ayanamsa = 24.23;
+
+            // Simple but Robust Engine Logic
+            // Agar library load ho gayi hai toh uska use karega, nahi toh fallback code
+            let planetsData = [];
+
+            if (typeof astrology !== 'undefined') {
+                const engine = new astrology.Engine({
+                    date: date,
+                    latitude: lat,
+                    longitude: lon,
+                    houseSystem: 'P',
+                    ayanamsa: 'Lahiri'
+                });
+                const chart = engine.getChart();
+                for(let p in chart.planets) {
+                    let deg = (chart.planets[p].longitude - ayanamsa + 360) % 360;
+                    planetsData.push({ name: p.toUpperCase(), degree: deg });
+                }
+            } else {
+                // Fallback: Agar library fail ho jaye toh testing ke liye dummy data dikhaye
+                resultsDiv.innerHTML = "<p style='color:red;'>Library Loading... Please wait or refresh.</p>";
+                return;
             }
-            document.getElementById('results').innerHTML = html;
-        }
 
-        function getRashi(d) {
-            const signs = ["Mesh", "Vrishabh", "Mithun", "Kark", "Simha", "Kanya", "Tula", "Vrishchik", "Dhanu", "Makar", "Kumbh", "Meen"];
-            return signs[Math.floor(d / 30)];
+            let html = "<h4>Vedic Positions (Nirayana)</h4>";
+            planetsData.forEach(p => {
+                let rashiObj = getRashi(p.degree);
+                html += `
+                    <div class="planet-row">
+                        <span><b>${p.name}</b></span>
+                        <span>${p.degree.toFixed(2)}°</span>
+                        <span class="rashi-name">${rashiObj.name}</span>
+                    </div>`;
+            });
+            resultsDiv.innerHTML = html;
+
+        } catch (error) {
+            resultsDiv.innerHTML = "Error: " + error.message;
+            console.error(error);
         }
-    </script>
+    }
+
+    function getRashi(d) {
+        const signs = ["Mesh (Aries)", "Vrishabh (Taurus)", "Mithun (Gemini)", "Kark (Cancer)", "Simha (Leo)", "Kanya (Virgo)", "Tula (Libra)", "Vrishchik (Scorpio)", "Dhanu (Sagittarius)", "Makar (Capricorn)", "Kumbh (Aquarius)", "Meen (Pisces)"];
+        let index = Math.floor(d / 30);
+        return { name: signs[index], num: index + 1 };
+    }
+</script>
+
 </body>
 </html>
