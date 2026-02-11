@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Professional Astrology Tool</title>
+    <script src="https://cdn.jsdelivr.net/npm/astrology-js@1.0.1/dist/index.browser.min.js"></script>
+    <style>
+        body { background-color: #0c0c0c; color: white; font-family: sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: auto; border: 1px solid #d4af37; padding: 20px; border-radius: 10px; }
+        input, button { padding: 10px; margin: 5px; width: 90%; }
+        .result-box { margin-top: 20px; background: #1a1a1a; padding: 15px; border-radius: 8px; }
+        .planet { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Personal Unlimited Chart Maker</h2>
+        <input type="datetime-local" id="birthTime" value="2026-02-11T12:00">
+        <input type="text" id="lat" placeholder="Latitude (e.g. 28.61)">
+        <input type="text" id="lon" placeholder="Longitude (e.g. 77.20)">
+        <button onclick="generateChart()">Generate Unlimited Chart</button>
+
+        <div id="results" class="result-box">
+            Results will appear here...
+        </div>
+    </div>
+
+    <script>
+        function generateChart() {
+            const time = new Date(document.getElementById('birthTime').value);
+            const lat = parseFloat(document.getElementById('lat').value) || 28.61;
+            const lon = parseFloat(document.getElementById('lon').value) || 77.20;
+
+            // Professional Engine Configuration
+            const engine = new astrology.Engine({
+                date: time,
+                latitude: lat,
+                longitude: lon,
+                houseSystem: 'P',
+                ayanamsa: 'Lahiri' // Sabse sateek Vedic correction
+            });
+
+            const chart = engine.getChart();
+            const planets = chart.planets;
+
+            let html = "<h3>Vedic Planetary Positions</h3>";
+            for (let name in planets) {
+                // Ayanamsa manual adjustment for precision
+                let vDegree = (planets[name].longitude - 24.23 + 360) % 360;
+                let rashi = getRashi(vDegree);
+                
+                html += `<div class="planet">
+                            <span><b>${name.toUpperCase()}</b></span>
+                            <span>${vDegree.toFixed(2)}°</span>
+                            <span style="color:#ffd700;">${rashi}</span>
+                         </div>`;
+            }
+            document.getElementById('results').innerHTML = html;
+        }
+
+        function getRashi(d) {
+            const signs = ["Mesh", "Vrishabh", "Mithun", "Kark", "Simha", "Kanya", "Tula", "Vrishchik", "Dhanu", "Makar", "Kumbh", "Meen"];
+            return signs[Math.floor(d / 30)];
+        }
+    </script>
+</body>
+</html>
