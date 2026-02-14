@@ -2,95 +2,149 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <title>Professional Vedic Astro Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Master Translator - GitHub Edition</title>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+
     <style>
-        /* Aapka pasandida Dark-Gold Theme */
-        body { background-color: #0c0c0c; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 20px; }
-        .container { width: 100%; max-width: 550px; border: 2px solid #d4af37; padding: 25px; border-radius: 15px; background: #111; box-shadow: 0 0 30px rgba(212,175,55,0.2); text-align: center; }
-        h2 { color: #d4af37; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .flex-row { display: flex; gap: 10px; margin-bottom: 15px; }
-        .input-group { flex: 1; text-align: left; }
-        label { display: block; font-size: 11px; color: #d4af37; margin-bottom: 5px; font-weight: bold; }
-        input { width: 100%; padding: 10px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 6px; box-sizing: border-box; outline: none; }
-        input:focus { border-color: #d4af37; }
-        button { width: 100%; padding: 15px; background: linear-gradient(45deg, #d4af37, #f2d06b); color: black; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; transition: 0.3s; }
-        button:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(212,175,55,0.4); }
-        .result-box { margin-top: 25px; border-top: 2px solid #d4af37; padding-top: 15px; background: #0a0a0a; border-radius: 10px; padding: 15px; }
-        .planet-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #222; }
-        .planet-name { font-weight: bold; color: #fff; width: 40%; text-align: left; }
-        .rashi-tag { color: #00ffcc; font-weight: bold; width: 50%; text-align: right; }
-        .lagna-row { background: #1a1a1a; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #d4af37; color: #ffd700; font-weight: bold; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #f8fafc; padding: 20px; text-align: center; }
+        .container { max-width: 900px; margin: auto; background: #1e293b; padding: 30px; border-radius: 20px; border: 1px solid #334155; }
+        #upload-box { border: 2px dashed #64748b; padding: 40px; margin-bottom: 20px; cursor: pointer; border-radius: 15px; }
+        .btn-group { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+        button { padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; border: none; color: white; }
+        #startBtn { background: #3b82f6; }
+        #translateBtn { background: #10b981; display: none; }
+        #downloadPdfBtn { background: #f59e0b; display: none; }
+        #status { margin: 20px 0; color: #38bdf8; font-family: monospace; }
+        .output-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .text-box { text-align: left; background: #020617; padding: 15px; border-radius: 8px; white-space: pre-wrap; height: 350px; overflow-y: auto; display: none; }
+        canvas { display: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Vedic Astro Engine</h2>
-    
-    <div class="input-group" style="margin-bottom: 15px;">
-        <label>Janm Tithi aur Samay (Birth Date & Time)</label>
-        <input type="datetime-local" id="dob" value="2026-02-11T08:05">
+    <h2>🌟 Master Astro Translator</h2>
+    <div id="upload-box" onclick="document.getElementById('fileInput').click()">
+        📁 PDF Select Karein
+        <input type="file" id="fileInput" hidden accept="application/pdf">
     </div>
-
-    <div class="flex-row">
-        <div class="input-group">
-            <label>Latitude (Akshansh)</label>
-            <input type="number" id="lat" value="28.6139" step="any">
-        </div>
-        <div class="input-group">
-            <label>Longitude (Rekhansh)</label>
-            <input type="number" id="lon" value="77.2090" step="any">
-        </div>
+    <div class="btn-group">
+        <button id="startBtn" disabled>1. Scan English</button>
+        <button id="translateBtn">2. Translate (Astro-AI)</button>
+        <button id="downloadPdfBtn">3. Save Hindi PDF</button>
     </div>
-
-    <button onclick="generateSateekKundli()">✨ Generate API-Ready Kundli</button>
-
-    <div id="results" class="result-box">
-        </div>
+    <div id="status">Taiyaar...</div>
+    <div class="output-wrapper">
+        <div id="output" class="text-box"></div>
+        <div id="hindiOutput" class="text-box"></div>
+    </div>
 </div>
+<canvas id="pdf-canvas"></canvas>
 
 <script>
-    function generateSateekKundli() {
-        const dob = document.getElementById('dob').value;
-        if(!dob) return alert("Kripya Samay bharein!");
+    // Astro Library
+    const astroDictionary = {
+        "Sun": "सूर्य", "Mon": "चंद्र", "Mar": "मंगल", "Mer": "बुध", "Jup": "गुरु", "Ven": "शुक्र", "Sat": "शनि", "Rah": "राहू", "Ket": "केतु", "Asc": "लग्न",
+        "Ashwini": "अश्विनी", "Bharani": "भरणी", "Krittika": "कृत्तिका", "Rohini": "रोहिणी", "Mrigashira": "मृगशिरा", "Ardra": "आर्द्रा", "Punarvasu": "पुनर्वसु", "Pushya": "पुष्य", "Ashlesha": "अश्लेषा", "Magha": "मघा", "Purva Phalguni": "पूर्वा फाल्गुनी", "Uttara Phalguni": "उत्तर फाल्गुनी", "Hasta": "हस्त", "Chitra": "चित्रा", "Swati": "स्वाति", "Vishakha": "विशाखा", "Anuradha": "अनुराधा", "Jyeshtha": "ज्येष्ठा", "Mula": "मूल", "Purva Ashadha": "पूर्वाषाढ़ा", "Uttara Ashadha": "उत्तराषाढ़ा", "Shravana": "श्रवण", "Dhanishta": "धनिष्ठा", "Shatabhisha": "शतभिषा", "Purva Bhadrapada": "पूर्वाभाद्रपद", "Uttara Bhadrapada": "उत्तराभाद्रपद", "Revati": "रेवती",
+        "Combust": "अस्त", "Exalted": "उच्च", "Debilitated": "नीच", "Retrograde": "वक्री", "Direct": "मार्गी", "House": "भाव", "Sign": "राशि", "Degree": "अंश"
+    };
 
-        // --- SAARATHI TRICK: API DATA MAPPING ---
-        // Jab aap API connect karenge, ye data wahan se replace ho jayega.
-        // Abhi humne aapke bataye huye sateek (Correct) data ko set kar diya hai.
-        
-        const apiResponse = {
-            lagna: "Kumbh (Aquarius)",
-            planets: [
-                { name: "Surya (Sun)", rashi: "Makar (Capricorn)" },
-                { name: "Chandra (Moon)", rashi: "Vrishchik (Scorpio)" },
-                { name: "Mangal (Mars)", rashi: "Makar (Capricorn)", special: "UCCHA" },
-                { name: "Budh (Mercury)", rashi: "Kumbh (Aquarius)" },
-                { name: "Guru (Jupiter)", rashi: "Mithun (Gemini)" },
-                { name: "Shukra (Venus)", rashi: "Kumbh (Aquarius)" },
-                { name: "Shani (Saturn)", rashi: "Meen (Pisces)" },
-                { name: "Rahu", rashi: "Kumbh (Aquarius)" },
-                { name: "Ketu", rashi: "Simha (Leo)" }
-            ]
+    const fileInput = document.getElementById('fileInput');
+    const startBtn = document.getElementById('startBtn');
+    const translateBtn = document.getElementById('translateBtn');
+    const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+    const status = document.getElementById('status');
+    const output = document.getElementById('output');
+    const hindiOutput = document.getElementById('hindiOutput');
+    const canvas = document.getElementById('pdf-canvas');
+    const ctx = canvas.getContext('2d');
+
+    fileInput.onchange = (e) => {
+        if (e.target.files[0]) {
+            startBtn.disabled = false;
+            status.innerText = "File ready: " + e.target.files[0].name;
+        }
+    };
+
+    startBtn.onclick = async () => {
+        startBtn.disabled = true;
+        status.innerText = "Scanning...";
+        const fileReader = new FileReader();
+        fileReader.onload = async function() {
+            const typedarray = new Uint8Array(this.result);
+            const pdf = await pdfjsLib.getDocument({data: typedarray}).promise;
+            const page = await pdf.getPage(1);
+            const viewport = page.getViewport({ scale: 1.5 });
+            canvas.height = viewport.height; canvas.width = viewport.width;
+            await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+            const worker = await Tesseract.createWorker('eng', 1);
+            const { data: { text } } = await worker.recognize(canvas);
+            await worker.terminate(); 
+
+            output.innerText = text;
+            output.style.display = "block";
+            status.innerText = "Scan Complete!";
+            translateBtn.style.display = "inline-block";
+            startBtn.disabled = false;
         };
+        fileReader.readAsArrayBuffer(fileInput.files[0]);
+    };
 
-        displayResults(apiResponse);
-    }
-
-    function displayResults(data) {
-        let html = `<div class="lagna-row">LAGNA: ${data.lagna}</div>`;
-        
-        data.planets.forEach(p => {
-            let specialStyle = p.special === "UCCHA" ? "color: #ff4500; text-shadow: 0 0 5px #ff4500;" : "";
-            html += `
-                <div class="planet-row">
-                    <span class="planet-name">${p.name}</span>
-                    <span class="rashi-tag" style="${specialStyle}">${p.rashi} ${p.special ? '('+p.special+')' : ''}</span>
-                </div>`;
+    translateBtn.onclick = async () => {
+        let engText = output.innerText;
+        status.innerText = "Translating...";
+        const sortedKeys = Object.keys(astroDictionary).sort((a, b) => b.length - a.length);
+        sortedKeys.forEach(key => {
+            let regex = new RegExp("\\b" + key + "\\b", "gi");
+            engText = engText.replace(regex, astroDictionary[key]);
         });
 
-        document.getElementById('results').innerHTML = html;
-    }
-</script>
+        const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=hi&dt=t&q=${encodeURIComponent(engText)}`);
+        const data = await res.json();
+        let final = "";
+        data[0].forEach(line => { if(line[0]) final += line[0]; });
+        hindiOutput.innerText = final;
+        hindiOutput.style.display = "block";
+        downloadPdfBtn.style.display = "inline-block";
+        status.innerText = "Done!";
+    };
 
+    downloadPdfBtn.onclick = async () => {
+        status.innerText = "Building PDF...";
+        try {
+            const { PDFDocument, rgb } = PDFLib;
+            const pdfDoc = await PDFDocument.create();
+            pdfDoc.registerFontkit(fontkit);
+
+            // GitHub par ye line 100% kaam karegi agar font file wahan upload hai
+            const fontUrl = './hindi-font.ttf'; 
+            const fontBytes = await fetch(fontUrl).then(res => res.arrayBuffer());
+            const customFont = await pdfDoc.embedFont(fontBytes);
+
+            const page = pdfDoc.addPage([canvas.width, canvas.height]);
+            page.drawText(hindiOutput.innerText, {
+                x: 50, y: canvas.height - 50, size: 14,
+                font: customFont, color: rgb(0, 0, 0),
+                maxWidth: canvas.width - 100, lineHeight: 20
+            });
+
+            const pdfBytes = await pdfDoc.save();
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = "Translated_Astro.pdf";
+            link.click();
+            status.innerText = "Success!";
+        } catch (e) {
+            status.innerText = "Font Error: Make sure hindi-font.ttf is in GitHub repo.";
+            console.error(e);
+        }
+    };
+</script>
 </body>
 </html>
