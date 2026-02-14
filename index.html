@@ -114,37 +114,62 @@
         status.innerText = "Done!";
     };
 
-    downloadPdfBtn.onclick = async () => {
-        status.innerText = "Building PDF...";
-        try {
-            const { PDFDocument, rgb } = PDFLib;
-            const pdfDoc = await PDFDocument.create();
-            pdfDoc.registerFontkit(fontkit);
+   downloadPdfBtn.onclick = async () => {
+    status.innerText = "Hindi PDF Ban Rahi Hai...";
+    try {
+        const { PDFDocument, rgb } = PDFLib;
+        const pdfDoc = await PDFDocument.create();
+        pdfDoc.registerFontkit(fontkit);
 
-            // GitHub par ye line 100% kaam karegi agar font file wahan upload hai
-            const fontUrl = './hindi-font.ttf'; 
-            const fontBytes = await fetch(fontUrl).then(res => res.arrayBuffer());
-            const customFont = await pdfDoc.embedFont(fontBytes);
+        // 1. Font Load Karein
+        const fontUrl = './hindi-font.ttf'; 
+        const fontBytes = await fetch(fontUrl).then(res => {
+            if(!res.ok) throw new Error("Font file nahi mili!");
+            return res.arrayBuffer();
+        });
+        const customFont = await pdfDoc.embedFont(fontBytes);
 
-            const page = pdfDoc.addPage([canvas.width, canvas.height]);
-            page.drawText(hindiOutput.innerText, {
-                x: 50, y: canvas.height - 50, size: 14,
-                font: customFont, color: rgb(0, 0, 0),
-                maxWidth: canvas.width - 100, lineHeight: 20
-            });
+        // 2. Canvas ki Image Banayein (Blank page se bachne ke liye)
+        const imageData = canvas.toDataURL('image/png');
+        const imageBytes = await fetch(imageData).then(res => res.arrayBuffer());
+        const embeddedImage = await pdfDoc.embedPng(imageBytes);
 
-            const pdfBytes = await pdfDoc.save();
-            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = "Translated_Astro.pdf";
-            link.click();
-            status.innerText = "Success!";
-        } catch (e) {
-            status.innerText = "Font Error: Make sure hindi-font.ttf is in GitHub repo.";
-            console.error(e);
-        }
-    };
+        // 3. Page Setup (Canvas ke size ke mutabiq)
+        const page = pdfDoc.addPage([canvas.width, canvas.height]);
+
+        // 4. Pehle Original Image lagayein (Background ki tarah)
+        page.drawImage(embeddedImage, {
+            x: 0, y: 0,
+            width: canvas.width, height: canvas.height,
+            opacity: 0.3 // Isse original text halka dikhega aur Hindi saaf
+        });
+
+        // 5. Hindi Text ko uske upar likhein
+        const text = hindiOutput.innerText;
+        page.drawText(text, {
+            x: 50,
+            y: canvas.height - 50,
+            size: 16,
+            font: customFont,
+            color: rgb(0, 0, 0),
+            maxWidth: canvas.width - 100,
+            lineHeight: 25
+        });
+
+        const pdfBytes = await pdfDoc.save();
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "Astro_Hindi_Report.pdf";
+        link.click();
+        status.innerText = "Success! Ab check karein.";
+
+    } catch (e) {
+        console.error("PDF Error:", e);
+        status.innerText = "Error: " + e.message;
+        alert("Bhai, Error aaya hai: " + e.message);
+    }
+};
 </script>
 </body>
 </html>
