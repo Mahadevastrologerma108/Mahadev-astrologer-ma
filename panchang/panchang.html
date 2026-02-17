@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panchang 2.0 | Trial</title>
+    <link rel="stylesheet" href="assets/css/style.css"> 
+    <style>
+        /* Gold Finishing for Calendar & Elements */
+        .gold-border { border: 2px solid #D4AF37; }
+        .gold-text { color: #D4AF37; font-family: 'Your-Home-Font', serif; }
+        .gold-bg { background: linear-gradient(145deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c); }
+        
+        /* Language Toggle Style */
+        .lang-switch { position: fixed; top: 80px; right: 20px; z-index: 1000; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="home-page-bg"> <header id="main-header"></header>
 
+    <div class="lang-switch">
+        <button id="toggleLang" class="gold-bg" onclick="switchLanguage()">Switch to Hindi</button>
+    </div>
+
+    <main class="container">
+        <section class="banner gold-border">
+            <h1 id="page-title" data-en="Daily Panchang" data-hi="दैनिक पंचांग">Daily Panchang</h1>
+            <p id="selected-date-display"></p>
+        </section>
+
+        <section class="calendar-container gold-border">
+            <div id="calendar-header">
+                <button onclick="prevMonth()"> < </button>
+                <h2 id="month-year-display"></h2>
+                <button onclick="nextMonth()"> > </button>
+            </div>
+            <div id="calendar-grid">
+                </div>
+        </section>
+
+        <section id="panchang-data" class="details-grid">
+            <div class="card gold-border">
+                <span data-en="Tithi" data-hi="तिथि">Tithi</span>
+                <p id="tithi-val">-</p>
+            </div>
+            <div class="card gold-border">
+                <span data-en="Nakshatra" data-hi="नक्षत्र">Nakshatra</span>
+                <p id="nakshatra-val">-</p>
+            </div>
+            </section>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
