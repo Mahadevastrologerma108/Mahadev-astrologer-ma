@@ -3,56 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panchang 2.0 | Trial</title>
-    <link rel="stylesheet" href="assets/css/style.css"> 
+    <title>Daily Panchang | Mahadev Astrologer</title>
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
     <style>
-        /* Gold Finishing for Calendar & Elements */
-        .gold-border { border: 2px solid #D4AF37; }
-        .gold-text { color: #D4AF37; font-family: 'Your-Home-Font', serif; }
-        .gold-bg { background: linear-gradient(145deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c); }
-        
-        /* Language Toggle Style */
-        .lang-switch { position: fixed; top: 80px; right: 20px; z-index: 1000; }
-        .hidden { display: none; }
+        /* Agar style.css load na ho toh backup ke liye thodi basic styling */
+        .gold-text { color: #D4AF37; text-align: center; }
+        .panchang-container { padding: 20px; max-width: 800px; margin: auto; }
+        .data-row { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #444; }
     </style>
 </head>
-<body class="home-page-bg"> <header id="main-header"></header>
+<body class="dark-theme"> <header>
+        <h1 class="gold-text" data-en="Mahadev Astrologer" data-hi="महादेव एस्ट्रोलॉजर">Mahadev Astrologer</h1>
+        <button id="toggleLang" class="gold-btn">Switch to Hindi</button>
+    </header>
 
-    <div class="lang-switch">
-        <button id="toggleLang" class="gold-bg" onclick="switchLanguage()">Switch to Hindi</button>
-    </div>
+    <main class="panchang-container">
+        <h2 id="rashi-title" class="gold-text">Panchang</h2>
+        <p id="selected-date-display" style="text-align: center; color: #aaa;"></p>
 
-    <main class="container">
-        <section class="banner gold-border">
-            <h1 id="page-title" data-en="Daily Panchang" data-hi="दैनिक पंचांग">Daily Panchang</h1>
-            <p id="selected-date-display"></p>
-        </section>
-
-        <section class="calendar-container gold-border">
-            <div id="calendar-header">
-                <button onclick="prevMonth()"> < </button>
-                <h2 id="month-year-display"></h2>
-                <button onclick="nextMonth()"> > </button>
-            </div>
-            <div id="calendar-grid">
-                </div>
-        </section>
-
-        <section id="panchang-data" class="details-grid">
-            <div class="card gold-border">
+        <div class="gold-border" style="margin-top: 20px;">
+            <div class="data-row">
                 <span data-en="Tithi" data-hi="तिथि">Tithi</span>
-                <p id="tithi-val">-</p>
+                <span id="tithi-val" class="gold-text">--</span>
             </div>
-            <div class="card gold-border">
+            <div class="data-row">
                 <span data-en="Nakshatra" data-hi="नक्षत्र">Nakshatra</span>
-                <p id="nakshatra-val">-</p>
+                <span id="nakshatra-val" class="gold-text">--</span>
             </div>
-            </section>
+            <div class="data-row">
+                <span data-en="Yoga" data-hi="योग">Yoga</span>
+                <span id="yoga-val" class="gold-text">--</span>
+            </div>
+            <div class="data-row">
+                <span data-en="Karana" data-hi="करण">Karana</span>
+                <span id="karana-val" class="gold-text">--</span>
+            </div>
+            <div class="data-row">
+                <span data-en="Sunrise" data-hi="सूर्योदय">Sunrise</span>
+                <span id="sunrise-val">--</span>
+            </div>
+            <div class="data-row">
+                <span data-en="Sunset" data-hi="सूर्यास्त">Sunset</span>
+                <span id="sunset-val">--</span>
+            </div>
+        </div>
+
+        <div id="calendar-grid" style="margin-top: 30px;"></div>
     </main>
 
-    <footer id="main-footer"></footer>
+    <footer style="margin-top: 50px; text-align: center;">
+        <p>&copy; 2026 Mahadev Astrologer</p>
+    </footer>
 
-    <script src="../assets/js/config.js"></script>
     <script src="../assets/js/script.js"></script>
 </body>
 </html>
