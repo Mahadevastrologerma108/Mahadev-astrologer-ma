@@ -1,152 +1,107 @@
-/**
- * Project: Mahadev Astrologer - Individual Panchang Page
- * Purpose: Complete logic for Tithi, Nakshatra, and Calendar
- * Path: assets/js/script.js
- */
+// ==========================================
+// MAHADEV ASTROLOGER - PANCHANG SCRIPT (REPLACE)
+// ==========================================
 
-// 1. App Configuration
 const AppConfig = {
-    currentLanguage: 'hi', // Default language
-    goldTheme: {
-        gradient: "linear-gradient(145deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c)"
+    currentLanguage: 'hi',
+    // Data ko yahi rakh rahe hain taaki 404 Error na aaye
+    panchangData: {
+        "2026-02-18": {
+            tithi: { en: "Shukla Dwitiya", hi: "शुक्ल द्वितीया" },
+            nakshatra: { en: "Shatabhisha", hi: "शतभिषा" },
+            yoga: { en: "Siddha", hi: "सिद्ध" },
+            karana: { en: "Balava", hi: "बालव" },
+            sun: { rise: "06:58 AM", set: "06:12 PM" }
+        },
+        "2026-02-19": {
+            tithi: { en: "Shukla Tritiya", hi: "शुक्ल तृतीया" },
+            nakshatra: { en: "Purva Bhadrapada", hi: "पूर्वा भाद्रपद" },
+            yoga: { en: "Sadhya", hi: "साध्य" },
+            karana: { en: "Kaulava", hi: "कौलव" },
+            sun: { rise: "06:57 AM", set: "06:13 PM" }
+        }
     }
-};
-
-// 2. Hardcoded Data (Taaki 404 Error kabhi na aaye)
-// Jab tumhare paas 1000+ dino ka data ho jaye, tab ise JSON file mein daalna
-const panchangData = {
-    "2026-02-18": {
-        tithi: { en: "Shukla Dwitiya", hi: "शुक्ल द्वितीया" },
-        nakshatra: { en: "Shatabhisha", hi: "शतभिषा" },
-        yoga: { en: "Siddha", hi: "सिद्ध" },
-        karana: { en: "Balava", hi: "बालव" },
-        sun: { rise: "06:58 AM", set: "06:12 PM" }
-    },
-    "2026-02-19": {
-        tithi: { en: "Shukla Tritiya", hi: "शुक्ल तृतीया" },
-        nakshatra: { en: "Purva Bhadrapada", hi: "पूर्वा भाद्रपद" },
-        yoga: { en: "Sadhya", hi: "साध्य" },
-        karana: { en: "Kaulava", hi: "कौलव" },
-        sun: { rise: "06:57 AM", set: "06:13 PM" }
-    }
-    // Bhai, yahan aur dates add karte jao...
 };
 
 let selectedDate = new Date();
-let currentViewDate = new Date();
 
-// 3. Main Functions
+// 1. UI Update Karne Wala Function
 function updatePanchangUI(date) {
     const dateKey = date.toISOString().split('T')[0];
     const lang = AppConfig.currentLanguage;
-    const dayData = panchangData[dateKey];
+    const data = AppConfig.panchangData[dateKey];
 
-    // UI Elements update
-    const tithiEl = document.getElementById('tithi-val');
-    const nakshatraEl = document.getElementById('nakshatra-val');
-    const yogaEl = document.getElementById('yoga-val');
-    const karanaEl = document.getElementById('karana-val');
-    const sunriseEl = document.getElementById('sunrise-val');
-    const sunsetEl = document.getElementById('sunset-val');
+    // Aaj ki date header mein
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateTitle = date.toLocaleDateString(lang === 'hi' ? 'hi-IN' : 'en-US', options);
+    
+    const dateEl = document.getElementById('selected-date-display');
+    if(dateEl) dateEl.innerText = dateTitle;
 
-    if (dayData) {
-        if(tithiEl) tithiEl.innerText = dayData.tithi[lang];
-        if(nakshatraEl) nakshatraEl.innerText = dayData.nakshatra[lang];
-        if(yogaEl) yogaEl.innerText = dayData.yoga[lang];
-        if(karanaEl) karanaEl.innerText = dayData.karana[lang];
-        if(sunriseEl) sunriseEl.innerText = dayData.sun.rise;
-        if(sunsetEl) sunsetEl.innerText = dayData.sun.set;
+    if (data) {
+        // Values Fill Karna (IDs check karein panchang.html mein)
+        setElementText('tithi-val', data.tithi[lang]);
+        setElementText('nakshatra-val', data.nakshatra[lang]);
+        setElementText('yoga-val', data.yoga[lang]);
+        setElementText('karana-val', data.karana[lang]);
+        setElementText('sunrise-val', data.sun.rise);
+        setElementText('sunset-val', data.sun.set);
     } else {
-        // Fallback agar data nahi hai
-        const msg = lang === 'hi' ? "उपलब्ध नहीं" : "Not Available";
-        if(tithiEl) tithiEl.innerText = msg;
-        // ...baaki fields mein bhi msg daal sakte ho
-    }
-
-    // Display selected date in header
-    const dateDisplay = document.getElementById('selected-date-display');
-    if(dateDisplay) {
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        dateDisplay.innerText = date.toLocaleDateString(lang === 'hi' ? 'hi-IN' : 'en-US', options);
+        const noData = lang === 'hi' ? "डेटा उपलब्ध नहीं" : "Data Not Available";
+        ['tithi-val', 'nakshatra-val', 'yoga-val', 'karana-val'].forEach(id => setElementText(id, noData));
     }
 }
 
-// 4. Language Switcher
+// Helper function
+function setElementText(id, text) {
+    const el = document.getElementById(id);
+    if(el) el.innerText = text;
+}
+
+// 2. Language Switcher
 function switchLanguage() {
     AppConfig.currentLanguage = (AppConfig.currentLanguage === 'en') ? 'hi' : 'en';
     
-    // Update Static Texts
+    // Static text update (Jo HTML mein data-en/data-hi se hain)
     document.querySelectorAll('[data-en]').forEach(el => {
         el.innerText = el.getAttribute(`data-${AppConfig.currentLanguage}`);
     });
 
-    // Update Button
+    // Button Text Update
     const btn = document.getElementById('toggleLang');
     if(btn) btn.innerText = AppConfig.currentLanguage === 'en' ? 'Switch to Hindi' : 'हिंदी में बदलें';
 
-    // Refresh UI
-    renderCalendar();
     updatePanchangUI(selectedDate);
 }
 
-// 5. Gold Calendar Logic
+// 3. Calendar Logic (Simplify kiya hai taaki crash na ho)
 function renderCalendar() {
     const grid = document.getElementById('calendar-grid');
-    const monthYearDisplay = document.getElementById('month-year-display');
-    if (!grid || !monthYearDisplay) return;
-
+    if(!grid) return;
+    
     grid.innerHTML = '';
-    const month = currentViewDate.getMonth();
-    const year = currentViewDate.getFullYear();
+    const today = new Date();
+    const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
 
-    const monthNames = AppConfig.currentLanguage === 'en' 
-        ? ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        : ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"];
-
-    monthYearDisplay.innerText = `${monthNames[month]} ${year}`;
-
-    // Days Header
-    const days = AppConfig.currentLanguage === 'en' ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] : ['रवि', 'सोम', 'मंगल', 'बुध', 'गुरु', 'शुक्र', 'शनि'];
-    days.forEach(day => {
-        const dDiv = document.createElement('div');
-        dDiv.className = 'calendar-day-header'; // Apni CSS ke hisaab se
-        dDiv.innerText = day;
-        grid.appendChild(dDiv);
-    });
-
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    // Empty slots
-    for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
-
-    // Actual Days
     for (let i = 1; i <= daysInMonth; i++) {
-        const dayEl = document.createElement('div');
-        dayEl.className = 'calendar-date';
-        dayEl.innerText = i;
-
-        // Highlight selected
-        if (i === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()) {
-            dayEl.style.background = AppConfig.goldTheme.gradient;
-            dayEl.style.color = "#000";
-            dayEl.style.fontWeight = "bold";
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-date';
+        dayDiv.innerText = i;
+        
+        // Highlight logic
+        if(i === today.getDate()) {
+            dayDiv.classList.add('active-date'); // CSS mein gold color dena
         }
 
-        dayEl.onclick = () => {
-            selectedDate = new Date(year, month, i);
-            renderCalendar();
+        dayDiv.onclick = () => {
+            selectedDate = new Date(today.getFullYear(), today.getMonth(), i);
             updatePanchangUI(selectedDate);
         };
-        grid.appendChild(dayEl);
+        grid.appendChild(dayDiv);
     }
 }
 
-// Month Nav
-function prevMonth() { currentViewDate.setMonth(currentViewDate.getMonth() - 1); renderCalendar(); }
-function nextMonth() { currentViewDate.setMonth(currentViewDate.getMonth() + 1); renderCalendar(); }
-
-// 6. Init on Load
+// 4. Initial Load
 document.addEventListener('DOMContentLoaded', () => {
     renderCalendar();
     updatePanchangUI(selectedDate);
