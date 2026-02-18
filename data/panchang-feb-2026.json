@@ -1,0 +1,16 @@
+{
+  "2026-02-18": {
+    "tithi": { "en": "Shukla Dwitiya", "hi": "शुक्ल द्वितीया" },
+    "nakshatra": { "en": "Shatabhisha", "hi": "शतभिषा" },
+    "yoga": { "en": "Siddha", "hi": "सिद्ध" },
+    "karana": { "en": "Balava", "hi": "बालव" },
+    "sun": { "rise": "06:58 AM", "set": "06:12 PM" }
+  },
+  "2026-02-19": {
+    "tithi": { "en": "Shukla Tritiya", "hi": "शुक्ल तृतीया" },
+    "nakshatra": { "en": "Purva Bhadrapada", "hi": "पूर्वा भाद्रपद" },
+    "yoga": { "en": "Sadhya", "hi": "साध्य" },
+    "karana": { "en": "Kaulava", "hi": "कौलव" },
+    "sun": { "rise": "06:57 AM", "set": "06:13 PM" }
+  }
+}
