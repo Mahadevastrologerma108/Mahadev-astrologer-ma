@@ -1,10 +1,10 @@
 // ==========================================
-// MAHADEV ASTROLOGER - PANCHANG SCRIPT (REPLACE)
+// MAHADEV ASTROLOGER - PANCHANG SCRIPT (FINAL REPLACE)
 // ==========================================
 
+// 1. App Configuration & Data (Directly in JS to avoid 404)
 const AppConfig = {
     currentLanguage: 'hi',
-    // Data ko yahi rakh rahe hain taaki 404 Error na aaye
     panchangData: {
         "2026-02-18": {
             tithi: { en: "Shukla Dwitiya", hi: "शुक्ल द्वितीया" },
@@ -25,84 +25,66 @@ const AppConfig = {
 
 let selectedDate = new Date();
 
-// 1. UI Update Karne Wala Function
+// 2. UI Update Logic
 function updatePanchangUI(date) {
     const dateKey = date.toISOString().split('T')[0];
     const lang = AppConfig.currentLanguage;
     const data = AppConfig.panchangData[dateKey];
 
-    // Aaj ki date header mein
+    // Selected Date Display
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const dateTitle = date.toLocaleDateString(lang === 'hi' ? 'hi-IN' : 'en-US', options);
     
     const dateEl = document.getElementById('selected-date-display');
     if(dateEl) dateEl.innerText = dateTitle;
 
+    // Panchang Details Fill Up
     if (data) {
-        // Values Fill Karna (IDs check karein panchang.html mein)
-        setElementText('tithi-val', data.tithi[lang]);
-        setElementText('nakshatra-val', data.nakshatra[lang]);
-        setElementText('yoga-val', data.yoga[lang]);
-        setElementText('karana-val', data.karana[lang]);
-        setElementText('sunrise-val', data.sun.rise);
-        setElementText('sunset-val', data.sun.set);
+        setVal('tithi-val', data.tithi[lang]);
+        setVal('nakshatra-val', data.nakshatra[lang]);
+        setVal('yoga-val', data.yoga[lang]);
+        setVal('karana-val', data.karana[lang]);
+        setVal('sunrise-val', data.sun.rise);
+        setVal('sunset-val', data.sun.set);
     } else {
-        const noData = lang === 'hi' ? "डेटा उपलब्ध नहीं" : "Data Not Available";
-        ['tithi-val', 'nakshatra-val', 'yoga-val', 'karana-val'].forEach(id => setElementText(id, noData));
+        const msg = lang === 'hi' ? "डेटा उपलब्ध नहीं" : "No Data";
+        ['tithi-val', 'nakshatra-val', 'yoga-val', 'karana-val'].forEach(id => setVal(id, msg));
     }
 }
 
-// Helper function
-function setElementText(id, text) {
+function setVal(id, text) {
     const el = document.getElementById(id);
     if(el) el.innerText = text;
 }
 
-// 2. Language Switcher
+// 3. Language Switch Function
 function switchLanguage() {
+    // Toggle Language
     AppConfig.currentLanguage = (AppConfig.currentLanguage === 'en') ? 'hi' : 'en';
     
-    // Static text update (Jo HTML mein data-en/data-hi se hain)
+    // Update all elements with data-en / data-hi attributes
     document.querySelectorAll('[data-en]').forEach(el => {
         el.innerText = el.getAttribute(`data-${AppConfig.currentLanguage}`);
     });
 
-    // Button Text Update
+    // Language Toggle Button Text Update
     const btn = document.getElementById('toggleLang');
-    if(btn) btn.innerText = AppConfig.currentLanguage === 'en' ? 'Switch to Hindi' : 'हिंदी में बदलें';
-
-    updatePanchangUI(selectedDate);
-}
-
-// 3. Calendar Logic (Simplify kiya hai taaki crash na ho)
-function renderCalendar() {
-    const grid = document.getElementById('calendar-grid');
-    if(!grid) return;
-    
-    grid.innerHTML = '';
-    const today = new Date();
-    const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-
-    for (let i = 1; i <= daysInMonth; i++) {
-        const dayDiv = document.createElement('div');
-        dayDiv.className = 'calendar-date';
-        dayDiv.innerText = i;
-        
-        // Highlight logic
-        if(i === today.getDate()) {
-            dayDiv.classList.add('active-date'); // CSS mein gold color dena
-        }
-
-        dayDiv.onclick = () => {
-            selectedDate = new Date(today.getFullYear(), today.getMonth(), i);
-            updatePanchangUI(selectedDate);
-        };
-        grid.appendChild(dayDiv);
+    if(btn) {
+        btn.innerText = AppConfig.currentLanguage === 'en' ? 'Switch to Hindi' : 'हिंदी में बदलें';
     }
+
+    // Refresh the UI with new language
+    updatePanchangUI(selectedDate);
 }
 
 // 4. Initial Load
 document.addEventListener('DOMContentLoaded', () => {
-    renderCalendar();
+    // Agar aaj ka data dikhana hai
     updatePanchangUI(selectedDate);
+    
+    // Bind the click event to your language button if not done in HTML
+    const langBtn = document.getElementById('toggleLang');
+    if(langBtn) {
+        langBtn.addEventListener('click', switchLanguage);
+    }
 });
