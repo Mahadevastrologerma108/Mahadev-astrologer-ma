@@ -1,4 +1,4 @@
-// 1. DATA CENTER (Feb 2026 Full Data Added)
+// 1. DATA CENTER
 const AppConfig = {
     lang: 'hi',
     panchangData: {
@@ -16,9 +16,11 @@ const AppConfig = {
     }
 };
 
+// Year/Month Tracker
+let currentViewDate = new Date(2026, 1, 1); 
 let selectedDate = new Date(); 
 
-// 2. UI UPDATE FUNCTION
+// 2. UI UPDATE
 function updateUI() {
     const l = AppConfig.lang;
     const year = selectedDate.getFullYear();
@@ -27,7 +29,6 @@ function updateUI() {
     const dateKey = `${year}-${month}-${day}`;
 
     const data = AppConfig.panchangData[dateKey];
-
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const displayDate = selectedDate.toLocaleDateString(l === 'hi' ? 'hi-IN' : 'en-US', options);
     
@@ -51,7 +52,13 @@ function fill(id, val) {
     if(el) el.innerText = val;
 }
 
-// 3. CALENDAR GENERATION
+// 3. MONTH NAVIGATION (Bahar hona chahiye)
+function changeMonth(step) {
+    currentViewDate.setMonth(currentViewDate.getMonth() + step);
+    renderCalendar();
+}
+
+// 4. CALENDAR GENERATION (Dynamic)
 function renderCalendar() {
     const grid = document.getElementById('calendar-grid');
     const monthDisplay = document.getElementById('current-month-display');
@@ -60,27 +67,23 @@ function renderCalendar() {
     grid.innerHTML = '';
     const l = AppConfig.lang;
     const now = new Date();
-    const year = 2026; // Fixed for your data
-    const month = 1;    // February (0-indexed)
+    const year = currentViewDate.getFullYear();
+    const month = currentViewDate.getMonth();
 
-    // Update Month Display
     const monthNames = l === 'hi' 
         ? ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"]
         : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     
     if(monthDisplay) monthDisplay.innerText = `${monthNames[month]} ${year}`;
 
-    // Day Labels
     const dayLabels = l === 'hi' 
         ? ["रवि", "सोम", "मंगल", "बुध", "गुरु", "शुक्र", "शनि"]
         : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
     dayLabels.forEach(label => {
         const dLabel = document.createElement('div');
-        dLabel.style.fontWeight = "bold";
-        dLabel.style.color = "#D4AF37";
-        dLabel.innerText = label;
-        grid.appendChild(dLabel);
+        dLabel.style.fontWeight = "bold"; dLabel.style.color = "#D4AF37";
+        dLabel.innerText = label; grid.appendChild(dLabel);
     });
 
     const firstDay = new Date(year, month, 1).getDay();
@@ -89,14 +92,17 @@ function renderCalendar() {
     }
 
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-
     for (let i = 1; i <= daysInMonth; i++) {
         const dayDiv = document.createElement('div');
         dayDiv.className = 'cal-day';
         dayDiv.innerText = i;
 
-        if(i === now.getDate() && month === now.getMonth()) dayDiv.classList.add('today-highlight');
-        if(i === selectedDate.getDate()) dayDiv.classList.add('selected-highlight');
+        // Today & Selected highlights
+        const isToday = (i === now.getDate() && month === now.getMonth() && year === now.getFullYear());
+        const isSelected = (i === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear());
+        
+        if(isToday) dayDiv.classList.add('today-highlight');
+        if(isSelected) dayDiv.classList.add('selected-highlight');
 
         dayDiv.onclick = () => {
             document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('selected-highlight'));
@@ -108,7 +114,7 @@ function renderCalendar() {
     }
 }
 
-// 4. LANGUAGE SWITCHER
+// 5. LANGUAGE & INIT
 function switchLanguage() {
     AppConfig.lang = AppConfig.lang === 'hi' ? 'en' : 'hi';
     document.querySelectorAll('[data-en]').forEach(el => {
@@ -116,12 +122,10 @@ function switchLanguage() {
     });
     const btn = document.getElementById('langBtn');
     if(btn) btn.innerText = AppConfig.lang === 'hi' ? 'English' : 'हिंदी';
-
     updateUI();
     renderCalendar(); 
 }
 
-// 5. INIT
 document.addEventListener('DOMContentLoaded', () => {
     renderCalendar();
     updateUI();
