@@ -1,19 +1,27 @@
+/**
+ * MAHADEV ASTROLOGER - MASTER SCRIPT (FIREBASE VERSION)
+ */
+
 const AppConfig = {
     lang: 'hi',
+    // Ye function ab window se ya Firebase se data nikalne mein madad karega
     getYearlyData: function(year) {
         const dataVarName = "Data" + year;
-        // Check window object (Global)
-        if (window[dataVarName]) return window[dataVarName];
-        return {};
+        return window[dataVarName] || {};
     }
 };
 
-let currentViewDate = new Date(2026, 1, 1); // Feb 2026 View
-let selectedDate = new Date(2026, 1, 15); // Default to 15 Feb for testing
+let currentViewDate = new Date(2026, 1, 1); // Default Feb 2026
+let selectedDate = new Date(); // Aaj ki date
 
-function updateUI() {
+// 1. TOP UI: Panchang Details
+async function updateUI() {
     const l = AppConfig.lang;
     const year = selectedDate.getFullYear();
+    
+    // Check if we need to fetch data for this year
+    await loadYearlyData(year);
+
     const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
     const day = String(selectedDate.getDate()).padStart(2, '0');
     const dateKey = `${month}-${day}`;
@@ -21,7 +29,6 @@ function updateUI() {
     const yearlyDB = AppConfig.getYearlyData(year);
     const data = yearlyDB[dateKey];
 
-    // Top Date Display
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('date-display').innerText = selectedDate.toLocaleDateString(l === 'hi' ? 'hi-IN' : 'en-US', options);
 
@@ -35,6 +42,7 @@ function updateUI() {
     }
 }
 
+// 2. BOTTOM UI: Monthly Festivals
 function renderEventList() {
     const container = document.getElementById('event-list-container');
     if(!container) return;
@@ -49,12 +57,10 @@ function renderEventList() {
             if(data.event) {
                 const day = key.split('-')[1];
                 const row = document.createElement('div');
-                row.className = 'row'; // Make sure your CSS has .row or style it here
                 row.style.display = "flex";
                 row.style.justifyContent = "space-between";
                 row.style.padding = "10px 0";
                 row.style.borderBottom = "1px solid rgba(212, 175, 55, 0.3)";
-                
                 row.innerHTML = `<span class="gold-text">${day} ${l==='hi'?'तारीख':'Date'}</span> <span>${data.event[l]}</span>`;
                 container.appendChild(row);
             }
@@ -66,16 +72,20 @@ function renderEventList() {
     }
 }
 
-function renderCalendar() {
+// 3. MIDDLE UI: Calendar
+async function renderCalendar() {
+    const year = currentViewDate.getFullYear();
+    const month = currentViewDate.getMonth();
+    
+    // Important: Wait for Firebase data before drawing calendar
+    await loadYearlyData(year);
+
     const grid = document.getElementById('calendar-grid');
     const monthDisplay = document.getElementById('current-month-display');
     if(!grid) return;
     grid.innerHTML = '';
     
     const l = AppConfig.lang;
-    const year = currentViewDate.getFullYear();
-    const month = currentViewDate.getMonth();
-
     const monthNames = l === 'hi' 
         ? ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"]
         : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -109,6 +119,7 @@ function renderCalendar() {
     renderEventList(); 
 }
 
+// Controls
 function changeMonth(step) {
     currentViewDate.setMonth(currentViewDate.getMonth() + step);
     renderCalendar();
@@ -130,6 +141,7 @@ function switchLanguage() {
     renderCalendar(); 
 }
 
+// Bootstrap the App
 document.addEventListener('DOMContentLoaded', () => { 
     renderCalendar(); 
     updateUI(); 
