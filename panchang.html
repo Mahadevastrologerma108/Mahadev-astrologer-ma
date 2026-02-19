@@ -5,26 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>दैनिक पंचांग | Mahadev Astrologer</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            text-align: center;
-            margin-top: 10px;
-        }
-        .cal-day {
-            padding: 10px 5px;
-            border: 1px solid #333;
-            cursor: pointer;
-            font-size: 0.9rem;
-            border-radius: 4px;
-        }
-        .cal-day:hover { background: #D4AF37; color: #000; }
-        .today-highlight { border: 2px solid #D4AF37; font-weight: bold; }
-        .selected-highlight { background: #D4AF37; color: #000; font-weight: bold; }
-        .day-name { font-weight: bold; color: #D4AF37; padding-bottom: 5px; }
-    </style>
 </head>
 <body>
 
@@ -48,7 +28,7 @@
             <div class="row"><span data-en="Sunset" data-hi="सूर्यास्त">सूर्यास्त</span><span id="sunset">--</span></div>
         </section>
 
-        <div class="gold-card" style="margin-top: 20px;">
+        <div class="gold-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <button onclick="changeMonth(-1)" class="btn-gold" style="padding: 5px 15px;">&lt;</button>
                 <h3 id="current-month-display" style="color: #D4AF37; margin: 0;"></h3>
@@ -56,6 +36,13 @@
             </div>
             <div id="calendar-grid" class="calendar-grid"></div>
         </div>
+
+        <section class="gold-card">
+            <h3 style="text-align: center; color: #D4AF37; margin-bottom:15px;" 
+                data-en="Monthly Festivals" data-hi="इस महीने के त्योहार">इस महीने के त्योहार</h3>
+            <div id="event-list-container">
+                </div>
+        </section>
 
         <div style="text-align: center; margin-top: 20px;">
             <a href="index.html" style="color: #D4AF37; text-decoration: none;">← Back to Home</a>
