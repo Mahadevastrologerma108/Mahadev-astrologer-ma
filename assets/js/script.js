@@ -43,6 +43,47 @@ function fill(id, val) {
     const el = document.getElementById(id);
     if(el) el.innerText = val;
 }
+// Calendar Generate Karne Ka Logic
+function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    if(!grid) return;
+
+    grid.innerHTML = ''; // Purana clear karo
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+
+    // Is mahine mein kitne din hain
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'cal-day';
+        dayDiv.innerText = i;
+
+        // Aaj ki date highlight karo
+        if(i === now.getDate()) dayDiv.classList.add('today-highlight');
+
+        // Click event: Jab user date par click kare
+        dayDiv.onclick = () => {
+            // Purana selection hatao
+            document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('selected-highlight'));
+            // Naya select karo
+            dayDiv.classList.add('selected-highlight');
+            
+            selectedDate = new Date(year, month, i);
+            updateUI(); // Panchang data update karo
+        };
+
+        grid.appendChild(dayDiv);
+    }
+}
+
+// DomContentLoaded mein ise bhi call karo
+document.addEventListener('DOMContentLoaded', () => {
+    renderCalendar();
+    updateUI();
+});
 
 // 3. LANGUAGE SWITCHER
 function switchLanguage() {
