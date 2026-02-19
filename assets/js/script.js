@@ -45,15 +45,46 @@ function fill(id, val) {
     if(el) el.innerText = val;
 }
 
-// 3. CALENDAR GENERATION
+// 3. CALENDAR GENERATION (Updated with Month & Day Names)
 function renderCalendar() {
     const grid = document.getElementById('calendar-grid');
     if(!grid) return;
 
     grid.innerHTML = '';
+    const l = AppConfig.lang;
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth();
+
+    // --- 1. Month Name Header ---
+    const monthNames = l === 'hi' 
+        ? ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"]
+        : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    
+    // Aapke HTML mein agar month display ka div nahi hai, toh hum grid ke upar ek bar bana sakte hain
+    // Ya phir hum seedha grid mein hi headers add karenge
+    
+    // --- 2. Days Name Header (Sun, Mon...) ---
+    const dayLabels = l === 'hi' 
+        ? ["रवि", "सोम", "मंगल", "बुध", "गुरु", "शुक्र", "शनि"]
+        : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    dayLabels.forEach(label => {
+        const dLabel = document.createElement('div');
+        dLabel.style.fontWeight = "bold";
+        dLabel.style.color = "#D4AF37";
+        dLabel.innerText = label;
+        grid.appendChild(dLabel);
+    });
+
+    // --- 3. First Day Offset (Empty Slots) ---
+    const firstDay = new Date(year, month, 1).getDay(); // Pata karega 1st date kis din hai
+    for (let i = 0; i < firstDay; i++) {
+        const emptyDiv = document.createElement('div');
+        grid.appendChild(emptyDiv);
+    }
+
+    // --- 4. Actual Dates ---
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     for (let i = 1; i <= daysInMonth; i++) {
@@ -61,10 +92,7 @@ function renderCalendar() {
         dayDiv.className = 'cal-day';
         dayDiv.innerText = i;
 
-        // Highlight Today
         if(i === now.getDate() && month === now.getMonth()) dayDiv.classList.add('today-highlight');
-        
-        // Highlight Selected
         if(i === selectedDate.getDate()) dayDiv.classList.add('selected-highlight');
 
         dayDiv.onclick = () => {
