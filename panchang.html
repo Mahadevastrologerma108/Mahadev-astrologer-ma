@@ -40,37 +40,21 @@
     <main class="container">
         <section class="gold-card">
             <h2 id="date-display" style="text-align: center; color: #D4AF37;"></h2>
-            
-            <div class="row">
-                <span data-en="Tithi" data-hi="तिथि">तिथि</span>
-                <span id="tithi" class="gold-text">--</span>
-            </div>
-            <div class="row">
-                <span data-en="Nakshatra" data-hi="नक्षत्र">नक्षत्र</span>
-                <span id="nakshatra" class="gold-text">--</span>
-            </div>
-            <div class="row">
-                <span data-en="Yoga" data-hi="योग">योग</span>
-                <span id="yoga" class="gold-text">--</span>
-            </div>
-            <div class="row">
-                <span data-en="Karana" data-hi="करण">करण</span>
-                <span id="karana" class="gold-text">--</span>
-            </div>
-            <div class="row">
-                <span data-en="Sunrise" data-hi="सूर्योदय">सूर्योदय</span>
-                <span id="sunrise">--</span>
-            </div>
-            <div class="row">
-                <span data-en="Sunset" data-hi="सूर्यास्त">सूर्यास्त</span>
-                <span id="sunset">--</span>
-            </div>
+            <div class="row"><span data-en="Tithi" data-hi="तिथि">तिथि</span><span id="tithi" class="gold-text">--</span></div>
+            <div class="row"><span data-en="Nakshatra" data-hi="नक्षत्र">नक्षत्र</span><span id="nakshatra" class="gold-text">--</span></div>
+            <div class="row"><span data-en="Yoga" data-hi="योग">योग</span><span id="yoga" class="gold-text">--</span></div>
+            <div class="row"><span data-en="Karana" data-hi="करण">करण</span><span id="karana" class="gold-text">--</span></div>
+            <div class="row"><span data-en="Sunrise" data-hi="सूर्योदय">सूर्योदय</span><span id="sunrise">--</span></div>
+            <div class="row"><span data-en="Sunset" data-hi="सूर्यास्त">सूर्यास्त</span><span id="sunset">--</span></div>
         </section>
 
         <div class="gold-card" style="margin-top: 20px;">
-            <h3 id="current-month-display" style="text-align: center; color: #D4AF37; margin-bottom: 10px;"></h3>
-            <div id="calendar-grid" class="calendar-grid">
-                </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <button onclick="changeMonth(-1)" class="btn-gold" style="padding: 5px 15px;">&lt;</button>
+                <h3 id="current-month-display" style="color: #D4AF37; margin: 0;"></h3>
+                <button onclick="changeMonth(1)" class="btn-gold" style="padding: 5px 15px;">&gt;</button>
+            </div>
+            <div id="calendar-grid" class="calendar-grid"></div>
         </div>
 
         <div style="text-align: center; margin-top: 20px;">
