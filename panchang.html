@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>दैनिक पंचांग | Mahadev Astrologer</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .cal-day {
+            padding: 10px 5px;
+            border: 1px solid #333;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-radius: 4px;
+        }
+        .cal-day:hover { background: #D4AF37; color: #000; }
+        .today-highlight { border: 2px solid #D4AF37; font-weight: bold; }
+        .selected-highlight { background: #D4AF37; color: #000; font-weight: bold; }
+        .day-name { font-weight: bold; color: #D4AF37; padding-bottom: 5px; }
+    </style>
 </head>
 <body>
 
@@ -47,34 +67,15 @@
             </div>
         </section>
 
+        <div class="gold-card" style="margin-top: 20px;">
+            <h3 id="current-month-display" style="text-align: center; color: #D4AF37; margin-bottom: 10px;"></h3>
+            <div id="calendar-grid" class="calendar-grid">
+                </div>
+        </div>
+
         <div style="text-align: center; margin-top: 20px;">
             <a href="index.html" style="color: #D4AF37; text-decoration: none;">← Back to Home</a>
         </div>
-        <div class="gold-card" style="margin-top: 20px;">
-    <h3 style="text-align: center; color: #D4AF37;" data-en="Select Date" data-hi="तारीख चुनें">तारीख चुनें</h3>
-    <div id="calendar-grid" class="calendar-grid">
-        </div>
-</div>
-
-<style>
-    .calendar-grid {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 5px;
-        text-align: center;
-        margin-top: 10px;
-    }
-    .cal-day {
-        padding: 10px 5px;
-        border: 1px solid #333;
-        cursor: pointer;
-        font-size: 0.9rem;
-        border-radius: 4px;
-    }
-    .cal-day:hover { background: #D4AF37; color: #000; }
-    .today-highlight { border: 2px solid #D4AF37; font-weight: bold; }
-    .selected-highlight { background: #D4AF37; color: #000; font-weight: bold; }
-</style>
     </main>
 
     <footer>
