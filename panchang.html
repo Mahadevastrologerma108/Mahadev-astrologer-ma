@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>दैनिक पंचांग | Mahadev Astrologer</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1 data-en="Mahadev Astrologer" data-hi="महादेव एस्ट्रोलॉजर">महादेव एस्ट्रोलॉजर</h1>
+        <nav>
+            <a href="index.html" class="nav-link">Home</a> | 
+            <a href="panchang.html" class="nav-link">Panchang</a>
+        </nav>
+        <button onclick="switchLanguage()" class="btn-gold" id="langBtn" style="margin-top:10px;">English</button>
+    </header>
+
+    <main class="container">
+        <section class="gold-card">
+            <h2 id="date-display" style="text-align: center; color: #D4AF37;"></h2>
+            
+            <div class="row">
+                <span data-en="Tithi" data-hi="तिथि">तिथि</span>
+                <span id="tithi" class="gold-text">--</span>
+            </div>
+            <div class="row">
+                <span data-en="Nakshatra" data-hi="नक्षत्र">नक्षत्र</span>
+                <span id="nakshatra" class="gold-text">--</span>
+            </div>
+            <div class="row">
+                <span data-en="Yoga" data-hi="योग">योग</span>
+                <span id="yoga" class="gold-text">--</span>
+            </div>
+            <div class="row">
+                <span data-en="Karana" data-hi="करण">करण</span>
+                <span id="karana" class="gold-text">--</span>
+            </div>
+            <div class="row">
+                <span data-en="Sunrise" data-hi="सूर्योदय">सूर्योदय</span>
+                <span id="sunrise">--</span>
+            </div>
+            <div class="row">
+                <span data-en="Sunset" data-hi="सूर्यास्त">सूर्यास्त</span>
+                <span id="sunset">--</span>
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="index.html" style="color: #D4AF37; text-decoration: none;">← Back to Home</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Mahadev Astrologer - Har Har Mahadev</p>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
