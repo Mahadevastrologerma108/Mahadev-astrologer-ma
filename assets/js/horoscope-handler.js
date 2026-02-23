@@ -1,8 +1,22 @@
 /* 🔱 MAHADEV ASTROLOGER - CENTRAL HOROSCOPE HANDLER */
 
+// 1. 🌍 UI Translation Mapping (Bilingual Magic)
+const horoscopeUI = {
+    hi: {
+        found_msg: "आपकी संभावित राशि:",
+        read_more: "आज का राशिफल पढ़ें →",
+        rashi_suffix: " राशिफल"
+    },
+    en: {
+        found_msg: "Your Identified Rashi:",
+        read_more: "Read Today's Horoscope →",
+        rashi_suffix: " Horoscope"
+    }
+};
+
 /**
- * 1. 🔍 MAGIC RASHI FINDER
- * Ye function horoscope.html par rashi dhoondhne aur redirect karne ke liye hai.
+ * 2. 🔍 MAGIC RASHI FINDER
+ * Horoscope selection page par rashi dhoondhne ke liye.
  */
 function handleMagicFind(val) {
     if (!val) return;
@@ -10,43 +24,51 @@ function handleMagicFind(val) {
     const resultBox = document.getElementById('magicResult');
     if (!resultBox) return; 
     
+    const lang = localStorage.getItem('selectedLang') || 'hi';
+    const ui = horoscopeUI[lang];
+
     const rashiMap = {
-        aries: { name: "मेष (Aries)", icon: "♈" },
-        taurus: { name: "वृषभ (Taurus)", icon: "♉" },
-        gemini: { name: "मिथुन (Gemini)", icon: "♊" },
-        cancer: { name: "कर्क (Cancer)", icon: "♋" },
-        leo: { name: "सिंह (Leo)", icon: "♌" },
-        virgo: { name: "कन्या (Virgo)", icon: "♍" },
-        libra: { name: "तुला (Libra)", icon: "♎" },
-        scorpio: { name: "वृश्चिक (Scorpio)", icon: "♏" },
-        sagittarius: { name: "धनु (Sagittarius)", icon: "♐" },
-        capricorn: { name: "मकर (Capricorn)", icon: "♑" },
-        aquarius: { name: "कुंभ (Aquarius)", icon: "♒" },
-        pisces: { name: "मीन (Pisces)", icon: "♓" }
+        aries: { hi: "मेष", en: "Aries", icon: "♈" },
+        taurus: { hi: "वृषभ", en: "Taurus", icon: "♉" },
+        gemini: { hi: "मिथुन", en: "Gemini", icon: "♊" },
+        cancer: { hi: "कर्क", en: "Cancer", icon: "♋" },
+        leo: { hi: "सिंह", en: "Leo", icon: "♌" },
+        virgo: { hi: "कन्या", en: "Virgo", icon: "♍" },
+        libra: { hi: "तुला", en: "Libra", icon: "♎" },
+        scorpio: { hi: "वृश्चिक", en: "Scorpio", icon: "♏" },
+        sagittarius: { hi: "धनु", en: "Sagittarius", icon: "♐" },
+        capricorn: { hi: "मकर", en: "Capricorn", icon: "♑" },
+        aquarius: { hi: "कुंभ", en: "Aquarius", icon: "♒" },
+        pisces: { hi: "मीन", en: "Pisces", icon: "♓" }
     };
 
     const info = rashiMap[val];
+    const rashiName = info[lang]; // Language ke hisaab se naam uthayega
 
-    // Result Card Display
+    // Result Card Display (Bilingual)
     resultBox.innerHTML = `
-        <div style="font-size: 3rem; margin-bottom: 10px;">${info.icon}</div>
-        <p style="color: #bbb; margin: 0;">आपकी संभावित राशि:</p>
-        <h4 style="color: #f5c542; font-size: 1.5rem; margin: 5px 0 15px 0;">${info.name}</h4>
-        <a href="${val}.html" class="redirect-btn">आज का राशिफल पढ़ें →</a>
+        <div class="animated fadeIn" style="padding: 20px;">
+            <div style="font-size: 3.5rem; margin-bottom: 10px;">${info.icon}</div>
+            <p style="color: #bbb; margin: 0;">${ui.found_msg}</p>
+            <h4 style="color: #f5c542; font-size: 1.8rem; margin: 5px 0 15px 0;">${rashiName}</h4>
+            <a href="${val}.html" class="redirect-btn" style="text-decoration:none; background: #f5c542; color: #000; padding: 10px 20px; border-radius: 25px; display: inline-block; font-weight: bold;">
+                ${ui.read_more}
+            </a>
+        </div>
     `;
 
     resultBox.style.display = 'block';
 
-    // Dropdown Sync (Ek select ho to dusra reset)
+    // Dropdown Sync logic
     const nameF = document.getElementById('nameFinder');
     const monthF = document.getElementById('monthFinder');
-    if (document.activeElement === nameF) monthF.value = '';
-    else if (document.activeElement === monthF) nameF.value = '';
+    if (document.activeElement === nameF) monthF.selectedIndex = 0;
+    else if (document.activeElement === monthF) nameF.selectedIndex = 0;
 }
 
 /**
- * 2. 📝 DATA LOADER
- * Ye function aries.html, taurus.html etc. par data load karne ke liye hai.
+ * 3. 📝 DATA LOADER
+ * Individual rashi pages (aries.html etc.) par content load karne ke liye.
  */
 function loadHoroscope(rashiKey) {
     const lang = localStorage.getItem('selectedLang') || 'hi'; 
@@ -57,7 +79,7 @@ function loadHoroscope(rashiKey) {
         return;
     }
 
-    // A. Main Content Fields
+    // A. Content Fields Mapping
     const fields = {
         'h-career': data.career[lang],
         'h-love': data.love[lang],
@@ -68,19 +90,22 @@ function loadHoroscope(rashiKey) {
         'h-time': data.luckyTime
     };
 
-    // Har ID ko check karke text fill karna
     Object.entries(fields).forEach(([id, val]) => {
         const el = document.getElementById(id);
         if (el) el.innerText = val || "--";
     });
 
-    // B. Title Update
+    // B. Title Update (Bilingual)
     const rashiTitle = document.getElementById('rashi-title');
     if (rashiTitle) {
-        rashiTitle.innerText = rashiKey.toUpperCase() + (lang === 'hi' ? " राशिफल" : " Horoscope");
+        const rashiMap = { aries: "Aries", taurus: "Taurus", gemini: "Gemini", cancer: "Cancer", leo: "Leo", virgo: "Virgo", libra: "Libra", scorpio: "Scorpio", sagittarius: "Sagittarius", capricorn: "Capricorn", aquarius: "Aquarius", pisces: "Pisces" };
+        const nameInLang = lang === 'hi' ? rashiMap[rashiKey] : rashiKey.charAt(0).toUpperCase() + rashiKey.slice(1);
+        
+        // Agar aapke pas translations.js mein keys hain (rashi_1 etc), to wo yahan use ho sakti hain
+        rashiTitle.innerText = nameInLang + horoscopeUI[lang].rashi_suffix;
     }
 
-    // C. Current Date Update
+    // C. Date Update
     const dateEl = document.getElementById('todayDate');
     if (dateEl) {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
