@@ -1,4 +1,7 @@
-aries: {
+// 1. Shuruat mein ye line honi chahiye
+window.dailyHoroscope = {
+
+  aries: {
     career: { 
       hi: "आज नई ऊर्जा के साथ काम की शुरुआत होगी। सहकर्मियों के साथ तालमेल बिठाना भविष्य में बड़े अवसर खोल सकता है, बस धैर्य रखें।", 
       en: "The day starts with fresh energy at work. Building synergy with colleagues may open great future opportunities; just stay patient." 
@@ -12,10 +15,13 @@ aries: {
       en: "Take brief breaks during work. You might feel a headache or eye strain; stay well-hydrated." 
     },
     tip: { 
-      hi: "किसी महत्वपूर्ण कार्य पर निकलने से पहले हनुमान चालीsa का पाठ करें या 'ॐ हं हनुमते नमः' का जाप करें।", 
+      hi: "किसी महत्वपूर्ण कार्य पर निकलने से पहले हनुमान चालीसा का पाठ करें या 'ॐ हं हनुमते नमः' का जाप करें।", 
       en: "Recite Hanuman Chalisa or chant 'Om Ham Hanumate Namah' before leaving for any important task." 
     },
     luckyColor: { hi: "गहरा लाल", en: "Deep Red" }, 
     luckyNumber: "9", 
     luckyTime: "10:15 AM - 11:30 AM"
   }
+
+// 2. Aakhiri mein ye bracket aur semicolon zaroor lagaiye
+};
