@@ -115,7 +115,7 @@
             <p data-key="horoscope_subtitle">अपनी राशि चुनें और आज का परामर्श प्राप्त करें</p>
         </div>
 
-        <div class="magic-tool-container">
+       <div class="magic-tool-container">
     <h3 class="royal-title">🔱 अपना राशि पहचानें (Rashi Finder)</h3>
     
     <div class="finder-grid">
@@ -140,23 +140,27 @@
 
         <div class="divider">या</div>
 
-<div class="finder-box">
-    <label>जन्म तिथि और महीने से:</label>
-    <select id="monthFinder" onchange="handleMagicFind(this.value)">
-        <option value="">तारीख और महीना चुनें...</option>
-        <option value="capricorn">15 Jan - 12 Feb (मकर)</option>
-        <option value="aquarius">13 Feb - 13 Mar (कुंभ)</option>
-        <option value="pisces">14 Mar - 12 Apr (मीन)</option>
-        <option value="aries">13 Apr - 13 May (मेष)</option>
-        <option value="taurus">14 May - 13 Jun (वृषभ)</option>
-        <option value="gemini">14 Jun - 15 Jul (मिथुन)</option>
-        <option value="cancer">16 Jul - 15 Aug (कर्क)</option>
-        <option value="leo">16 Aug - 15 Sep (सिंह)</option>
-        <option value="virgo">16 Sep - 16 Oct (कन्या)</option>
-        <option value="libra">17 Oct - 14 Nov (तुला)</option>
-        <option value="scorpio">15 Nov - 14 Dec (वृश्चिक)</option>
-        <option value="sagittarius">15 Dec - 14 Jan (धनु)</option>
-    </select>
+        <div class="finder-box">
+            <label>जन्म तिथि और महीने से:</label>
+            <select id="monthFinder" onchange="handleMagicFind(this.value)">
+                <option value="">तारीख और महीना चुनें...</option>
+                <option value="capricorn">15 Jan - 12 Feb (मकर)</option>
+                <option value="aquarius">13 Feb - 13 Mar (कुंभ)</option>
+                <option value="pisces">14 Mar - 12 Apr (मीन)</option>
+                <option value="aries">13 Apr - 13 May (मेष)</option>
+                <option value="taurus">14 May - 13 Jun (वृषभ)</option>
+                <option value="gemini">14 Jun - 15 Jul (मिथुन)</option>
+                <option value="cancer">16 Jul - 15 Aug (कर्क)</option>
+                <option value="leo">16 Aug - 15 Sep (सिंह)</option>
+                <option value="virgo">16 Sep - 16 Oct (कन्या)</option>
+                <option value="libra">17 Oct - 14 Nov (तुला)</option>
+                <option value="scorpio">15 Nov - 14 Dec (वृश्चिक)</option>
+                <option value="sagittarius">15 Dec - 14 Jan (धनु)</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="magicResult" class="result-card-box"></div>
 </div>
     </div>
     
