@@ -99,115 +99,102 @@
             <p data-key="horoscope_subtitle">अपनी राशि चुनें और आज का परामर्श प्राप्त करें</p>
         </div>
 
-        <div class="magic-tool-container">
-            <h3 class="royal-title">🔱 अपना राशि पहचानें (Rashi Finder)</h3>
-            <div class="finder-grid">
-                <div class="finder-box">
-                    <label>नाम के पहले अक्षर से:</label>
-                    <select id="nameFinder" onchange="handleMagicFind(this.value)">
-                        <option value="">अक्षर चुनें...</option>
-                        <option value="aries">अ, ल, ई (A, L, E)</option>
-                        <option value="taurus">ब, व, उ (B, V, U)</option>
-                        <option value="gemini">क, छ, घ (K, CH, G)</option>
-                        <option value="cancer">ही, हू, हे, हो (H, D)</option>
-                        <option value="leo">मा, मी, मू, मे (M, T)</option>
-                        <option value="virgo">टो, पा, पी, पू (P, T, N)</option>
-                        <option value="libra">रा, री, रू, रे (R, T)</option>
-                        <option value="scorpio">तो, ना, नी, नू (N, Y)</option>
-                        <option value="sagittarius">ये, यो, भा, भी (B, D, P)</option>
-                        <option value="capricorn">भो, जा, जी, खी (J, K)</option>
-                        <option value="aquarius">गू, गे, गो, सा (S, G, D)</option>
-                        <option value="pisces">दी, दू, थ, झ (D, C, T)</option>
-                    </select>
-                </div>
-
-                <div class="divider">या</div>
-
-                <div class="finder-box">
-                    <label>जन्म तिथि और महीने से:</label>
-                    <select id="monthFinder" onchange="handleMagicFind(this.value)">
-                        <option value="">तारीख और महीना चुनें...</option>
-                        <option value="capricorn">15 Jan - 12 Feb (मकर)</option>
-                        <option value="aquarius">13 Feb - 13 Mar (कुंभ)</option>
-                        <option value="pisces">14 Mar - 12 Apr (मीन)</option>
-                        <option value="aries">13 Apr - 13 May (मेष)</option>
-                        <option value="taurus">14 May - 13 Jun (वृषभ)</option>
-                        <option value="gemini">14 Jun - 15 Jul (मिथुन)</option>
-                        <option value="cancer">16 Jul - 15 Aug (कर्क)</option>
-                        <option value="leo">16 Aug - 15 Sep (सिंह)</option>
-                        <option value="virgo">16 Sep - 16 Oct (कन्या)</option>
-                        <option value="libra">17 Oct - 14 Nov (तुला)</option>
-                        <option value="scorpio">15 Nov - 14 Dec (वृश्चिक)</option>
-                        <option value="sagittarius">15 Dec - 14 Jan (धनु)</option>
-                    </select>
-                </div>
-            </div>
-            <div id="magicResult" class="result-card-box"></div>
+<div class="magic-tool-container">
+    <h3 class="royal-title" data-key="finder_title">🔱 अपना राशि पहचानें (Rashi Finder)</h3>
+    <div class="finder-grid">
+        <div class="finder-box">
+            <label data-key="finder_name_label">नाम के पहले अक्षर से:</label>
+            <select id="nameFinder" onchange="handleMagicFind(this.value)">
+                <option value="" data-key="finder_select">अक्षर चुनें...</option>
+                <option value="aries">अ, ल, ई (A, L, E)</option>
+                <option value="taurus">ब, व, उ (B, V, U)</option>
+                <option value="gemini">क, छ, घ (K, CH, G)</option>
+                <option value="cancer">ही, हू, हे, हो (H, D)</option>
+                <option value="leo">मा, मी, मू, मे (M, T)</option>
+                <option value="virgo">टो, पा, पी, पू (P, T, N)</option>
+                <option value="libra">रा, री, रू, रे (R, T)</option>
+                <option value="scorpio">तो, ना, नी, नू (N, Y)</option>
+                <option value="sagittarius">ये, यो, भा, भी (B, D, P)</option>
+                <option value="capricorn">भो, जा, जी, खी (J, K)</option>
+                <option value="aquarius">गू, गे, गो, सा (S, G, D)</option>
+                <option value="pisces">दी, दू, थ, झ (D, C, T)</option>
+            </select>
         </div>
 
-        <div class="rashi-grid">
-            <a href="aries.html" class="rashi-card">
-                <div class="rashi-icon">♈</div>
-                <div class="rashi-name">Aries</div>
-                <div class="rashi-sub">मेष</div>
-            </a>
-            <a href="taurus.html" class="rashi-card">
-                <div class="rashi-icon">♉</div>
-                <div class="rashi-name">Taurus</div>
-                <div class="rashi-sub">वृषभ</div>
-            </a>
-            <a href="gemini.html" class="rashi-card">
-                <div class="rashi-icon">♊</div>
-                <div class="rashi-name">Gemini</div>
-                <div class="rashi-sub">मिथुन</div>
-            </a>
-            <a href="cancer.html" class="rashi-card">
-                <div class="rashi-icon">♋</div>
-                <div class="rashi-name">Cancer</div>
-                <div class="rashi-sub">कर्क</div>
-            </a>
-            <a href="leo.html" class="rashi-card">
-                <div class="rashi-icon">♌</div>
-                <div class="rashi-name">Leo</div>
-                <div class="rashi-sub">सिंह</div>
-            </a>
-            <a href="virgo.html" class="rashi-card">
-                <div class="rashi-icon">♍</div>
-                <div class="rashi-name">Virgo</div>
-                <div class="rashi-sub">कन्या</div>
-            </a>
-            <a href="libra.html" class="rashi-card">
-                <div class="rashi-icon">♎</div>
-                <div class="rashi-name">Libra</div>
-                <div class="rashi-sub">तुला</div>
-            </a>
-            <a href="scorpio.html" class="rashi-card">
-                <div class="rashi-icon">♏</div>
-                <div class="rashi-name">Scorpio</div>
-                <div class="rashi-sub">वृश्चिक</div>
-            </a>
-            <a href="sagittarius.html" class="rashi-card">
-                <div class="rashi-icon">♐</div>
-                <div class="rashi-name">Sagittarius</div>
-                <div class="rashi-sub">धनु</div>
-            </a>
-            <a href="capricorn.html" class="rashi-card">
-                <div class="rashi-icon">♑</div>
-                <div class="rashi-name">Capricorn</div>
-                <div class="rashi-sub">मकर</div>
-            </a>
-            <a href="aquarius.html" class="rashi-card">
-                <div class="rashi-icon">♒</div>
-                <div class="rashi-name">Aquarius</div>
-                <div class="rashi-sub">कुंभ</div>
-            </a>
-            <a href="pisces.html" class="rashi-card">
-                <div class="rashi-icon">♓</div>
-                <div class="rashi-name">Pisces</div>
-                <div class="rashi-sub">मीन</div>
-            </a>
+        <div class="divider" data-key="finder_divider">या</div>
+
+        <div class="finder-box">
+            <label data-key="finder_date_label">जन्म तिथि और महीने से:</label>
+            <select id="monthFinder" onchange="handleMagicFind(this.value)">
+                <option value="" data-key="finder_select">तारीख और महीना चुनें...</option>
+                <option value="capricorn">15 Jan - 12 Feb (मकर)</option>
+                <option value="aquarius">13 Feb - 13 Mar (कुंभ)</option>
+                <option value="pisces">14 Mar - 12 Apr (मीन)</option>
+                <option value="aries">13 Apr - 13 May (मेष)</option>
+                <option value="taurus">14 May - 13 Jun (वृषभ)</option>
+                <option value="gemini">14 Jun - 15 Jul (मिथुन)</option>
+                <option value="cancer">16 Jul - 15 Aug (कर्क)</option>
+                <option value="leo">16 Aug - 15 Sep (सिंह)</option>
+                <option value="virgo">16 Sep - 16 Oct (कन्या)</option>
+                <option value="libra">17 Oct - 14 Nov (तुला)</option>
+                <option value="scorpio">15 Nov - 14 Dec (वृश्चिक)</option>
+                <option value="sagittarius">15 Dec - 14 Jan (धनु)</option>
+            </select>
         </div>
     </div>
+    <div id="magicResult" class="result-card-box"></div>
+</div>
+
+       <div class="rashi-grid">
+    <a href="aries.html" class="rashi-card">
+        <div class="rashi-icon">♈</div>
+        <div class="rashi-name" data-key="rashi_1">Aries</div>
+    </a>
+    <a href="taurus.html" class="rashi-card">
+        <div class="rashi-icon">♉</div>
+        <div class="rashi-name" data-key="rashi_2">Taurus</div>
+    </a>
+    <a href="gemini.html" class="rashi-card">
+        <div class="rashi-icon">♊</div>
+        <div class="rashi-name" data-key="rashi_3">Gemini</div>
+    </a>
+    <a href="cancer.html" class="rashi-card">
+        <div class="rashi-icon">♋</div>
+        <div class="rashi-name" data-key="rashi_4">Cancer</div>
+    </a>
+    <a href="leo.html" class="rashi-card">
+        <div class="rashi-icon">♌</div>
+        <div class="rashi-name" data-key="rashi_5">Leo</div>
+    </a>
+    <a href="virgo.html" class="rashi-card">
+        <div class="rashi-icon">♍</div>
+        <div class="rashi-name" data-key="rashi_6">Virgo</div>
+    </a>
+    <a href="libra.html" class="rashi-card">
+        <div class="rashi-icon">♎</div>
+        <div class="rashi-name" data-key="rashi_7">Libra</div>
+    </a>
+    <a href="scorpio.html" class="rashi-card">
+        <div class="rashi-icon">♏</div>
+        <div class="rashi-name" data-key="rashi_8">Scorpio</div>
+    </a>
+    <a href="sagittarius.html" class="rashi-card">
+        <div class="rashi-icon">♐</div>
+        <div class="rashi-name" data-key="rashi_9">Sagittarius</div>
+    </a>
+    <a href="capricorn.html" class="rashi-card">
+        <div class="rashi-icon">♑</div>
+        <div class="rashi-name" data-key="rashi_10">Capricorn</div>
+    </a>
+    <a href="aquarius.html" class="rashi-card">
+        <div class="rashi-icon">♒</div>
+        <div class="rashi-name" data-key="rashi_11">Aquarius</div>
+    </a>
+    <a href="pisces.html" class="rashi-card">
+        <div class="rashi-icon">♓</div>
+        <div class="rashi-name" data-key="rashi_12">Pisces</div>
+    </a>
+</div>
 
     <div id="footer-placeholder"></div>
 
