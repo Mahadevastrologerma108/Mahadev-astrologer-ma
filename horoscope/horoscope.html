@@ -1,1 +1,188 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rashifal 2026 | Divine Guidance</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
 
+    <style>
+        :root { --gold: #f5c542; --dark-bg: #0a0a0a; }
+        body { background: var(--dark-bg); color: #fff; font-family: 'Poppins', sans-serif; margin: 0; }
+
+        .selection-container {
+            max-width: 1100px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .selection-header h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .selection-header p {
+            color: #888;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        /* 🔱 Rashi Grid Logic */
+        .rashi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .rashi-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(245, 197, 66, 0.1);
+            padding: 30px 15px;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Card Decoration */
+        .rashi-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(245, 197, 66, 0.05) 0%, transparent 70%);
+            transition: 0.5s;
+            opacity: 0;
+        }
+
+        .rashi-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-8px);
+            background: rgba(245, 197, 66, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .rashi-card:hover::before { opacity: 1; }
+
+        .rashi-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(245, 197, 66, 0.3);
+        }
+
+        .rashi-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .rashi-sub {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 600px) {
+            .selection-header h1 { font-size: 1.8rem; }
+            .rashi-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <div class="selection-container">
+        <div class="selection-header">
+            <h1 data-key="horoscope_title">दैनिक राशिफल</h1>
+            <p data-key="horoscope_subtitle">अपनी राशि चुनें और आज का परामर्श प्राप्त करें</p>
+        </div>
+
+        <div class="rashi-grid">
+            <a href="aries.html" class="rashi-card">
+                <div class="rashi-icon">♈</div>
+                <div class="rashi-name">Aries</div>
+                <div class="rashi-sub">मेष</div>
+            </a>
+            <a href="taurus.html" class="rashi-card">
+                <div class="rashi-icon">♉</div>
+                <div class="rashi-name">Taurus</div>
+                <div class="rashi-sub">वृषभ</div>
+            </a>
+            <a href="gemini.html" class="rashi-card">
+                <div class="rashi-icon">♊</div>
+                <div class="rashi-name">Gemini</div>
+                <div class="rashi-sub">मिथुन</div>
+            </a>
+            <a href="cancer.html" class="rashi-card">
+                <div class="rashi-icon">♋</div>
+                <div class="rashi-name">Cancer</div>
+                <div class="rashi-sub">कर्क</div>
+            </a>
+            <a href="leo.html" class="rashi-card">
+                <div class="rashi-icon">♌</div>
+                <div class="rashi-name">Leo</div>
+                <div class="rashi-sub">सिंह</div>
+            </a>
+            <a href="virgo.html" class="rashi-card">
+                <div class="rashi-icon">♍</div>
+                <div class="rashi-name">Virgo</div>
+                <div class="rashi-sub">कन्या</div>
+            </a>
+            <a href="libra.html" class="rashi-card">
+                <div class="rashi-icon">♎</div>
+                <div class="rashi-name">Libra</div>
+                <div class="rashi-sub">तुला</div>
+            </a>
+            <a href="scorpio.html" class="rashi-card">
+                <div class="rashi-icon">♏</div>
+                <div class="rashi-name">Scorpio</div>
+                <div class="rashi-sub">वृश्चिक</div>
+            </a>
+            <a href="sagittarius.html" class="rashi-card">
+                <div class="rashi-icon">♐</div>
+                <div class="rashi-name">Sagittarius</div>
+                <div class="rashi-sub">धनु</div>
+            </a>
+            <a href="capricorn.html" class="rashi-card">
+                <div class="rashi-icon">♑</div>
+                <div class="rashi-name">Capricorn</div>
+                <div class="rashi-sub">मकर</div>
+            </a>
+            <a href="aquarius.html" class="rashi-card">
+                <div class="rashi-icon">♒</div>
+                <div class="rashi-name">Aquarius</div>
+                <div class="rashi-sub">कुंभ</div>
+            </a>
+            <a href="pisces.html" class="rashi-card">
+                <div class="rashi-icon">♓</div>
+                <div class="rashi-name">Pisces</div>
+                <div class="rashi-sub">मीन</div>
+            </a>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../assets/js/translations.js"></script>
+    <script src="../assets/js/layout.js"></script>
+
+</body>
+</html>
