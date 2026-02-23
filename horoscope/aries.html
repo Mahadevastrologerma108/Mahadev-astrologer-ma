@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body { background: #0a0a0a; color: #f5c542; font-family: 'Cinzel', serif; padding: 50px; }
+        .box { border: 1px solid #f5c542; padding: 20px; border-radius: 10px; background: rgba(245,197,66,0.05); }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1 id="rashi-title">Loading...</h1>
+        <p id="todayDate"></p>
+        <hr>
+        <h3>Career: <span id="h-career" style="color:#fff; font-family: 'Poppins';"></span></h3>
+        <h3>Lucky Color: <span id="h-color" style="color:#fff;"></span></h3>
+    </div>
+
+    <script src="horoscope-data.js"></script>
+    <script src="../assets/js/horoscope-handler.js"></script>
+
+    <script>
+        // Environment Check
+        window.onload = () => {
+            console.log("Checking Environment...");
+            if(typeof window.dailyHoroscope !== 'undefined') {
+                console.log("✅ Data File Connected");
+            } else {
+                console.error("❌ Data File Missing!");
+            }
+            loadHoroscope('aries');
+        };
+    </script>
+</body>
+</html>
