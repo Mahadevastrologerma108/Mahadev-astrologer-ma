@@ -44,25 +44,28 @@ function injectLayout() {
 }
 
 // 🔱 Global Translation Engine
+/* 🔱 layout.js - Global Fix */
+
 function translatePage() {
     const lang = localStorage.getItem('selectedLang') || 'hi';
     
-    // Yahan hum 'window.translation' (Global) check kar rahe hain
-    const data = window.translation; 
-
-    if (!data) {
-        console.warn("⚠️ Mahadev: Global 'translation' object not found yet.");
+    // 🔱 Sabar Logic: Agar data abhi nahi mila, toh 50ms baad fir try karo
+    if (!window.translation) {
+        console.log("⏳ Waiting for translation data...");
+        setTimeout(translatePage, 50); 
         return;
     }
 
+    const data = window.translation;
     const elements = document.querySelectorAll('[data-key]');
+    
     elements.forEach(el => {
         const key = el.getAttribute('data-key');
         if (data[lang] && data[lang][key]) {
             el.innerText = data[lang][key];
         }
     });
-    console.log("✅ Mahadev: Page Translated to", lang);
+    console.log("✅ Page Translated Successfully!");
 }
 
 // 🔱 Language Switcher
