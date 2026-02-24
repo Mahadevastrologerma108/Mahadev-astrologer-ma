@@ -3,7 +3,7 @@
 function injectLayout() {
     const lang = localStorage.getItem('selectedLang') || 'hi';
     
-    // ... (Aapka Path Detection Logic bilkul sahi hai) ...
+    // Path Detection
     const isSubFolder = window.location.pathname.includes('/pages/') || 
                         window.location.pathname.includes('/panchang/') ||
                         window.location.pathname.endsWith('.html') && !window.location.pathname.includes('index.html');
@@ -37,15 +37,32 @@ function injectLayout() {
         footerEl.innerHTML = `<footer class="main-footer"><p data-key="footer_text">© 2026 Mahadev Astrologer</p></footer>`;
     }
 
-    // 🔱 FIXED LOGIC: Thoda delay dekar call karein taaki translations.js load ho jaye
+    // 🔱 FIXED LOGIC: Thoda delay taaki translation.js (Global) load ho jaye
     setTimeout(() => {
-        if (typeof translatePage === 'function') {
-            console.log("🔱 Mahadev: Running Translation...");
-            translatePage();
-        } else {
-            console.error("❌ Mahadev: translatePage function nahi mila!");
+        translatePage();
+    }, 100);
+}
+
+// 🔱 Global Translation Engine
+function translatePage() {
+    const lang = localStorage.getItem('selectedLang') || 'hi';
+    
+    // Yahan hum 'window.translation' (Global) check kar rahe hain
+    const data = window.translation; 
+
+    if (!data) {
+        console.warn("⚠️ Mahadev: Global 'translation' object not found yet.");
+        return;
+    }
+
+    const elements = document.querySelectorAll('[data-key]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (data[lang] && data[lang][key]) {
+            el.innerText = data[lang][key];
         }
-    }, 100); // 100ms ka delay magic ki tarah kaam karega
+    });
+    console.log("✅ Mahadev: Page Translated to", lang);
 }
 
 // 🔱 Language Switcher
@@ -56,5 +73,4 @@ function toggleLang() {
     location.reload();
 }
 
-// Auto-run when page loads
 document.addEventListener('DOMContentLoaded', injectLayout);
