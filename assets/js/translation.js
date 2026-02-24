@@ -1,20 +1,17 @@
-const horoscopeUI = {
+const translation = {
     hi: {
         finder_title: "🔱 अपना राशि पहचानें (Rashi Finder)",
-        name_label: "नाम के पहले अक्षर से:",
-        date_label: "जन्म तिथि और महीने से:",
-        select_placeholder: "चुनें...",
-        found_msg: "आपकी संभावित राशि:",
-        read_more: "आज का राशिफल पढ़ें →",
-        divider: "या"
+        finder_name_label: "नाम के पहले अक्षर से:", // HTML wali key se match karo
+        finder_date_label: "जन्म तिथि और महीने से:",
+        finder_select: "चुनें...",
+        finder_divider: "या"
+        // ... baki keys
     },
     en: {
         finder_title: "🔱 Identify Your Zodiac (Rashi Finder)",
-        name_label: "By First Letter of Name:",
-        date_label: "By Date & Month of Birth:",
-        select_placeholder: "Select...",
-        found_msg: "Your Identified Rashi:",
-        read_more: "Read Today's Horoscope →", 
-        divider: "OR"
+        finder_name_label: "By First Letter of Name:",
+        finder_date_label: "By Date & Month of Birth:",
+        finder_select: "Select...",
+        finder_divider: "OR"
     }
 };
