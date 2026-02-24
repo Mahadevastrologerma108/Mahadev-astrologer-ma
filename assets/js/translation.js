@@ -1,4 +1,4 @@
-const translation = {
+window.translations = {
     hi: {
         finder_title: "🔱 अपना राशि पहचानें (Rashi Finder)",
         finder_name_label: "नाम के पहले अक्षर से:", // HTML wali key se match karo
