@@ -14,7 +14,7 @@ const horoscopeUI = {
         date_label: "By Date & Month of Birth:",
         select_placeholder: "Select...",
         found_msg: "Your Identified Rashi:",
-        read_more: "Read Today's Horoscope →",
+        read_more: "Read Today's Horoscope →", 
         divider: "OR"
     }
 };
