@@ -3,13 +3,11 @@
 function injectLayout() {
     const lang = localStorage.getItem('selectedLang') || 'hi';
     
-    // Path Detection: Ye check karega ki page folder ke andar hai ya bahar
+    // ... (Aapka Path Detection Logic bilkul sahi hai) ...
     const isSubFolder = window.location.pathname.includes('/pages/') || 
                         window.location.pathname.includes('/panchang/') ||
                         window.location.pathname.endsWith('.html') && !window.location.pathname.includes('index.html');
     
-    // Agar folder ke andar hai to path '../' hoga, varna khali
-    const pathPrefix = isSubFolder ? '../' : './';
     const rootPath = isSubFolder ? '../index.html' : 'index.html';
     const horoscopePath = isSubFolder ? '../horoscope.html' : 'horoscope.html';
 
@@ -36,19 +34,18 @@ function injectLayout() {
     }
 
     if (footerEl) {
-        footerEl.innerHTML = `
-            <footer class="main-footer">
-                <div class="footer-content">
-                    <p data-key="footer_text">© 2026 Mahadev Astrologer - All Rights Reserved</p>
-                </div>
-            </footer>
-        `;
+        footerEl.innerHTML = `<footer class="main-footer"><p data-key="footer_text">© 2026 Mahadev Astrologer</p></footer>`;
     }
 
-    // Header/Footer load hote hi translation engine chalao
-    if (typeof translatePage === 'function') {
-        translatePage();
-    }
+    // 🔱 FIXED LOGIC: Thoda delay dekar call karein taaki translations.js load ho jaye
+    setTimeout(() => {
+        if (typeof translatePage === 'function') {
+            console.log("🔱 Mahadev: Running Translation...");
+            translatePage();
+        } else {
+            console.error("❌ Mahadev: translatePage function nahi mila!");
+        }
+    }, 100); // 100ms ka delay magic ki tarah kaam karega
 }
 
 // 🔱 Language Switcher
