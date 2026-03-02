@@ -34,12 +34,26 @@
                 <div class="dosha-card kapha"><h3>Kapha</h3><p>Earth & Water: Needs Uplifting High Beats.</p></div>
             </div>
 
-            <div class="dosha-action">
-                <button onclick="checkDosha()" class="module-btn">DISCOVER YOUR DOMINANT DOSHA</button>
-                <div id="dosha-warning" class="warning-note">
-                    <strong>⚠️ MANDATORY WARNING:</strong> Online quiz sirf ek 'Glimpse' hai. Exact Dosha pehchanne aur sahi Frequency modulation ke liye **Kundali, Palmistry, ya Numerology** analysis anivarya hai. Galat prayog se 'Vibrational Toxicity' ho sakti hai. Kisi kushal expert ya hamse consult zaroor karein.
-                </div>
-            </div>
+           <div style="text-align: center; margin: 30px 0;">
+    <button class="module-btn" id="start-quiz-btn" onclick="checkDoshaOptionB()">🔱 DISCOVER YOUR DOMINANT DOSHA</button>
+</div>
+
+<div id="dosha-quiz-container" style="display:none; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; margin: 20px 0; border: 1px solid var(--gold); text-align: center;">
+    <h3 class="gold-text" id="quiz-header">Sahi vikalp chunein:</h3>
+    <div id="quiz-step">
+        <p id="quiz-question" style="font-size: 1.2rem; margin-bottom: 20px;">1. Aapka sharir kaisa hai?</p>
+        <div id="quiz-options">
+            <button class="quiz-opt" onclick="nextStep('A')">Dubla/Patla</button>
+            <button class="quiz-opt" onclick="nextStep('B')">Medium/Athletic</button>
+            <button class="quiz-opt" onclick="nextStep('C')">Bhari/Sthir</button>
+        </div>
+    </div>
+</div>
+
+<div id="dosha-warning" class="warning-note" style="display:none;">
+    <strong>⚠️ PARAM-AAVASHYAK SUCHNA:</strong> 
+    Yeh result ek prathmik anuman (initial estimate) hai. Sahi Dosha aur exact Healing Frequency ke liye **Kundali, Birth-Time aur Planetary Degrees** ka vishleshan anivarya hai. Galat frequency ka chayan mansik tanav paida kar sakta hai. Sahi maarg-darshan ke liye hamse paraamarsh (consult) karein.
+</div>
         </section>
 
         <section class="matrix-section">
