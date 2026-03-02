@@ -77,17 +77,27 @@ function nextStep(val) {
     }
 }
 
-// 5. Final Result & Warning Display
+// 5. Final Result (Updated for Conversion)
 function showFinalResult() {
     let finalDosha = (scores[0] === 'A') ? "VATA" : (scores[0] === 'B' ? "PITTA" : "KAPHA");
     const container = document.getElementById('dosha-quiz-container');
     const warningNote = document.getElementById('dosha-warning');
     
     container.innerHTML = `
-        <div style="padding: 10px; animation: fadeIn 1s ease-in;">
-            <h2 class="gold-text" style="font-size: 1.8rem; margin-bottom:10px;">Result: ${finalDosha} Dominant</h2>
-            <p style="color:#fff;">Mahadev ki kripa se aapka prathmik vishleshan (Initial Analysis) ho gaya hai.</p>
-            <p style="font-size: 0.85rem; color: #aaa; margin-top:10px;">Ab niche di gayi 'Param-Aavashyak' savdhani ko dhyan se padhein.</p>
+        <div class="result-box" style="padding: 20px; animation: fadeIn 1s;">
+            <h2 class="gold-text" style="font-size: 1.8rem;">Result: ${finalDosha} Dominant</h2>
+            <p>Aapki energy profile Mahadev ki kripa se mil gayi hai.</p>
+            
+            <div class="booking-zone" style="margin-top:25px; border-top: 1px solid rgba(245,197,66,0.2); padding-top:20px;">
+                <p style="color:var(--gold); font-weight:bold;">Ab apni exact 'Healing Frequency' unlock karein:</p>
+                <p style="font-size:0.85rem; margin-bottom:15px; color:#ccc;">Kaunsa rasta aapke liye sahi hai?</p>
+                
+                <div class="method-buttons" style="display: flex; flex-direction: column; gap: 10px;">
+                    <button class="quiz-opt" style="width:100%; margin:5px 0;" onclick="loadDivineForm('Kundali', '${finalDosha}')">🔱 Via Astrological Chart (Kundali)</button>
+                    <button class="quiz-opt" style="width:100%; margin:5px 0;" onclick="loadDivineForm('Palmistry', '${finalDosha}')">✋ Via Palmistry Analysis</button>
+                    <button class="quiz-opt" style="width:100%; margin:5px 0;" onclick="loadDivineForm('Numerology', '${finalDosha}')">🔢 Via Numerology Vibration</button>
+                </div>
+            </div>
         </div>
     `;
     
@@ -97,5 +107,49 @@ function showFinalResult() {
     }
 }
 
-// Initialize
+// 6. The Magical Form (New Lead System)
+function loadDivineForm(method, dosha) {
+    const container = document.getElementById('dosha-quiz-container');
+    let formHTML = `
+        <div class="magical-form-box" style="animation: fadeIn 0.8s; text-align:left; padding:10px;">
+            <h3 class="gold-text" style="text-align:center;">🔱 ${method} Analysis</h3>
+            <p style="font-size:0.8rem; margin-bottom:20px; text-align:center; color:#aaa;">Please provide details for <b>${dosha}</b> Frequency Mapping.</p>
+            
+            <form id="healing-contact-form" onsubmit="window.handleSoundHealingSubmit(event, '${method}', '${dosha}')">
+                <input type="text" placeholder="Full Name" required class="form-input" style="width:100%; padding:12px; margin-bottom:15px; background:rgba(0,0,0,0.5); border:1px solid rgba(245,197,66,0.3); color:#fff; border-radius:8px;">
+    `;
+
+    if (method === 'Kundali') {
+        formHTML += `
+            <input type="date" title="Birth Date" required class="form-input" style="width:100%; padding:12px; margin-bottom:15px; background:rgba(0,0,0,0.5); border:1px solid rgba(245,197,66,0.3); color:#fff; border-radius:8px;">
+            <input type="time" title="Birth Time" required class="form-input" style="width:100%; padding:12px; margin-bottom:15px; background:rgba(0,0,0,0.5); border:1px solid rgba(245,197,66,0.3); color:#fff; border-radius:8px;">
+            <input type="text" placeholder="Birth Place (City, Country)" required class="form-input" style="width:100%; padding:12px; margin-bottom:15px; background:rgba(0,0,0,0.5); border:1px solid rgba(245,197,66,0.3); color:#fff; border-radius:8px;">
+        `;
+    } else if (method === 'Palmistry') {
+        formHTML += `
+            <input type="text" placeholder="Current Location" required class="form-input" style="width:100%; padding:12px; margin-bottom:15px; background:rgba(0,0,0,0.5); border:1px solid rgba(245,197,66,0.3); color:#fff; border-radius:8px;">
+            <div style="background: rgba(245,197,66,0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.8rem; color: #eee; border: 1px dashed var(--gold);">
+                📸 <b>Note:</b> Keep clear photos of both hands (Front & Back) ready. Our team will ask for them on WhatsApp.
+            </div>
+        `;
+    } else if (method === 'Numerology') {
+        formHTML += `
+            <input type="date" title="Birth Date" required class="form-input" style="width:100%; padding:12px; margin-bottom:15px; background:rgba(0,0,0,0.5); border:1px solid rgba(245,197,66,0.3); color:#fff; border-radius:8px;">
+            <input type="text" placeholder="Current Full Name (Spelling)" required class="form-input" style="width:100%; padding:12px; margin-bottom:15px; background:rgba(0,0,0,0.5); border:1px solid rgba(245,197,66,0.3); color:#fff; border-radius:8px;">
+        `;
+    }
+
+    formHTML += `
+                <input type="tel" placeholder="WhatsApp Number" required class="form-input" style="width:100%; padding:12px; margin-bottom:15px; background:rgba(0,0,0,0.5); border:1px solid rgba(245,197,66,0.3); color:#fff; border-radius:8px;">
+                <textarea placeholder="Any specific mental or physical issue?" class="form-input" style="width:100%; padding:12px; margin-bottom:15px; background:rgba(0,0,0,0.5); border:1px solid rgba(245,197,66,0.3); color:#fff; border-radius:8px; height:80px;"></textarea>
+                <button type="submit" class="module-btn" style="width:100%; border-radius:50px;">INVOKE FREQUENCY MAPPING ➔</button>
+            </form>
+        </div>
+    `;
+
+    container.innerHTML = formHTML;
+    container.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Initialization remains same
 document.addEventListener('DOMContentLoaded', loadTable);
