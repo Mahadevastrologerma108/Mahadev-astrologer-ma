@@ -1,7 +1,9 @@
-  body { 
+/* MAHADEV ASTROLOGER M.A. - Unified Styles */
+
+body { 
     background-color: #0f0f0f; 
     color: #e0e0e0; 
-    font-family: 'Segoe UI', sans-serif; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     padding: 20px; 
 }
 
@@ -20,6 +22,7 @@ h2 {
     text-align: center; 
     border-bottom: 2px solid #ff9800; 
     padding-bottom: 10px; 
+    font-family: 'Cinzel', serif; /* Optional: Agar fonts load ho rahe hain */
 }
 
 .input-group { margin-bottom: 15px; }
@@ -39,6 +42,11 @@ input {
     color: #fff; 
     border-radius: 5px; 
     box-sizing: border-box; 
+    outline: none;
+}
+
+input:focus {
+    border-color: #ff9800;
 }
 
 button { 
@@ -52,19 +60,52 @@ button {
     cursor: pointer; 
     transition: 0.3s; 
     margin-top: 10px; 
+    text-transform: uppercase;
 }
 
-button:hover { background: #e68900; }
+button:hover { 
+    background: #e68900; 
+    box-shadow: 0 0 15px rgba(255, 152, 0, 0.4);
+}
 
 #output { 
     margin-top: 20px; 
-    padding: 15px; 
+    padding: 20px; 
     background: #000; 
     border-radius: 8px; 
     display: none; 
-    border-left: 4px solid #ff9800; 
+    border-left: 5px solid #ff9800; 
+    animation: fadeIn 0.5s ease-in; /* Result aane par smooth animation */
 }
 
-.res-item { margin-bottom: 8px; font-size: 1.1rem; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-.val { color: #ff9800; font-weight: bold; }
+.res-item { 
+    margin-bottom: 10px; 
+    font-size: 1.1rem; 
+    border-bottom: 1px solid #222;
+    padding-bottom: 5px;
+}
+
+.val { 
+    color: #ff9800; 
+    font-weight: bold; 
+}
+
+/* Frequency specific styling - Your Master Touch */
+#out-freq {
+    color: #4caf50; /* Green shade for healing vibe */
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
+    font-size: 1.4rem;
+    display: block;
+    margin-top: 5px;
+}
+
+#out-benefit {
+    color: #ccc;
+    font-size: 0.9rem;
+    font-style: italic;
+}
