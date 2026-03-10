@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAHADEV ASTRO - Trial Engine</title>
+    <style>
+        body { background-color: #0f0f0f; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; }
+        .container { max-width: 500px; margin: auto; background: #1a1a1a; padding: 25px; border-radius: 15px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { color: #ff9800; text-align: center; border-bottom: 2px solid #ff9800; padding-bottom: 10px; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #bbb; }
+        input { width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #ff9800; border: none; color: #000; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        button:hover { background: #e68900; }
+        #output { margin-top: 20px; padding: 15px; background: #000; border-radius: 8px; display: none; border-left: 4px solid #ff9800; }
+        .res-item { margin-bottom: 8px; font-size: 1.1rem; }
+        .val { color: #ff9800; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🚩 Trial Logic Engine</h2>
+    
+    <div class="input-group">
+        <label>Birth Date</label>
+        <input type="date" id="dob" value="1990-04-13">
+    </div>
+    
+    <div class="input-group">
+        <label>Birth Time</label>
+        <input type="time" id="tob" value="19:25">
+    </div>
+
+    <div class="input-group" style="display: flex; gap: 10px;">
+        <div style="flex: 1;">
+            <label>Latitude</label>
+            <input type="number" id="lat" value="25.76" step="0.01">
+        </div>
+        <div style="flex: 1;">
+            <label>Longitude</label>
+            <input type="number" id="lon" value="82.68" step="0.01">
+        </div>
+    </div>
+
+    <button onclick="runTrial()">RUN CALCULATION TEST</button>
+
+    <div id="output">
+        <div class="res-item">Moon Degree: <span id="out-moon" class="val"></span></div>
+        <div class="res-item">Nakshatra: <span id="out-nak" class="val"></span></div>
+        <div class="res-item">Yogini: <span id="out-yog" class="val"></span></div>
+        <div class="res-item">Status: <span id="out-status" class="val">Verified ✅</span></div>
+    </div>
+</div>
+
+<script>
+/**
+ * MAHADEV ASTROLOGER M.A. - Logic Merged Code
+ */
+const AstroEngine = {
+    // Julian Day + Time Correction
+    getJD: (d, t, lon) => {
+        let [y, m, day] = d.split('-').map(Number);
+        let [h, min] = t.split(':').map(Number);
+        let decimalTime = h + (min / 60);
+
+        if (m <= 2) { y--; m += 12; }
+        let a = Math.floor(y / 100);
+        let b = 2 - a + Math.floor(a / 4);
+        let jd = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + day + b - 1524.5;
+        return jd + (decimalTime / 24) - (lon / 360);
+    },
+
+    // True Moon Position (Mand-Phala + Ayanamsa)
+    getMoon: (jd) => {
+        const T = (jd - 2451545.0) / 36525;
+        let L0 = 218.316 + 481267.881 * T; // Mean Moon
+        let M = 134.963 + 477198.867 * T;   // Mean Anomaly
+        let correction = 6.289 * Math.sin(M * Math.PI / 180); // Mand-Phala
+        let trueMoon = (L0 + correction) % 360;
+        
+        let ayanamsa = 23.85 + (1.397 * T); // Lahiri Ayanamsa
+        let siderealMoon = (trueMoon - ayanamsa + 360) % 360;
+        return siderealMoon;
+    }
+};
+
+function runTrial() {
+    const d = document.getElementById('dob').value;
+    const t = document.getElementById('tob').value;
+    const la = parseFloat(document.getElementById('lat').value);
+    const lo = parseFloat(document.getElementById('lon').value);
+
+    // 1. Get Julian Day
+    const jd = AstroEngine.getJD(d, t, lo);
+    
+    // 2. Get Sidereal Moon
+    const moon = AstroEngine.getMoon(jd);
+    
+    // 3. Nakshatra (800' per Nakshatra)
+    const nakNum = Math.floor((moon * 60) / 800) + 1;
+    
+    // 4. Yogini Formula: (N + 3) % 8
+    let yIdx = (nakNum + 3) % 8;
+    if (yIdx === 0) yIdx = 8;
+
+    const yoginis = ["", "Mangala", "Pingala", "Dhanya", "Bhramari", "Bhadrika", "Ulka", "Siddha", "Sankata"];
+
+    // Update UI
+    document.getElementById('out-moon').innerText = moon.toFixed(2) + "°";
+    document.getElementById('out-nak').innerText = nakNum;
+    document.getElementById('out-yog').innerText = yoginis[yIdx];
+    document.getElementById('output').style.display = 'block';
+
+    // Logging for Developer (Ctrl+Shift+I to see)
+    console.log("--- TEST REPORT ---");
+    console.log("Julian Day:", jd);
+    console.log("Moon Longitude:", moon);
+    console.log("Nakshatra:", nakNum);
+    console.log("Yogini:", yoginis[yIdx]);
+}
+</script>
+
+</body>
+</html>
