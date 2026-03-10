@@ -1,10 +1,11 @@
-/* MAHADEV ASTROLOGER M.A. - Unified Styles */
+/* MAHADEV ASTROLOGER M.A. - Final Professional Styles */
 
 body { 
     background-color: #0f0f0f; 
     color: #e0e0e0; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     padding: 20px; 
+    line-height: 1.6;
 }
 
 .container { 
@@ -22,7 +23,8 @@ h2 {
     text-align: center; 
     border-bottom: 2px solid #ff9800; 
     padding-bottom: 10px; 
-    font-family: 'Cinzel', serif; /* Optional: Agar fonts load ho rahe hain */
+    font-family: 'Cinzel', serif;
+    text-shadow: 0 0 10px rgba(255, 152, 0, 0.3);
 }
 
 .input-group { margin-bottom: 15px; }
@@ -30,64 +32,88 @@ h2 {
 label { 
     display: block; 
     margin-bottom: 5px; 
-    font-size: 0.9rem; 
-    color: #bbb; 
+    font-size: 0.85rem; 
+    color: #888; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 input { 
     width: 100%; 
-    padding: 10px; 
+    padding: 12px; 
     background: #222; 
     border: 1px solid #444; 
     color: #fff; 
     border-radius: 5px; 
     box-sizing: border-box; 
     outline: none;
+    font-size: 1rem;
+}
+
+/* Date/Time icons ko visible banane ke liye */
+input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
 }
 
 input:focus {
     border-color: #ff9800;
+    background: #2a2a2a;
 }
 
 button { 
     width: 100%; 
-    padding: 12px; 
+    padding: 14px; 
     background: #ff9800; 
     border: none; 
     color: #000; 
     font-weight: bold; 
     border-radius: 5px; 
     cursor: pointer; 
-    transition: 0.3s; 
+    transition: 0.3s ease; 
     margin-top: 10px; 
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 button:hover { 
     background: #e68900; 
-    box-shadow: 0 0 15px rgba(255, 152, 0, 0.4);
+    box-shadow: 0 0 20px rgba(255, 152, 0, 0.4);
+    transform: translateY(-2px);
 }
 
 #output { 
-    margin-top: 20px; 
+    margin-top: 25px; 
     padding: 20px; 
     background: #000; 
-    border-radius: 8px; 
+    border-radius: 10px; 
     display: none; 
     border-left: 5px solid #ff9800; 
-    animation: fadeIn 0.5s ease-in; /* Result aane par smooth animation */
+    animation: fadeIn 0.6s ease-out; 
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+.res-header {
+    color: #f5c542;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
 }
 
 .res-item { 
     margin-bottom: 10px; 
-    font-size: 1.1rem; 
-    border-bottom: 1px solid #222;
-    padding-bottom: 5px;
+    font-size: 1.05rem; 
+    display: flex;
+    justify-content: space-between;
 }
 
 .val { 
@@ -95,17 +121,26 @@ button:hover {
     font-weight: bold; 
 }
 
-/* Frequency specific styling - Your Master Touch */
+/* Frequency specific styling */
 #out-freq {
-    color: #4caf50; /* Green shade for healing vibe */
+    color: #4caf50;
     text-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#out-benefit {
+    color: #aaa;
+    font-size: 0.85rem;
+    font-style: italic;
     display: block;
     margin-top: 5px;
 }
 
-#out-benefit {
-    color: #ccc;
-    font-size: 0.9rem;
-    font-style: italic;
+/* Navagraha Grid display setup */
+#planets-grid div {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    padding: 8px;
+    border: 1px solid #222;
 }
