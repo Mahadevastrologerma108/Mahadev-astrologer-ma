@@ -1,6 +1,6 @@
 /**
- * MAHADEV ASTROLOGER M.A. - Final Merged Logic Engine
- * Includes: Julian Day, Moon Position, Nakshatra, Yogini & Frequency
+ * MAHADEV ASTROLOGER M.A. - 9 Planets Logic Engine
+ * includes: All 9 Planets, Nakshatra, Yogini & Frequencies
  */
 
 const AstroEngine = {
@@ -9,7 +9,6 @@ const AstroEngine = {
         let [y, m, day] = d.split('-').map(Number);
         let [h, min] = t.split(':').map(Number);
         let decimalTime = h + (min / 60);
-
         if (m <= 2) { y--; m += 12; }
         let a = Math.floor(y / 100);
         let b = 2 - a + Math.floor(a / 4);
@@ -17,41 +16,59 @@ const AstroEngine = {
         return jd + (decimalTime / 24) - (lon / 360);
     },
 
-    // 2. ग्रह स्पष्ट (True Moon Position with Lahiri Ayanamsa)
-    getMoon: (jd) => {
+    // 2. 9 Planets Calculation Engine
+    getPlanets: (jd) => {
         const T = (jd - 2451545.0) / 36525;
-        let L0 = 218.316 + 481267.881 * T; // Mean Moon
-        let M = 134.963 + 477198.867 * T;   // Mean Anomaly
-        let correction = 6.289 * Math.sin(M * Math.PI / 180); // Mand-Phala
-        let trueMoon = (L0 + correction) % 360;
-        
-        let ayanamsa = 23.85 + (1.397 * T); // Lahiri Ayanamsa
-        let siderealMoon = (trueMoon - ayanamsa + 360) % 360;
-        return siderealMoon;
+        const ayanamsa = 23.85 + (1.397 * T); // Lahiri Ayanamsa
+
+        // Planetary Constants: [Mean Longitude L0, Mean Motion n, Mand-Phala Correction]
+        const data = {
+            Sun:     { L0: 280.466, n: 0.985647,  corr: 1.914 },
+            Moon:    { L0: 218.316, n: 13.176396, corr: 6.289 },
+            Mars:    { L0: 355.453, n: 0.524020,  corr: 10.691 },
+            Jupiter: { L0: 34.404,  n: 0.083085,  corr: 5.549 },
+            Saturn:  { L0: 49.944,  n: 0.033444,  corr: 6.500 },
+            Venus:   { L0: 181.979, n: 1.602130,  corr: 0.517 },
+            Mercury: { L0: 252.250, n: 4.092334,  corr: 2.500 },
+            Rahu:    { L0: 125.044, n: -0.052953, corr: 0 }, // Mean Node
+        };
+
+        let positions = {};
+        for (let planet in data) {
+            let p = data[planet];
+            // Mean Position
+            let meanPos = (p.L0 + p.n * (jd - 2451545.0)) % 360;
+            // Mean Anomaly (Simplified for JS Engine)
+            let M = meanPos; 
+            // True Position with correction
+            let truePos = (meanPos + p.corr * Math.sin(M * Math.PI / 180)) % 360;
+            // Apply Ayanamsa
+            let siderealPos = (truePos - ayanamsa + 360) % 360;
+            positions[planet] = siderealPos;
+        }
+
+        // Ketu is always Rahu + 180
+        positions['Ketu'] = (positions['Rahu'] + 180) % 360;
+
+        return positions;
     }
 };
 
-// 3. Single Execution Function
 function runCalculation() {
     const d = document.getElementById('dob').value;
     const t = document.getElementById('tob').value;
     const lo = parseFloat(document.getElementById('lon').value);
 
-    // Validate inputs
-    if (!d || !t || isNaN(lo)) {
-        alert("Please fill all details correctly!");
-        return;
-    }
+    if (!d || !t || isNaN(lo)) { alert("Fill all details!"); return; }
 
-    // Processing via Engine
     const jd = AstroEngine.getJD(d, t, lo);
-    const moon = AstroEngine.getMoon(jd);
-    const nakNum = Math.floor((moon * 60) / 800) + 1;
-    
-    let yIdx = (nakNum + 3) % 8;
-    if (yIdx === 0) yIdx = 8;
+    const planets = AstroEngine.getPlanets(jd);
 
-    // Smart Frequency Database
+    // Nakshatra & Yogini Calculation based on Moon
+    const moon = planets.Moon;
+    const nakNum = Math.floor((moon * 60) / 800) + 1;
+    let yIdx = (nakNum + 3) % 8 || 8;
+
     const yoginiData = {
         1: { name: "Mangala", freq: "528 Hz", benefit: "Love & DNA Repair" },
         2: { name: "Pingala", freq: "639 Hz", benefit: "Connecting Relationships" },
@@ -66,17 +83,18 @@ function runCalculation() {
     const result = yoginiData[yIdx];
 
     // --- Update UI ---
+    // Standard Results
     document.getElementById('out-moon').innerText = moon.toFixed(2) + "°";
     document.getElementById('out-nak').innerText = nakNum;
     document.getElementById('out-yog').innerText = result.name;
     document.getElementById('out-freq').innerText = result.freq;
     document.getElementById('out-benefit').innerText = result.benefit;
-    
-    // Show the hidden output box
-    document.getElementById('output').style.display = 'block';
 
-    console.log(`Mahadev Engine: ${result.name} identified at ${result.freq} ✅`);
+    // 9 Planets Display (Console logging for verification)
+    console.log("--- 9 Planets Report ---");
+    console.table(planets);
+
+    document.getElementById('output').style.display = 'block';
 }
 
-// 4. Event Listener
 document.getElementById('runBtn').addEventListener('click', runCalculation);
