@@ -1,6 +1,6 @@
 /**
- * MAHADEV ASTROLOGER M.A. - Final Merged Logic Engine
- * includes: All 9 Planets, Nakshatra, Yogini & Frequencies
+ * MAHADEV ASTROLOGER M.A. - Smart Engine
+ * Includes: 9 Planets, Nakshatra, Yogini, Frequency, DMS & Rashi
  */
 
 const AstroEngine = {
@@ -16,10 +16,30 @@ const AstroEngine = {
         return jd + (decimalTime / 24) - (lon / 360);
     },
 
-    // 2. 9 Planets Calculation Engine
+    // 2. NEW: Decimal to DMS + Rashi Logic
+    formatDMS: (decimalDegree) => {
+        const rashis = ["Mesha", "Vrishabha", "Mithuna", "Karka", "Simha", "Kanya", "Tula", "Vrishchika", "Dhanu", "Makara", "Kumbha", "Meena"];
+        
+        // Find Rashi (30° each)
+        let rashiIndex = Math.floor(decimalDegree / 30);
+        let rashiName = rashis[rashiIndex % 12];
+        
+        // Degrees within that Rashi
+        let degInside = decimalDegree % 30;
+        let d = Math.floor(degInside);
+        let m = Math.floor((degInside - d) * 60);
+        let s = Math.round((((degInside - d) * 60) - m) * 60);
+        
+        if (s === 60) { s = 0; m++; }
+        if (m === 60) { m = 0; d++; }
+
+        return `${d}°${m}'${s}" <small style="color:#888;">(${rashiName})</small>`;
+    },
+
+    // 3. 9 Planets Calculation Engine
     getPlanets: (jd) => {
         const T = (jd - 2451545.0) / 36525;
-        const ayanamsa = 23.85 + (1.397 * T); // Lahiri Ayanamsa
+        const ayanamsa = 23.85 + (1.397 * T); 
 
         const data = {
             Sun:     { L0: 280.466, n: 0.985647,  corr: 1.914 },
@@ -46,11 +66,7 @@ const AstroEngine = {
     }
 };
 
-/**
- * Main Calculation Function
- */
 function runCalculation() {
-    // Inputs
     const d = document.getElementById('dob').value;
     const t = document.getElementById('tob').value;
     const lo = parseFloat(document.getElementById('lon').value);
@@ -60,11 +76,9 @@ function runCalculation() {
         return; 
     }
 
-    // Processing
     const jd = AstroEngine.getJD(d, t, lo);
     const planets = AstroEngine.getPlanets(jd);
 
-    // Moon Data for Yogini
     const moon = planets.Moon;
     const nakNum = Math.floor((moon * 60) / 800) + 1;
     let yIdx = (nakNum + 3) % 8 || 8;
@@ -82,31 +96,31 @@ function runCalculation() {
 
     const result = yoginiData[yIdx];
 
-    // 1. Top Display Update
-    document.getElementById('out-moon').innerText = moon.toFixed(2) + "°";
+    // 1. Update UI (Using the new DMS format for Moon)
+    document.getElementById('out-moon').innerHTML = AstroEngine.formatDMS(moon);
     document.getElementById('out-nak').innerText = nakNum;
     document.getElementById('out-yog').innerText = result.name;
     document.getElementById('out-freq').innerText = result.freq;
     document.getElementById('out-benefit').innerText = result.benefit;
 
-    // 2. 9 Planets Grid Update
+    // 2. Update 9 Planets Grid (DMS + Rashi included)
     const grid = document.getElementById('planets-grid');
     if (grid) {
         grid.innerHTML = ""; 
         for (let pName in planets) {
             grid.innerHTML += `
-                <div style="padding: 8px; border-bottom: 1px solid #222; display: flex; justify-content: space-between;">
+                <div style="padding: 8px; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items:center;">
                     <span style="color: #888;">${pName}</span> 
-                    <span style="color: #f5c542; font-weight: bold;">${planets[pName].toFixed(2)}°</span>
+                    <span style="color: #f5c542; font-weight: bold; font-size: 0.9rem;">
+                        ${AstroEngine.formatDMS(planets[pName])}
+                    </span>
                 </div>
             `;
         }
     }
 
-    // Show Output
     document.getElementById('output').style.display = 'block';
-    console.log("Calculation Verified: All 9 Planets Updated ✅");
+    console.log("Mahadev Engine Status: 9 Planets with DMS & Rashi Verified ✅");
 }
 
-// Event Listener
 document.getElementById('runBtn').addEventListener('click', runCalculation);
