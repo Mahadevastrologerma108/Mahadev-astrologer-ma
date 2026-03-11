@@ -1,4 +1,4 @@
-/* 🔱 MAHADEV ASTROLOGER - CENTRAL LAYOUT HANDLER */
+/* 🔱 MAHADEV ASTROLOGER - CENTRAL LAYOUT HANDLER (FIXED) */
 
 function injectLayout() {
     const lang = localStorage.getItem('selectedLang') || 'hi';
@@ -6,7 +6,7 @@ function injectLayout() {
     // Path Detection
     const isSubFolder = window.location.pathname.includes('/pages/') || 
                         window.location.pathname.includes('/panchang/') ||
-                        window.location.pathname.endsWith('.html') && !window.location.pathname.includes('index.html');
+                        (window.location.pathname.endsWith('.html') && !window.location.pathname.includes('index.html'));
     
     const rootPath = isSubFolder ? '../index.html' : 'index.html';
     const horoscopePath = isSubFolder ? '../horoscope.html' : 'horoscope.html';
@@ -18,7 +18,7 @@ function injectLayout() {
         headerEl.innerHTML = `
             <header class="main-header">
                 <nav class="nav-container">
-                    <div class="logo" style="font-family:'Cinzel'; color:#f5c542;">🔱 MAHADEV</div>
+                    <div class="logo" style="font-family:'Cinzel'; color:#f5c542; font-size:1.5rem;">🔱 MAHADEV</div>
                     <ul class="nav-links">
                         <li><a href="${rootPath}" data-key="nav_home">Home</a></li>
                         <li><a href="${horoscopePath}" data-key="nav_horoscope">Horoscope</a></li>
@@ -34,51 +34,47 @@ function injectLayout() {
     }
 
     if (footerEl) {
-        footerEl.innerHTML = `<footer class="main-footer"><p data-key="footer_text">© 2026 Mahadev Astrologer</p></footer>`;
+        footerEl.innerHTML = `<footer class="main-footer" style="text-align:center; padding:20px; border-top:1px solid #222;">
+            <p data-key="footer_text">© 2026 Mahadev Astrologer</p>
+        </footer>`;
     }
 
-    // 🔱 FIXED LOGIC: Thoda delay taaki translation.js (Global) load ho jaye
-    setTimeout(() => {
-        translatePage();
-    }, 100);
+    // 🔱 FIXED: Thoda wait taaki dictionary load ho jaye
+    setTimeout(translatePage, 100);
 }
 
 // 🔱 Global Translation Engine
-/* 🔱 layout.js - Global Fix */
-
 function translatePage() {
     const lang = localStorage.getItem('selectedLang') || 'hi';
     
-    // 🔱 Sabar Logic: Agar data abhi nahi mila, toh 50ms baad fir try karo
-    if (!window.translation) {
-        console.log("⏳ Waiting for translation data...");
-        setTimeout(translatePage, 50); 
+    // 🔱 CORRECTED: window.translations (S के साथ) चेक करें
+    const source = window.translations; 
+
+    if (!source) {
+        console.log("⏳ Waiting for translations.js to load...");
+        setTimeout(translatePage, 100); 
         return;
     }
 
-    const data = window.translation;
-    const elements = document.querySelectorAll('[data-key]');
-    
-    elements.forEach(el => {
+    const data = source[lang];
+    if (!data) return;
+
+    // 1. साधारण टेक्स्ट बदलें
+    document.querySelectorAll('[data-key]').forEach(el => {
         const key = el.getAttribute('data-key');
-        if (data[lang] && data[lang][key]) {
-            el.innerText = data[lang][key];
-        }
+        if (data[key]) el.innerHTML = data[key];
     });
-    console.log("✅ Page Translated Successfully!");
+
+    // 2. इनपुट प्लेसहोल्डर्स बदलें (IMPORTANT)
+    document.querySelectorAll('[data-placeholder-key]').forEach(el => {
+        const key = el.getAttribute('data-placeholder-key');
+        if (data[key]) el.setAttribute('placeholder', data[key]);
+    });
+
+    console.log("✅ Mahadev Astrologer: " + lang.toUpperCase() + " Applied!");
 }
 
-// अपनी script.js में यह छोटा सा 'Performance' टिप जोड़ें
-document.getElementById('consultation-form').addEventListener('submit', function(e) {
-    // बटन को डिसेबल करें ताकि डबल क्लिक न हो (FID सुधार)
-    const btn = document.getElementById('submit-btn');
-    btn.disabled = true;
-    btn.innerText = "Processing...";
-    
-    // बाकी आपका Firebase वाला Logic यहाँ चलेगा
-});
-
-// 🔱 Language Switcher
+// Language Switcher
 function toggleLang() {
     const currentLang = localStorage.getItem('selectedLang') || 'hi';
     const newLang = (currentLang === 'hi') ? 'en' : 'hi';
