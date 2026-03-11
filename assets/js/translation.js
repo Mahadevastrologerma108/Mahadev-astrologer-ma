@@ -1,7 +1,7 @@
 window.translations = {
     hi: {
         finder_title: "🔱 अपना राशि पहचानें (Rashi Finder)",
-        finder_name_label: "नाम के पहले अक्षर से:", // HTML wali key se match karo
+        finder_name_label: "नाम के पहले अक्षर से:", 
         finder_date_label: "जन्म तिथि और महीने से:",
         finder_select: "चुनें...",
         finder_divider: "या",
@@ -28,7 +28,7 @@ window.translations = {
         "opt_num": "अंक ज्योतिष (Numerology)",
         "opt_combo": "कॉम्बो विश्लेषण (All-in-One)",
         "palm_note": "नोट: हस्तरेखा के लिए, कृपया फॉर्म भेजने के बाद हमारे WhatsApp पर अपनी हथेलियों की साफ़ फोटो भेजें।",
-        "email_note": "ध्यान दें: ईमेल पर रिपोर्ट भेजने में २४-४८ घंटे लग सकते हैं।",
+        "email_note": "ध्यान दें: ईमेल पर रिपोर्ट भेजने में २४-४८ घंटे लग सकते हैं।"
     },
 
     en: {
@@ -36,8 +36,9 @@ window.translations = {
         finder_name_label: "By First Letter of Name:",
         finder_date_label: "By Date & Month of Birth:",
         finder_select: "Select...",
-        finder_divider: "OR"
-    // Form Titles & Labels
+        finder_divider: "OR",
+
+        // Form Titles & Labels
         "form_title": "Book Consultation",
         "lbl_select_service": "Select Service",
         "lbl_privacy": "Contact Method & Privacy",
