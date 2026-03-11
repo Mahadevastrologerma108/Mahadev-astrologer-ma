@@ -68,6 +68,16 @@ function translatePage() {
     console.log("✅ Page Translated Successfully!");
 }
 
+// अपनी script.js में यह छोटा सा 'Performance' टिप जोड़ें
+document.getElementById('consultation-form').addEventListener('submit', function(e) {
+    // बटन को डिसेबल करें ताकि डबल क्लिक न हो (FID सुधार)
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerText = "Processing...";
+    
+    // बाकी आपका Firebase वाला Logic यहाँ चलेगा
+});
+
 // 🔱 Language Switcher
 function toggleLang() {
     const currentLang = localStorage.getItem('selectedLang') || 'hi';
