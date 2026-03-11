@@ -129,8 +129,8 @@
     <h2 class="gold-text" style="text-align: center; font-size: 2.2rem; margin-bottom: 30px;" data-key="form_title"></h2>
     
     <form id="consultation-form">
-        <label for="service-select" class="gold-text" style="font-size: 0.8rem; letter-spacing: 1px; display: block; margin-bottom: 5px;" data-key="lbl_select_service"></label>
-        <select id="service-select" class="input-field" onchange="applyFormLogic()" aria-label="Select Service" style="background: #14142b;">
+        <label for="service-select" class="gold-text" style="font-size: 0.8rem; letter-spacing: 1px; display: block; margin-bottom: 8px;" data-key="lbl_select_service"></label>
+        <select id="service-select" class="input-field" onchange="applyFormLogic()" aria-label="Select Service">
             <option value="kundli_making" data-key="opt_kundli"></option>
             <option value="kundli_matching" data-key="opt_match"></option>
             <option value="palmistry" data-key="opt_palm"></option>
@@ -138,43 +138,36 @@
             <option value="combo_analysis" data-key="opt_combo"></option>
         </select>
 
-        <input type="text" id="user-name" 
-               placeholder="" data-placeholder-key="ph_name" 
-               class="input-field" aria-label="Name" required>
+        <input type="text" id="user-name" aria-label="Name" placeholder="" data-placeholder-key="ph_name" class="input-field" required>
 
-        <div style="margin: 15px 0; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 20px; border: 1px solid var(--border);">
-            <label class="gold-text" id="method-label" style="font-size: 0.75rem; display: block; margin-bottom: 12px;" data-key="lbl_privacy"></label>
-            <div role="radiogroup" aria-labelledby="method-label" style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
-                <label style="cursor:pointer; font-size: 0.85rem;"><input type="radio" name="contact-method" value="WhatsApp" checked onclick="syncContactMethod('WA')"> WhatsApp</label>
-                <label style="cursor:pointer; font-size: 0.85rem;"><input type="radio" name="contact-method" value="Telegram" onclick="syncContactMethod('TG')"> Telegram</label>
-                <label style="cursor:pointer; font-size: 0.85rem;"><input type="radio" name="contact-method" value="Email" onclick="syncContactMethod('EM')"> Email</label>
+        <div class="contact-box">
+            <label id="method-label" class="gold-text" style="font-size: 0.75rem; display: block; margin-bottom: 12px;" data-key="lbl_privacy"></label>
+            <div role="radiogroup" aria-labelledby="method-label" class="radio-group">
+                <label><input type="radio" name="contact-method" value="WhatsApp" checked onclick="syncContactMethod('WA')"> WhatsApp</label>
+                <label><input type="radio" name="contact-method" value="Telegram" onclick="syncContactMethod('TG')"> Telegram</label>
+                <label><input type="radio" name="contact-method" value="Email" onclick="syncContactMethod('EM')"> Email</label>
             </div>
 
-            <input type="text" id="contact-detail" 
-                   placeholder="" data-placeholder-key="ph_contact" 
-                   class="input-field" aria-label="Contact Detail" required>
-            
+            <input type="text" id="contact-detail" aria-label="Contact" placeholder="" data-placeholder-key="ph_contact" class="input-field" required>
             <p id="email-warning" style="display:none; color: var(--gold); font-size: 0.7rem; margin-top: 5px;" data-key="email_note"></p>
 
-            <div style="margin-top: 15px; display: flex; align-items: flex-start; gap: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-                <input type="checkbox" id="generate-uid" style="accent-color: var(--gold); width: 18px; height: 18px;">
-                <label for="generate-uid" style="font-size: 0.75rem; color: #ccc; cursor: pointer;" data-key="lbl_uid"></label>
+            <div class="uid-check">
+                <input type="checkbox" id="generate-uid">
+                <label for="generate-uid" data-key="lbl_uid"></label>
             </div>
         </div>
 
         <div id="section-single">
-            <input type="date" id="single-dob" aria-label="Date of Birth" class="input-field">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <input type="time" id="single-time" aria-label="Time of Birth" class="input-field">
-                <input type="text" id="single-place" 
-                       placeholder="" data-placeholder-key="ph_city" 
-                       class="input-field" aria-label="City">
+            <input type="date" id="single-dob" aria-label="DOB" class="input-field">
+            <div class="grid-2">
+                <input type="time" id="single-time" aria-label="Time" class="input-field">
+                <input type="text" id="single-place" aria-label="Place" placeholder="" data-placeholder-key="ph_city" class="input-field">
             </div>
         </div>
 
         <button type="submit" class="gold-btn" id="submit-btn" style="margin-top:20px;" data-key="btn_invoke"></button>
     </form>
-</section>
+</section>    
 
     <div id="footer-placeholder"></div>
 
