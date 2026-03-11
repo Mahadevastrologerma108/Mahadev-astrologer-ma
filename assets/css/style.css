@@ -42,3 +42,24 @@ span {
     display: block;
     margin-top: 5px;
 }
+
+/* Trial Fixes for Core Web Vitals */
+.input-field::placeholder {
+    color: #999 !important;
+    opacity: 1;
+}
+
+/* मोबाइल पर टाइपिंग और क्लिकिंग आसान बनाने के लिए */
+@media (max-width: 600px) {
+    .input-field, .gold-btn {
+        min-height: 52px; /* Large tap targets for Mobile Score */
+        font-size: 16px !important; /* Prevents auto-zoom on iPhones */
+    }
+}
+
+/* Accessibility: Focus visible */
+.input-field:focus {
+    border-color: #f5c542 !important;
+    box-shadow: 0 0 12px rgba(245, 197, 66, 0.4);
+    outline: none;
+}
