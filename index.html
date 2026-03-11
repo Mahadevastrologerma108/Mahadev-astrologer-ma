@@ -173,6 +173,40 @@
 
     <script src="assets/js/translation.js"></script>
     <script src="assets/js/layout.js"></script>
+<script>
+        function applyTranslations() {
+            // URL से भाषा लें (जैसे: ?lang=en) या 'hi' रखें
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get('lang') || 'hi';
+            
+            // आपकी फाइल में 'window.translations' ऑब्जेक्ट होना चाहिए
+            const dict = window.translations ? window.translations[lang] : null;
+
+            if (dict) {
+                // साधारण टेक्स्ट (data-key) भरें
+                document.querySelectorAll('[data-key]').forEach(el => {
+                    const key = el.getAttribute('data-key');
+                    if (dict[key]) {
+                        el.innerHTML = dict[key];
+                    }
+                });
+
+                // प्लेसहोल्डर्स (data-placeholder-key) भरें
+                document.querySelectorAll('[data-placeholder-key]').forEach(el => {
+                    const key = el.getAttribute('data-placeholder-key');
+                    if (dict[key]) {
+                        el.setAttribute('placeholder', dict[key]);
+                    }
+                });
+                console.log("🔱 Mahadev Astrologer: " + lang.toUpperCase() + " Loaded.");
+            } else {
+                console.log("❌ Error: Dictionary not found! Check translation.js content.");
+            }
+        }
+
+        // लोड होने पर चलायें
+        window.addEventListener('load', applyTranslations);
+    </script>
     
 </body>
 </html>
