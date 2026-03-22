@@ -1,0 +1,66 @@
+.premium-card {
+    border: 1px solid var(--gold);
+    background: linear-gradient(145deg, rgba(245,197,66,0.08), rgba(0,0,0,0.4));
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Glow border effect */
+.premium-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(45deg, transparent, var(--gold), transparent);
+    -webkit-mask: 
+        linear-gradient(#000 0 0) content-box, 
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+/* Hover effect */
+.premium-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 0 20px rgba(245, 197, 66, 0.4);
+}
+
+/* Icon */
+.card-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* Heading */
+.premium-card h3 {
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+/* Text */
+.premium-card p {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Button */
+.cta-button {
+    display: inline-block;
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    margin-top: 15px;
+    background: var(--gold);
+    color: black;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background: white;
+}
